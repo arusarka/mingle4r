@@ -1,32 +1,91 @@
-= mingle4r
+== mingle4r
 
-* FIX (url)
+http://github.com/arusarka/mingle4r/tree/master
 
 == DESCRIPTION:
 
-FIX (describe your package)
+This gem is a wrapper around active resource to access the rest api exposed by mingle.
+It provides a easy way to communicate with mingle. For the library to work you need to
+enable basic authentication (not enabled by default) in Mingle. See below to enable 
+basic authentication in Mingle.
+
+Enable basic authentication in Mingle
+-------------------------------------
+
+1) Go to Mingle DataDir
+
+2) Open YAML file <Mingle DataDir>/config/auth_config.yml
+
+3) Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+It gives you access to projects in the mingle instance, cards under the project and also
+attachments for a particular card.
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+A) Getting all the projects for a particular instance
+--------------------------------------------------
+
+Suppose you want to connect to the mingle instance hosted at http://localhost:8080 where the
+username is 'testuser' and password is 'password'.
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+projs = m_c.projects
+
+projs is an array of active resource objects
+
+B) Getting a particular project
+----------------------------
+
+Before you access a particular project you need to set the project id for the mingle client 
+object. You can do that in two ways. Supposing you are trying to access a project with an
+identifier of 'great_mingle_project'
+
+WARNING : project identifier and project name are different. If you named your project as
+'Great Mingle Project' it's identifier is by default 'great_mingle_project'. To be sure what
+the identifier of a project is you should look at the url in mingle in the particular project
+you are trying to access. It should be something like 'http://localhost:8080/projects/great_mingle_project'
+
+1) Set at initialize time
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password', 'great_mingle_project')
+m_c.project
+
+2) Set an attribute later
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+m_c.project
+
+C) Getting cards for a particular project
+--------------------------------------
+
+Get a mingle client object initialized as in SECTION A. Then call the cards method.
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+m_c.cards
+
+cards will be an array of activeresoure objects.
 
 == REQUIREMENTS:
 
-active_resource
+1) active_resource gem, it would be automatically taken care of
+during gem install.
+
+2) Mingle > 2.3
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+sudo (not on crappy windows) gem install mingle4r
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 FIX
+Copyright (c) 2009 Arusarka Haldar
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
