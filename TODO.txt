@@ -1,0 +1,7 @@
+cards history api
+cards comment
+user api
+property definitions api
+subversion configurration api
+transitions api
+wiki page api
