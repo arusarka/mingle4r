@@ -28,6 +28,13 @@ describe DummyClass do
     DummyClass.password.should == password
   end
   
+  it "should understand that the attributes have been set" do
+    DummyClass.site = 'http://localhost:8080'
+    DummyClass.user = 'test'
+    DummyClass.password = 'password'
+    assert DummyClass.all_attributes_set?
+  end
+  
   it "should be able to create an instance" do
     dummy_obj = DummyClass.new
     dummy_obj.should_not == nil

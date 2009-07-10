@@ -64,9 +64,14 @@ module Mingle4r
       created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token}"
       eval "#{created_class_name} = created_class"
 
+      # includes a module called InstanceMethods in the class created dynamically
+      # if it is defined inside the wrapper class
       inst_meth_mod_name = instance_methods_module_name()
       created_class.send(:include, self.const_get(inst_meth_mod_name.to_sym)) if inst_meth_mod_name
+      created_class.send(:include, Mingle4r::CommonDynClassInstanceMethods)
 
+      # extends the class created dynamically with a module called ClassMethods if
+      # it is defined inside the wrapper class
       class_meth_mod_name = class_methods_module_name()
       created_class.extend(self.const_get(class_meth_mod_name)) if class_meth_mod_name
         

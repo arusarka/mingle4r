@@ -15,8 +15,3 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README']
   s.add_dependency('active_resource')
 end
-
-if $0 == __FILE__ 
-  Gem::manage_gems 
-  Gem::Builder.new(spec).build 
-end

@@ -62,7 +62,7 @@ m_c.project
 C) Getting cards for a particular project
 --------------------------------------
 
-Get a mingle client object initialized as in SECTION A. Then call the cards method.
+Get a mingle client object initialized as in SECTION B. Then call the cards method.
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'

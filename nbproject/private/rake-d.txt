@@ -1,6 +1,5 @@
 clobber=
 clobber_package=Remove package products
-default=
 gem=Build the gem file mingle4r-0.0.1.gem
 package=Build all the packages
 pkg=
@@ -8,3 +7,4 @@ pkg/mingle4r-0.0.1=
 pkg/mingle4r-0.0.1.gem=
 pkg/mingle4r-0.0.1.zip=
 repackage=Force a rebuild of the package files
+spec=Run specs
