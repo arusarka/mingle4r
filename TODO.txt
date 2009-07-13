@@ -3,3 +3,5 @@ cards history api - based on date, maybe something like activeresource find
 cards comment
 subversion configurration api
 transitions api
+
+Much later : have a pluginable api for rest

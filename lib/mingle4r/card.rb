@@ -47,9 +47,18 @@ module Mingle4r
       end
       
       # returns back the version of the card given. If an invalid version is given, the latest
-      # version is returned
+      # version is returned, takes a number, :next and :before
       def at_version(version_no)
-        self.class.find(self.number, :params => {:version => version_no})
+        version_2_find = 0
+        case version_no
+        when :before
+          version_2_find = self.version.to_i - 1
+        when :next
+          version_2_find = self.version.to_i + 1
+        else
+          version_2_find = version_no.to_i
+        end
+        self.class.find(self.number, :params => {:version => version_2_find})
       end
 
       private

@@ -5,7 +5,7 @@ spec = Gem::Specification.new do |s|
   s.email = 'arusarka@gmail.com'
   s.homepage = 'http://github.com/arusarka/mingle4r/'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'Mingle connector'
+  s.summary = 'Mingle connector using active resource'
   s.description = <<-EOS
   This gem provides a wrapper around active resource so that the user can directly use the rest API exposed
   by Mingle without much hassle.It provides a easy way to communicate with mingle. For the library to work you need to
