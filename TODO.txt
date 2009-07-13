@@ -1,7 +1,5 @@
-cards history api
+wiki page api
+cards history api - based on date, maybe something like activeresource find 
 cards comment
-user api
-property definitions api
 subversion configurration api
 transitions api
-wiki page api

@@ -7,7 +7,7 @@ require 'spec/rake/spectask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'mingle4r'
-  s.version = '0.0.1'
+  s.version = '0.1.5'
   s.author = 'asur'
   s.email = 'arusarka@gmail.com'
   s.homepage = 'http://github.com/arusarka/mingle4r/'
@@ -22,11 +22,11 @@ spec = Gem::Specification.new do |s|
   Enable basic authentication in Mingle
   -------------------------------------
 
-  1) Go to Mingle DataDir
+    1) Go to Mingle DataDir
 
-  2) Open YAML file <Mingle DataDir>/config/auth_config.yml
+    2) Open YAML file <Mingle DataDir>/config/auth_config.yml
 
-  3) Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
+    3) Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
 
   == FEATURES/PROBLEMS:
 
@@ -58,12 +58,12 @@ spec = Gem::Specification.new do |s|
   the identifier of a project is you should look at the url in mingle in the particular project
   you are trying to access. It should be something like 'http://localhost:8080/projects/great_mingle_project'
 
-  1) Set at initialize time
+    1) Set at initialize time
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password', 'great_mingle_project')
   m_c.project
 
-  2) Set an attribute later
+    2) Set an attribute later
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
@@ -82,10 +82,10 @@ spec = Gem::Specification.new do |s|
 
   == REQUIREMENTS:
 
-  1) active_resource gem, it would be automatically taken care of
+    1) active_resource gem, it would be automatically taken care of
   during gem install.
 
-  2) Mingle > 2.3
+    2) Mingle > 2.3
 
   == INSTALL:
 

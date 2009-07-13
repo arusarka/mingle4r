@@ -1,0 +1,9 @@
+0.2
+---
+
+
+0.0.1
+-----
+
+Rest Api's - Card, Project, User, Attachment, Property Definition
+Mingle Client - supports getting cards, project etc.

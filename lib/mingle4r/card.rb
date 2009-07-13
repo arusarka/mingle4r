@@ -45,6 +45,12 @@ module Mingle4r
         req.body = post_body
         Net::HTTP.new(attachment_url.host, attachment_url.port).start { |http| http.request(req) }
       end
+      
+      # returns back the version of the card given. If an invalid version is given, the latest
+      # version is returned
+      def at_version(version_no)
+        self.class.find(self.number, :params => {:version => version_no})
+      end
 
       private
       def boundary
