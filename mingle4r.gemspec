@@ -1,5 +1,3 @@
-require 'rubygems'
-
 spec = Gem::Specification.new do |s|
   s.name = 'mingle4r'
   s.version = '0.0.1'
