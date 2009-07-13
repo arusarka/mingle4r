@@ -1,6 +1,5 @@
-wiki page api
+transitions api
 cards comment
 subversion configurration api
-transitions api
 
 Much later : have a pluginable api for rest

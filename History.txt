@@ -1,9 +1,10 @@
-0.2
----
+0.1.5
+-----
 
+* Rest Api's added - wiki
 
 0.0.1
 -----
 
-Rest Api's - Card, Project, User, Attachment, Property Definition
-Mingle Client - supports getting cards, project etc.
+* Rest Api's - Card, Project, User, Attachment, Property Definition
+* Mingle Client - supports getting cards, project etc.
