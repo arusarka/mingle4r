@@ -20,6 +20,16 @@ module Mingle4r
         user_class = Mingle4r::User.send(:create_resource_class)
         @users = user_class.find(:all)
       end
+      
+      def wiki
+        return @wiki if @wiki
+        wiki_site = File.join(self.class.site.to_s, "projects/#{self.identifier()}")
+        Mingle4r::Wiki.site = wiki_site
+        Mingle4r::Wiki.user = self.class.user
+        Mingle4r::Wiki.password = self.class.password
+        wiki_class = Mingle4r::Wiki.send(:create_resource_class)
+        @wiki = wiki_class.find(:all)
+      end
     end # module InstanceMethods
     
     extend Mingle4r::CommonClassMethods

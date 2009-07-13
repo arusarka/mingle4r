@@ -58,8 +58,8 @@ module Mingle4r
       created_class.site = self.site
       created_class.user = self.user
       created_class.password = self.password
-      created_class.collection_name = class_name.downcase.pluralize
-      created_class.element_name = class_name.downcase
+      created_class.collection_name = @collection_name || class_name.downcase.pluralize
+      created_class.element_name = @element_name || class_name.downcase
 
       created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token}"
       eval "#{created_class_name} = created_class"
