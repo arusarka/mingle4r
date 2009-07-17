@@ -1,3 +1,14 @@
+0.2.0
+-----
+
+* added class method apply_filter to Card class. allows an MQL filter
+* added instance method execute_transition to Card class. allows to execute a transition on a card.
+
+0.1.6
+-----
+
+* added instance method at_version to Card class. gets the particular version for the card
+
 0.1.5
 -----
 

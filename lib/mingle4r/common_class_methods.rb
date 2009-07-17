@@ -93,8 +93,8 @@ module Mingle4r
       self.constants.detect { |const| const.split('::')[-1] =~ /#{class_meth_mod_name}/ }
     end
     
-    # def method_missing(meth_id, *args, &block)
-    #   @resource_class.send(meth_id, args, block)
-    # end
+    def method_missing(meth_id, *args, &block)
+      @resource_class.send(meth_id, *args, &block)
+    end
   end
 end

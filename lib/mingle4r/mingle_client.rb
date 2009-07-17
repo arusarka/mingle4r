@@ -25,12 +25,12 @@ module Mingle4r
         Project.find(:all)
         true
       rescue Exception => e
-        raise e.message
+        e.message
       end
     end
 
     def project
-      raise Exception 'proj_id attribute not set' unless @proj_id
+      raise 'proj_id attribute not set' unless @proj_id
       @project = Mingle4r::Project.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
       @project
     end
@@ -40,7 +40,7 @@ module Mingle4r
     end
 
     def cards
-      raise Exception 'proj_id attribute not set' unless @proj_id
+      raise 'proj_id attribute not set' unless @proj_id
       @project = Mingle4r::Project.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
       @project.cards
     end

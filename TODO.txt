@@ -1,5 +1,5 @@
 transitions api
-cards comment
+cards comment - not possible immediately / also should this be supported ? its not a published api
 subversion configurration api
 
 Much later : have a pluginable api for rest
