@@ -1,6 +1,7 @@
 module Mingle4r
   module CommonClassMethods
-    attr_reader :site, :user, :password
+    attr_reader :site, :user, :password, :collection_name, :element_name
+    attr_writer :collection_name, :element_name
 
     def new(args = {})
       @resource_class = create_resource_class()
@@ -58,10 +59,10 @@ module Mingle4r
       created_class.site = self.site
       created_class.user = self.user
       created_class.password = self.password
-      created_class.collection_name = @collection_name || class_name.downcase.pluralize
-      created_class.element_name = @element_name || class_name.downcase
+      created_class.collection_name = @collection_name || class_name.underscore.pluralize
+      created_class.element_name = @element_name || class_name.underscore
 
-      created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token}"
+      created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token()}"
       eval "#{created_class_name} = created_class"
 
       # includes a module called InstanceMethods in the class created dynamically

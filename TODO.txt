@@ -1,4 +1,6 @@
-transitions api
+Test the new methods in card class. 
+test wiki, property definitions api extensively
+Write documentation
 cards comment - not possible immediately / also should this be supported ? its not a published api
 subversion configurration api
 
