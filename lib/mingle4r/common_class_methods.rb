@@ -1,7 +1,6 @@
 module Mingle4r
   module CommonClassMethods
-    attr_reader :site, :user, :password, :collection_name, :element_name
-    attr_writer :collection_name, :element_name
+    attr_reader :site, :user, :password
 
     def new(args = {})
       @resource_class = create_resource_class()
@@ -35,8 +34,30 @@ module Mingle4r
       @password
     end
     
+    def collection_name=(collection_name)
+      if collection_name != self.collection_name
+        @collection_name = collection_name
+      end
+      @collection_name
+    end
+    
+    def element_name=(element_name)
+      if element_name != self.element_name
+        @element_name = element_name
+      end
+      @element_name
+    end
+    
+    def collection_name
+      @collection_name || class_name.underscore.pluralize
+    end
+    
+    def element_name
+      @element_name || class_name.underscore
+    end
+    
     def all_attributes_set?
-      @site && @user && @password
+      site && user && password
     end
     
     def find(*args)
@@ -59,8 +80,8 @@ module Mingle4r
       created_class.site = self.site
       created_class.user = self.user
       created_class.password = self.password
-      created_class.collection_name = @collection_name || class_name.underscore.pluralize
-      created_class.element_name = @element_name || class_name.underscore
+      created_class.collection_name = self.collection_name
+      created_class.element_name = self.element_name
 
       created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token()}"
       eval "#{created_class_name} = created_class"
