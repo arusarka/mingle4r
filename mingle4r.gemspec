@@ -1,8 +1,6 @@
-require 'lib/mingle4r/version'
-
 Gem::Specification.new do |s|
   s.name = 'mingle4r'
-  s.version = Mingle4r::Version::to_s
+  s.version = '0.2.1'
   s.author = 'asur'
   s.email = 'arusarka@gmail.com'
   s.homepage = 'http://github.com/arusarka/mingle4r/'
