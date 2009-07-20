@@ -70,6 +70,24 @@ m_c.cards
 
 cards will be an array of activeresoure objects.
 
+D) Getting custom properties for any resource
+---------------------------------------------
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+card = m_c.cards[0]
+card.custom_properties => returns an array of hashes, {property name => property method name}
+
+E) Getting a particular property
+--------------------------------
+
+gets a particular property value when the name of the property(as is displayed in Mingle) is given
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+card = m_c.cards[0]
+card.property_value('Status')
+
 == REQUIREMENTS:
 
 1) active_resource gem, it would be automatically taken care of
