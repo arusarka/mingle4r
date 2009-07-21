@@ -45,13 +45,36 @@ describe DummyClass do
     dummy_obj.class.superclass.should == ActiveResource::Base
   end
   
+  it "should create same class when site is not changed" do
+    class DummyClass
+      class << self
+        attr_reader :resource_class
+      end
+    end
+    site = 'http://localhost/foo'
+    DummyClass.site = site
+    DummyClass.user = 'test'
+    DummyClass.password = 'password'
+    class1 = DummyClass.resource_class
+    DummyClass.site = site
+    class2 = DummyClass.resource_class
+    class1.should == class2
+  end
+  
   it "should create different classes when site is changed" do
+    class DummyClass
+      class << self
+        attr_reader :resource_class
+      end
+    end
     site1 = 'http://localhost/foo'
     site2 = 'http://localhost/bar'
     DummyClass.site = site1
-    class1 = DummyClass.send(:create_resource_class)
+    DummyClass.user = 'test'
+    DummyClass.password = 'password'
+    class1 = DummyClass.resource_class
     DummyClass.site = site2
-    class2 = DummyClass.send(:create_resource_class)
+    class2 = DummyClass.resource_class
     class1.should_not == class2
   end
   
