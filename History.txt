@@ -1,3 +1,10 @@
+0.2.1
+-----
+
+* added option to relationship methods(e.g. - cards, users, attachments) to return cached or 
+updated results
+* property_definitions is a relationship method of project instead of mingle client.
+
 0.2.0
 -----
 
