@@ -1,5 +1,6 @@
 require 'mingle4r/card/attachment'
 require 'net/http'
+require 'uri'
 
 module Mingle4r
   class Card
@@ -32,29 +33,37 @@ module Mingle4r
       end
 
       def upload_attachment(file_path)
-        attachment_url = URI.parse(File.join(self.class.site.to_s, "projects/#{self.number()}/attachments.xml"))
-        req = Net::HTTP::Post.new(attachment_url.path)
+        attachment_uri = URI.parse(File.join(self.class.site.to_s, "cards/#{self.number()}/attachments.xml"))
+        # attachment_uri = URI.parse('https://mingle05.thoughtworks.com/projects/mailin_mingle/cards/22/attachments.xml')
+        
+        http             = Net::HTTP.new(attachment_uri.host, attachment_uri.port)
+        http.use_ssl     = attachment_uri.is_a?(URI::HTTPS)
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE if http.use_ssl
+        
         basic_encode = 'Basic ' + ["#{self.class.user}:#{self.class.password}"].pack('m').delete("\r\n")
-        req.initialize_http_header({ 'Content-Type' => "multipart/form-data; boundary=#{boundary()}", 'authorization' => basic_encode})
+        
+        post_headers = {
+          'Authorization' => basic_encode,
+          'Content-Type' => 'multipart/form-data; boundary=----------XnJLe9ZIbbGUYtzPQJ16u1'
+        }
+        
+        file_content = IO.read(file_path)
 
-        file_content = IO.open(file_path)
-
-        post_body = <<-EOS
-        #{boundary()}\r
-        Content-Disposition: form-data; name="file"; filename="#{File.basename(file_path)}"\r
-        Content-Type: application/octet-stream\r
-        Content-Length: #{file_content.size}\r
-        #{boundary}\r
-        #{file_content}\r
-        #{boundary()}--\r
-        EOS
-
-        req.body = post_body
-        Net::HTTP.new(attachment_url.host, attachment_url.port).start { |http| http.request(req) }
+        post_body = <<EOS
+------------XnJLe9ZIbbGUYtzPQJ16u1\r
+Content-Disposition: form-data; name="file"; filename="#{File.basename(file_path)}"\r
+Content-Type: application/octet-stream\r
+Content-Length: #{file_content.size}\r
+\r
+#{file_content}\r
+------------XnJLe9ZIbbGUYtzPQJ16u1--\r
+EOS
+        
+        http.post(attachment_uri.path, post_body, post_headers)
       end
       
       # returns back the version of the card given. If an invalid version is given, the latest
-      # version is returned, takes a number, :next and :before
+      # version is returned, takes a number or :next or :before
       def at_version(version_no)
         version_2_find = 0
         case version_no
