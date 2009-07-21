@@ -7,7 +7,7 @@ module Mingle4r
       @user = user
       @password = password
       @proj_id = proj_id
-      set_resource_attributes      
+      set_resource_attributes()
     end
     
     def site=(site)
@@ -73,10 +73,14 @@ module Mingle4r
       @project.cards
     end
     
+    def users
+      Mingle4r::User.find(:all)
+    end
+    
     private
     def set_resource_attributes
       set_project_attributes
-      set_property_definition_attributes
+      set_user_attributes
     end
     
     def set_project_attributes
@@ -85,12 +89,18 @@ module Mingle4r
       Project.password = @password
     end
     
-    def set_property_definition_attributes
-      raise 'Project Id (proj_id attribute) not given.' unless @proj_id
-      properties_site = File.join(@site.to_s, "projects/#{@proj_id}")
-      PropertyDefinition.site = properties_site
-      PropertyDefinition.user = @user
-      PropertyDefinition.password = @password
+    # def set_property_definition_attributes
+    #   raise 'Project Id (proj_id attribute) not given.' unless @proj_id
+    #   properties_site = File.join(@site.to_s, "projects/#{@proj_id}")
+    #   PropertyDefinition.site = properties_site
+    #   PropertyDefinition.user = @user
+    #   PropertyDefinition.password = @password
+    # end
+    
+    def set_user_attributes
+      User.site = @site
+      User.user = user
+      User.password = @password
     end
   end
 end
