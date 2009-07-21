@@ -1,11 +1,11 @@
 module Mingle4r
   class PropertyDefinition
-    module InstanceMethods
-    end
-      
-    module ClassMethods
-    end
-      
+    # module InstanceMethods
+    # end
+    #   
+    # module ClassMethods
+    # end
+    #   
     extend Mingle4r::CommonClassMethods
     
     self.element_name = 'record'
