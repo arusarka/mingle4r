@@ -3,7 +3,7 @@ module Mingle4r
     attr_reader :site, :user, :password
 
     def new(args = {})
-      # @resource_class = create_resource_class()
+      # @resource_class = create_resource_class() # should this be commented
       @resource_class.new(args)
     end
     
