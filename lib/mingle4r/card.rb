@@ -1,6 +1,4 @@
 require 'mingle4r/card/attachment'
-require 'net/http'
-require 'uri'
 
 module Mingle4r
   class Card
@@ -22,19 +20,20 @@ module Mingle4r
     end
     
     module InstanceMethods
-      def attachments
-        return @attachments if @attachments
+      def attachments(refresh = false)
+        return @attachments if(!refresh && @attachments_cached)
         attachment_site = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
         Mingle4r::Card::Attachment.site = attachment_site
         Mingle4r::Card::Attachment.user = self.class.user
         Mingle4r::Card::Attachment.password = self.class.password
         attachment_class = Mingle4r::Card::Attachment.send(:create_resource_class)
         @attachments = attachment_class.find(:all)
+        @attachments_cached = true
+        @attachments
       end
 
       def upload_attachment(file_path)
         attachment_uri = URI.parse(File.join(self.class.site.to_s, "cards/#{self.number()}/attachments.xml"))
-        # attachment_uri = URI.parse('https://mingle05.thoughtworks.com/projects/mailin_mingle/cards/22/attachments.xml')
         
         http             = Net::HTTP.new(attachment_uri.host, attachment_uri.port)
         http.use_ssl     = attachment_uri.is_a?(URI::HTTPS)
