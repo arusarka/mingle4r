@@ -110,6 +110,15 @@ m_c.proj_id = 'great_mingle_project'
 card = m_c.cards[0]
 card.property_value('Status')
 
+F) Adding comment to a particular card
+--------------------------------------
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.cards[0]
+defect_card.add_comment('Not able to reproduce')
+
+
 == REQUIREMENTS:
 
 1) active_resource gem, it would be automatically taken care of
