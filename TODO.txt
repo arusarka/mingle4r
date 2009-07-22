@@ -1,7 +1,6 @@
 Write documentation
-Test the new methods in card class. 
+Test the new methods in card class
 test wiki, property definitions api extensively
-cards comment - not possible immediately / also should this be supported ? its not a published api
-subversion configurration api
+subversion configuration api
 
 Much later : have a pluginable api for rest
