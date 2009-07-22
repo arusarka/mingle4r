@@ -13,7 +13,8 @@ module Mingle4r
         find(scope, options)
       end
       
-      # applies filter on card types
+      # applies an mql filter on card types. Look at https://mingle05.thoughtworks.com/help/mql_reference.html
+      # for reference
       def apply_filter(filter_string)
         find_without_pagination(:all, :params => {'filters[mql]'.to_sym => filter_string})
       end
@@ -43,7 +44,7 @@ module Mingle4r
         
         post_headers = {
           'Authorization' => basic_encode,
-          'Content-Type' => 'multipart/form-data; boundary=----------XnJLe9ZIbbGUYtzPQJ16u1'
+          'Content-Type'  => 'multipart/form-data; boundary=----------XnJLe9ZIbbGUYtzPQJ16u1'
         }
         
         file_content = IO.read(file_path)

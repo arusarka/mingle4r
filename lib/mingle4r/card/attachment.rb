@@ -2,6 +2,8 @@ module Mingle4r
   class Card
     class Attachment
       module InstanceMethods
+        # downloads the attachment. It an additional file path is given it saves it at the 
+        # given path. The given path should be writable
         def download(file_name = nil)
           collection_uri = self.class.site
           rel_down_url = self.url
@@ -28,6 +30,7 @@ module Mingle4r
           name()
         end
         
+        # This method had to be overriden. 
         # normal active resource destroy doesn't work as mingle site for deleting attachments doesn't end with .xml.
         def destroy
           connection = self.send(:connection)

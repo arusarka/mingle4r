@@ -1,6 +1,8 @@
 module Mingle4r
   class Project
     module InstanceMethods
+      # returns the cards for the project. To hit the resource server without returning
+      # cached results pass true as an argument.
       def cards(refresh = false)
         return @cards if(!refresh && @cards_cached)
         cards_site = File.join(self.class.site.to_s, "projects/#{self.identifier()}")
@@ -13,6 +15,8 @@ module Mingle4r
         @cards
       end
       
+      # returns the users for the project. To hit the resource server without returning
+      # cached results pass true as an argument.
       def users(refresh = false)
         return @users if(!refresh && @users_cached)
         users_site = File.join(self.class.site.to_s, "projects/#{self.identifier()}")
@@ -26,18 +30,22 @@ module Mingle4r
         @users
       end
       
-      def wiki(refresh = false)
-        return @wiki if(!refresh && @wiki_cached)
+      # returns the wikis for the project. To hit the resource server without returning
+      # cached results pass true as an argument.
+      def wikis(refresh = false)
+        return @wikis if(!refresh && @wikis_cached)
         wiki_site = File.join(self.class.site.to_s, "projects/#{self.identifier()}")
         Mingle4r::Wiki.site = wiki_site
         Mingle4r::Wiki.user = self.class.user
         Mingle4r::Wiki.password = self.class.password
         wiki_class = Mingle4r::Wiki.send(:create_resource_class)
-        @wiki = wiki_class.find(:all)
-        @wiki_cached = true
-        @wiki
+        @wikis = wiki_class.find(:all)
+        @wikis_cached = true
+        @wikis
       end
       
+      # returns the property definitions for the project. To hit the resource server
+      # pass true as an argument
       def property_definitions(refresh = false)
         return @prop_definitions if(!refresh && @prop_definitions_cached)
         properties_site = File.join(@site.to_s, "projects/#{self.identifier}")

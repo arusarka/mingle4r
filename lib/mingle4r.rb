@@ -5,6 +5,7 @@ require 'rubygems'
 require 'active_resource'
 require 'net/http'
 
+# This module should be used to interact with mingle. Look in the readme for examples.
 module Mingle4r
 end
 
