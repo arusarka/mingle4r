@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'mingle4r'
-  s.version = '0.2.2'
+  s.version = '0.2.5'
   s.author = 'asur'
   s.email = 'arusarka@gmail.com'
   s.homepage = 'http://github.com/arusarka/mingle4r/'

@@ -6,6 +6,6 @@ describe Mingle4r do
   end
   
   it "should return proper version" do
-    Mingle4r::Version::to_s.should == '0.2.2'
+    Mingle4r::Version::to_s.should == '0.2.5'
   end
 end
