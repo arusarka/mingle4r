@@ -76,7 +76,27 @@ EOS
         self.class.find(self.number, :params => {:version => version_2_find})
       end
 
-
+      # adds a comment to a card.
+      def add_comment(comment)
+        comment_uri = URI.parse(File.join(self.class.site.to_s, "cards/add_comment?card_id=#{self.id}"))
+        
+        http             = Net::HTTP.new(comment_uri.host, comment_uri.port)
+        http.use_ssl     = comment_uri.is_a?(URI::HTTPS)
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE if http.use_ssl
+        
+        basic_encode = 'Basic ' + ["#{self.class.user}:#{self.class.password}"].pack('m').delete("\r\n")
+        
+        post_headers = {
+          'Authorization' => basic_encode,
+          'Content-Type'  => 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+        
+        post_body = "comment=#{comment}&card_id=#{self.id}"
+        
+        http.post(comment_uri.path, post_body, post_headers)
+      end
+      
+      # TODO - Check if working with https
       # Executes the given transition on the card.
       # Example :
       # defect_card.execute_transition(:transition_name => 'Close Defect', :Owner => nil, :Status => 'Closed', :transition_comment => comment)
