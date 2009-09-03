@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
              'lib/mingle4r/wiki.rb',
              'lib/mingle4r.rb',
              'lib/mingle_resource.rb',
-             'spec/mingle4r/card/card_spec.rb',
+             'spec/mingle4r/card/attachment_spec.rb',
              'spec/mingle4r/card_spec.rb',
              'spec/mingle4r/common_class_methods_spec.rb',
              'spec/mingle4r/helpers_spec.rb',
