@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
              'spec/mingle4r/helpers_spec.rb',
              'spec/mingle4r/project_spec.rb',
              'spec/mingle4r/property_definition_spec.rb',
-             'spec/mingle4r/version_spec.rb'
+             'spec/mingle4r/version_spec.rb',
              'spec/mingle4r/wiki_spec.rb',
              'spec/mingle4r_spec.rb',
              'spec/spec_helper.rb',
