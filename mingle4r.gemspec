@@ -39,12 +39,12 @@ Gem::Specification.new do |s|
              'test/integration/test_card_filter.rb',
              'test/integration/test_card_transition.rb',
              'test/integration/test_getting_users.rb',
-             'test_uploading_attachment.rb',
+             'test/integration/test_uploading_attachment.rb',
              'test/integration/test_wiki.rb',
              'MIT-LICENSE',
              'Rakefile',
              'README',
-             'TODO']
+             'TODO.txt']
   s.require_path = 'lib'
   s.extra_rdoc_files = ['README']
   s.add_dependency('activeresource')
