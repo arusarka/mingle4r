@@ -36,8 +36,6 @@ Enable basic authentication in Mingle
 
 It gives you access to projects in the mingle instance, cards under the project and also
 attachments for a particular card. 
-Presently comments on cards cannot be updated as mingle does not expose this api. It will
-be supported in later version only if mingle supports it.
 
 == SYNOPSIS:
 
