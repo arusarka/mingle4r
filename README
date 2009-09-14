@@ -85,8 +85,8 @@ m_c.cards
 
 cards will be an array of activeresoure objects.
 
-D) Getting custom properties for any resource
----------------------------------------------
+D) Getting custom properties for a card
+---------------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -101,7 +101,17 @@ However this gives only custom properties, not all the properties.
 E) Getting a particular property
 --------------------------------
 
-gets a particular property value when the name of the property(as is displayed in Mingle) is given
+gets the value of a property. The property name can be given in several ways.
+suppose we are trying to get the property 'Iteration Number' as in mingle
+
+  1) give the name as seen in Mingle. E.g. - card.property_value('Iteration Number')
+
+  2) give the property method name i.e. in the active resource object it would
+become by default 'cp_iteration_number' attribute unless set differently in
+Mingle. E.g. - card.property_value('cp_iteration_number')
+
+  3) give the method a 'space separated' / 'camelcased' method name. e.g. - 'Iteration Number'
+'IterationNumber' E.g. card.property_value('IterationNumber')
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'

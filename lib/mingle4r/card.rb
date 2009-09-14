@@ -34,13 +34,11 @@ module Mingle4r
       end
 
       def upload_attachment(file_path)
-        attachment_uri = URI.parse(File.join(self.class.site.to_s, "cards/#{self.number()}/attachments.xml"))
-        
+        attachment_uri   = URI.parse(File.join(self.class.site.to_s, "cards/#{self.number()}/attachments.xml"))
         http             = Net::HTTP.new(attachment_uri.host, attachment_uri.port)
         http.use_ssl     = attachment_uri.is_a?(URI::HTTPS)
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE if http.use_ssl
-        
-        basic_encode = 'Basic ' + ["#{self.class.user}:#{self.class.password}"].pack('m').delete("\r\n")
+        basic_encode     = 'Basic ' + ["#{self.class.user}:#{self.class.password}"].pack('m').delete("\r\n")
         
         post_headers = {
           'Authorization' => basic_encode,
@@ -126,6 +124,41 @@ EOS
         req.set_form_data(form_data)
         
         Net::HTTP.new(transition_uri.host, transition_uri.port).start { |http| http.request(req) }
+      end
+      # gets the value of a property. The property name can be given in several ways.
+      # suppose we are trying to get the property 'Iteration Number' as in mingle
+      #
+      # 1) give the name as seen in Mingle. E.g. - card.property_value('Iteration Number')
+      #
+      # 2) give the property method name i.e. in the active resource object it would
+      # become by default 'cp_iteration_number' attribute unless set differently in
+      # Mingle. E.g. - card.property_value('cp_iteration_number')
+      #
+      # 3) give the method a 'space separated' / 'camelcased' method name. e.g. - 'Iteration Number'
+      # 'IterationNumber' E.g. card.property_value('IterationNumber')
+      def property_value(prop_name)
+        begin
+          column_name = PropertyDefinition.column_name_for(prop_name.to_s)
+          self.send(column_name.to_sym) 
+        rescue NoMethodError
+          if self.attributes.has_key?(prop_name)
+            self.attributes[prop_name]
+          else
+            # try calling a underscorized method. eg 'Iteration Number' becomes
+            # 'iteration_number'
+            method_id = (prop_name.split(' ').map { |substring| substring.downcase }).join('_').underscore.to_sym
+            self.send(method_id)
+          end
+        end
+      end
+
+      def custom_properties
+        custom_props = []
+        props = attributes.keys
+        PropertyDefinition.find(:all).each do |prop|
+          custom_props << {prop.name => prop.column_name} if(props.include?(prop.column_name))
+        end
+        custom_props
       end
       
       private
