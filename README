@@ -4,10 +4,10 @@ http://github.com/arusarka/mingle4r/tree/master
 
 == DESCRIPTION:
 
-This gem is a wrapper around active resource to access the rest api exposed by mingle.
-It provides a easy way to communicate with mingle. For the library to work you need to
-enable basic authentication (not enabled by default) in Mingle. See below to enable 
-basic authentication in Mingle.
+This gem is a wrapper around active resource to access the rest api exposed by mingle
+(http://studios.thoughtworks.com/mingle-agile-project-management).It provides a easy 
+way to communicate with mingle. For the library to work you need to enable basic authentication
+(not enabled by default) in Mingle. See below to enable basic authentication in Mingle.
 
 The speciality of this gem is that once an active resource class attribute (e.g- site,
 user, password, collection_name, element_name) is set, it cannot be changed. That is even
