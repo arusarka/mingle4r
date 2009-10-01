@@ -1,4 +1,4 @@
-Write documentation
+Write documentation for each method
 Test the new methods in card class
 test wiki, property definitions api extensively
 subversion configuration api

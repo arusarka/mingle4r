@@ -9,16 +9,6 @@ This gem is a wrapper around active resource to access the rest api exposed by m
 way to communicate with mingle. For the library to work you need to enable basic authentication
 (not enabled by default) in Mingle. See below to enable basic authentication in Mingle.
 
-The speciality of this gem is that once an active resource class attribute (e.g- site,
-user, password, collection_name, element_name) is set, it cannot be changed. That is even
-if the attributes are changed it doesn't get reflected in the ActiveResource::Base
-methods due to redefining the methods. The short story is that active resource fails to
-find the resources at the location and it throws an error. There are two ways to get
-around it.1) A small and effective hack (but a hack is hack!). The other way is to create
-the resource classes dynamically and set the attributes properly. This library uses the
-later approach. But it also provides a lot of other helper methods which makes interacting
-with Mingle a lot easier.
-
 However if you are planning to connect and work with mingle from the terminal, then there
 is another gem mingle-mingle which you should look at. This library provides a very easy
 api to write code to work with mingle (see the examples below) but thats it.
@@ -136,7 +126,7 @@ during gem install.
 
 == INSTALL:
 
-sudo (not on crappy windows) gem install mingle4r
+sudo (not on windows) gem install mingle4r
 
 == LICENSE:
 
