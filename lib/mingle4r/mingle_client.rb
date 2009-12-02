@@ -1,7 +1,7 @@
 module Mingle4r
   class MingleClient
     attr_reader :site, :user, :password, :proj_id
-
+    
     def initialize(site, user, password, proj_id = nil)
       @site = site
       @user = user
@@ -46,11 +46,12 @@ module Mingle4r
     end
     
     def valid_credentials?
-      Project.site = site
-      Project.user = user
-      Project.password = password
+      project_class = @api.project_class
+      project_class.site = @api.base_url
+      project_class.user = user
+      project_class.password = password
       begin
-        Project.find(:all)
+        project_class.find(:all)
         true
       rescue Exception => e
         e.message
@@ -59,48 +60,35 @@ module Mingle4r
 
     def project
       raise 'proj_id attribute not set' unless @proj_id
-      @project = Mingle4r::Project.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
+      @project = @api.project_class.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
       @project
     end
     
     def projects
-      Mingle4r::Project.find(:all)
+      @api.project_class.find(:all)
     end
 
     def cards
       raise 'proj_id attribute not set' unless @proj_id
-      @project = Mingle4r::Project.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
+      @project = @api.project_class.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
       @project.cards
     end
     
     def users
-      Mingle4r::User.find(:all)
+      @api.user_class.find(:all)
     end
     
     private
     def set_resource_attributes
-      set_project_attributes
-      set_user_attributes
+      @api = API.create(@site)
+      set_attributes(@api.project_class)
+      set_attributes(@api.user_class)
     end
     
-    def set_project_attributes
-      Project.site = @site
-      Project.user = @user
-      Project.password = @password
-    end
-    
-    # def set_property_definition_attributes
-    #   raise 'Project Id (proj_id attribute) not given.' unless @proj_id
-    #   properties_site = File.join(@site.to_s, "projects/#{@proj_id}")
-    #   PropertyDefinition.site = properties_site
-    #   PropertyDefinition.user = @user
-    #   PropertyDefinition.password = @password
-    # end
-    
-    def set_user_attributes
-      User.site = @site
-      User.user = user
-      User.password = @password
+    def set_attributes(klass)
+      klass.site = @api.base_url
+      klass.user = @user
+      klass.password = @password
     end
   end
 end

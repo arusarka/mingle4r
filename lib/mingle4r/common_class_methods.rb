@@ -161,8 +161,7 @@ module Mingle4r
     def find(*args)
       scope = args.slice!(0)
       options = args.slice!(0) || {}
-      obj = @resource_class.find(scope, options)
-      obj
+      @resource_class.find(scope, options)
     end
     
     private
@@ -181,8 +180,10 @@ module Mingle4r
       created_class.collection_name = self.collection_name
       created_class.element_name = self.element_name
 
-      created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token()}"
-      eval "#{created_class_name} = created_class"
+      # created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token()}"
+      created_class_name = class_name + Mingle4r::Helpers.fast_token()
+      created_class = self.const_set(created_class_name, created_class)
+      # eval "#{created_class_name} = created_class"
 
       # includes a module called InstanceMethods in the class created dynamically
       # if it is defined inside the wrapper class
@@ -194,7 +195,7 @@ module Mingle4r
       # it is defined inside the wrapper class
       class_meth_mod_name = class_methods_module_name()
       created_class.extend(self.const_get(class_meth_mod_name)) if class_meth_mod_name
-        
+      
       created_class
     end
     
