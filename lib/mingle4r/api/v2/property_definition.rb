@@ -1,6 +1,6 @@
 module Mingle4r
   class API
-    class V1
+    class V2
       class PropertyDefinition
         extend Mingle4r::CommonClassMethods
 

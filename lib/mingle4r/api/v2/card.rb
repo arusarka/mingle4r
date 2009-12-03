@@ -56,6 +56,12 @@ module Mingle4r
             @transitions = Card::Transition.find(:all)
           end
           
+          def murmurs(refresh = false)
+            return @murmurs if(!refresh && @murmurs)
+            set_murmur_class_attributes
+            @murmurs = Murmur.find(:all)
+          end
+          
           def upload_attachment(file_path)
             attachment_uri   = URI.parse(File.join(self.class.site.to_s, "cards/#{self.number()}/attachments.xml"))
             http             = Net::HTTP.new(attachment_uri.host, attachment_uri.port)
@@ -94,7 +100,7 @@ EOS
             transition = transitions.detect { |t| t.name ==  trans_name}
             transition.execute(args)
           end
-                
+          
           # returns back the version of the card given. If an invalid version is given, the latest
           # version is returned, takes a number or :next or :before
           def at_version(version_no)
@@ -136,6 +142,13 @@ EOS
             Card::Transition.site     = transition_site
             Card::Transition.user     = self.class.user
             Card::Transition.password = self.class.password
+          end
+          
+          def set_murmur_class_attributes
+            murmur_site = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
+            V2::Murmur.site = murmur_site
+            V2::Murmur.user = self.class.user
+            V2::Murmur.password = self.class.password
           end
         end
       end

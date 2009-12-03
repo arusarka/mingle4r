@@ -13,7 +13,6 @@ module Mingle4r
       end
       
       def mingle_version
-        return @mingle_version if @mingle_version
         html  = mingle_about_page
         match = html.match('<dd>Version</dd>\n.*<dt>([_\d]*)</dt>')
         raise Exception, 'Not a proper mingle instance' unless match

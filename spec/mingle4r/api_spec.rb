@@ -11,4 +11,12 @@ describe Mingle4r::API do
     api = Mingle4r::API.create('http://localhost:9090')
     api.should be_instance_of(Mingle4r::API::V1)
   end
+  
+  it "should not return cached results for the mingle version" do
+    Mingle4r::API.stub!(:mingle_about_page).and_return(mingle_html_2)
+    api1 = Mingle4r::API.create('http://localhost:9090')
+    Mingle4r::API.stub!(:mingle_about_page).and_return(mingle_html_3)
+    api2 = Mingle4r::API.create('http://localhost:9090')
+    api2.should be_instance_of(Mingle4r::API::V2)
+  end
 end
