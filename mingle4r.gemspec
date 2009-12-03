@@ -13,8 +13,33 @@ Gem::Specification.new do |s|
   EOS
   s.files = ['lib/mingle4r.rb',
              'lib/mingle_resource.rb',
-             'lib/mingle4r/mingle_client'
-             'lib/mingle4r/api'
+             
+             'lib/mingle4r/api.rb',
+             'lib/mingle4r/common_class_methods.rb',
+             'lib/mingle4r/common_dyn_class_instance_methods.rb',
+             'lib/mingle4r/helpers.rb',
+             'lib/mingle4r/mingle_client.rb',
+             'lib/mingle4r/version.rb',
+             
+             'lib/mingle4r/api/v1.rb',
+             'lib/mingle4r/api/v1/card.rb',                            
+             'lib/mingle4r/api/v1/card/attachment.rb',
+             'lib/mingle4r/api/v1/project.rb',              
+             'lib/mingle4r/api/v1/property_definition.rb',
+             'lib/mingle4r/api/v1/transition_execution.rb',
+             'lib/mingle4r/api/v1/user.rb',
+             'lib/mingle4r/api/v1/wiki.rb',
+             
+             'lib/mingle4r/api/v2.rb',
+             'lib/mingle4r/api/v2/card.rb',
+             'lib/mingle4r/api/v2/card/attachment.rb',
+             'lib/mingle4r/api/v2/card/comment.rb',
+             'lib/mingle4r/api/v2/card/transition.rb',
+             'lib/mingle4r/api/v2/project.rb',
+             'lib/mingle4r/api/v2/property_definition.rb',
+             'lib/mingle4r/api/v2/user.rb',
+             'lib/mingle4r/api/v2/wiki.rb',
+                                                         
              'MIT-LICENSE',
              'Rakefile',
              'README',

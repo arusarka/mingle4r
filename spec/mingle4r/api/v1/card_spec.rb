@@ -64,4 +64,16 @@ describe Mingle4r::API::V1::Card do
     
     Mingle4r::API::V1::Card.new.send(:boundary).should == '----------XnJLe9ZIbbGUYtzPQJ16u1'
   end
+  
+  it "should be able to create the appropriate V1::TransitionExecution object for executing transitions" do
+    Mingle4r::API::V1::Card.site = 'http://localhost/projects/test'
+    Mingle4r::API::V1::Card.user = 'user'
+    Mingle4r::API::V1::Card.password = 'password'
+
+    card = Mingle4r::API::V1::Card.new(:number => 1)
+    Mingle4r::API::V1::TransitionExecution.should_receive(:new).with({'transition' => 'Close Story', 'card' => 1}).
+    and_return(OpenStruct.new(:execute => ''))
+    
+    card.execute_transition("transition" => 'Close Story')
+  end
 end

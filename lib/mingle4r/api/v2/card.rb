@@ -88,6 +88,12 @@ EOS
             comment = Card::Comment.new(:content => str.to_s)
             comment.save
           end
+          
+          def execute(args)
+            trans_name = args.symbolize_keys[:name]
+            transition = transitions.detect { |t| t.name ==  trans_name}
+            transition.execute(args)
+          end
                 
           # returns back the version of the card given. If an invalid version is given, the latest
           # version is returned, takes a number or :next or :before

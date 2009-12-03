@@ -104,45 +104,31 @@ EOS
             http.post(comment_uri.path, post_body, post_headers)
           end
       
-          # TODO - Check if working with https
           # Executes the given transition on the card.
           # Example :
           # defect_card.execute_transition(:name => 'Close Defect', :Owner => nil, :Status => 'Closed', :transition_comment => comment)
           # transition_comment is mandatory if the transition is set that way.
           # after transition 'Owner' would have value 'Not Set' and 'Status' would be 'Closed' for defect card
-          def execute_transition(args_hash)
-            project_id = File.basename(self.class.site.to_s)
-            transition_name = args_hash.delete(:name)
-            raise 'Transition name for given' unless transition_name
-            transition_uri = URI.parse(File.join(self.class.site.to_s, 'transition_executions.xml'))
-        
-            # create the form data
-            form_data = {
-              'transition_execution[transition]' => transition_name,
-              'transition_execution[card]' => self.number.to_s
-            }
-            comment = args_hash.delete(:transition_comment)
-            form_data['transition_execution[comment]'] = Helpers.encode2html(comment) if comment
-            args_hash.each do |key, value|
-              form_data['transition_execution[properties][][name]'] = Helpers.encode2html(key.to_s)
-              form_data['transition_execution[properties][][value]'] = Helpers.encode2html(value.to_s)
-            end
-        
-            req = Net::HTTP::Post.new(transition_uri.path)
-            req.basic_auth self.class.user, self.class.password
-            req.set_form_data(form_data)
-        
-            Net::HTTP.new(transition_uri.host, transition_uri.port).start { |http| http.request(req) }
+          def execute_transition(args = {})
+            V1::TransitionExecution.site     = self.class.site.to_s
+            V1::TransitionExecution.user     = self.class.user
+            V1::TransitionExecution.password = self.class.password
+            
+            args.symbolize_keys!
+            trans_hash = create_transition_exec_hash(args)
+            V1::TransitionExecution.new(trans_hash).execute
           end
       
           # gets the value of a property. The property name given should be the same name as
           # the mingle property name
           def property_value(name, val = nil)
+            set_property_definitions_attributes
             column_name = PropertyDefinition.column_name_for(name.to_s)
             val ? attributes[column_name] = val : attributes[column_name]
           end
 
           def custom_properties
+            set_property_definitions_attributes
             custom_props = []
             card_props = attributes.keys
             PropertyDefinition.find(:all).each do |prop|
@@ -157,6 +143,28 @@ EOS
           private
           def boundary
             '----------XnJLe9ZIbbGUYtzPQJ16u1'
+          end
+          
+          def create_transition_exec_hash(args)
+            transition_hash = {}
+            transition_hash['card'] = (args.delete(:card) || self.number).to_i
+            transition_hash['transition'] = (args.delete(:name) || args.delete(:transition))
+            
+            comment = args.delete(:comment)
+            transition_hash['comment'] = comment if comment
+            properties = []
+            args.each do |name, value|
+              property = {'name' => name.to_s, 'value' => value}
+              properties.push(property)
+            end
+            transition_hash['properties'] = properties unless properties.empty?
+            transition_hash
+          end
+          
+          def set_property_definitions_attributes
+            PropertyDefinition.site = self.class.site.to_s
+            PropertyDefinition.user = self.class.user
+            PropertyDefinition.password = self.class.password
           end
         end
       end

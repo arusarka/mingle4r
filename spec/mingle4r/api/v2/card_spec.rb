@@ -90,23 +90,23 @@ describe Mingle4r::API::V2::Card do
     Mingle4r::API::V2::Card::Transition.password.should == 'test'
   end
   
-  # it "should be able to attributes in V2::TransitionExecution class while executing a transition" do    
-  #   Mingle4r::API::V2::Card.site = 'http://localhost:9090/'
-  #   Mingle4r::API::V2::Card.user = 'test'
-  #   Mingle4r::API::V2::Card.password = 'test'
-  #   
-  #   card =  Mingle4r::API::V2::Card.new({:number => 1})
-  #   trans_exec = Mingle4r::API::V2::Card::Transition.new(:name => 'Soft Delete Story', :id => 2)
-  #   Mingle4r::API::V2::Card::Transition.stub!(:find).and_return([trans_exec])
-  #   
-  #   mock_transition = mock()
-  #   mock_transition.stub!(:save)
-  #   Mingle4r::API::V2::Card::TransitionExecution.stub!(:new).and_return(mock_transition)
-  #   
-  #   card.execute_transition('name' => 'Soft Delete Story', 'Testing Type' => 'Manual', 'comment' => 'Took a lot time')
-  #   
-  #   Mingle4r::API::V2::Card::TransitionExecution.site.should == 'http://localhost:9090/'
-  #   Mingle4r::API::V2::Card::TransitionExecution.user.should == 'test'
-  #   Mingle4r::API::V2::Card::TransitionExecution.password.should == 'test'
-  # end
+  it "should be able to execute a transition" do    
+    Mingle4r::API::V2::Card.site = 'http://localhost:9090/'
+    Mingle4r::API::V2::Card.user = 'test'
+    Mingle4r::API::V2::Card.password = 'test'
+    
+    Mingle4r::API::V2::Card::Transition.site = 'http://localhost:9090/cards/1'
+    Mingle4r::API::V2::Card::Transition.user = 'testuser'
+    Mingle4r::API::V2::Card::Transition.password = 'testuser'
+    
+    card = Mingle4r::API::V2::Card.new(:number => 1)
+    transition1 = Mingle4r::API::V2::Card::Transition.new(:name => 'Dummy transition')
+    transition2 = Mingle4r::API::V2::Card::Transition.new(:name => 'Accepted')
+    transitions = [transition1, transition2]
+    Mingle4r::API::V2::Card::Transition.stub!(:find).and_return(transitions)
+    args = {:name => 'Accepted', :comment => 'Test comment'}
+    transition2.should_receive(:execute).with(args)
+    
+    card.execute(args)
+  end
 end
