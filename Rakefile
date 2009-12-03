@@ -4,6 +4,7 @@ require 'rubygems'
 require 'rake'
 require 'spec/rake/spectask'
 require 'rake/gempackagetask'
+require 'optparse'
 
 namespace :gem do
   desc "Builds the gem"
@@ -18,6 +19,11 @@ end
 
 # task : run specs
 Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
+  if(ENV['test'] && (ENV['test'] != 'all'))
+    t.spec_files = FileList['spec/**/' + ENV['test'] + '_spec.rb']
+  else  
+    t.spec_files = FileList['spec/**/*_spec.rb']
+  end
   t.verbose = true
 end
+

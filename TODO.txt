@@ -1,4 +1,9 @@
-Write documentation for each method
-Test the new methods in card class
-test wiki, property definitions api extensively
-subversion configuration api
+restructure project
+write tests for mingle4r/api/v1/card
+write tests for mingle4r/mingle_client
+restructure v2 of api with TDD
+
+refactorings
+------------
+remove calling create_resource_class through send
+remove checking for cache through a variable. check the results container directly

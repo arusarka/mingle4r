@@ -68,11 +68,11 @@ module Mingle4r
       @api.project_class.find(:all)
     end
 
-    def cards
-      raise 'proj_id attribute not set' unless @proj_id
-      @project = @api.project_class.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
-      @project.cards
-    end
+    # def cards
+    #   raise 'proj_id attribute not set' unless @proj_id
+    #   @project = @api.project_class.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
+    #   @project.cards
+    # end
     
     def users
       @api.user_class.find(:all)

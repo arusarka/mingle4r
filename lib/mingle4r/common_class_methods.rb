@@ -93,7 +93,7 @@ module Mingle4r
 
     # creates an object of the class in which this module is extended
     def new(args = {})
-      # @resource_class = create_resource_class() # should this be commented
+      # @resource_class ||= create_resource_class() # should this be commented
       @resource_class.new(args)
     end
     
@@ -168,8 +168,8 @@ module Mingle4r
     # creates an active resource class dynamically. All the attributes are set automatically. Avoid calling
     # this method directly                                                  
     def create_resource_class
-      # raise exceptions if any of site, user or password is not set
-      raise "Please set the site for #{self} class before using create_resource_class()." unless(self.site)
+      # raise exceptions if site is not set
+      raise "Please set the site for #{self} class." unless(self.site)
       
       created_class = Class.new(MingleResource)
       
@@ -214,7 +214,7 @@ module Mingle4r
     end
     
     def method_missing(meth_id, *args, &block)
-      @resource_class.send(meth_id, *args, &block)
+      @resource_class.send(meth_id.to_sym, *args, &block)
     end
   end
 end

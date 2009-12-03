@@ -45,9 +45,15 @@ module Mingle4r
           end
           
           def comments(refresh = false)
-            return @comments if(!refresh && @comments_cached)
+            return @comments if(!refresh && @comments)
             set_comment_class_attributes
             @comments = Card::Comment.find(:all)
+          end
+          
+          def transitions(refresh = false)
+            return @transitions if(!refresh && @transitions)
+            set_transition_class_attributes
+            @transitions = Card::Transition.find(:all)
           end
           
           def upload_attachment(file_path)
@@ -82,7 +88,7 @@ EOS
             comment = Card::Comment.new(:content => str.to_s)
             comment.save
           end
-      
+                
           # returns back the version of the card given. If an invalid version is given, the latest
           # version is returned, takes a number or :next or :before
           def at_version(version_no)
@@ -117,6 +123,13 @@ EOS
             Card::Comment.site     = comment_site
             Card::Comment.user     = self.class.user
             Card::Comment.password = self.class.password
+          end
+          
+          def set_transition_class_attributes
+            transition_site           = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
+            Card::Transition.site     = transition_site
+            Card::Transition.user     = self.class.user
+            Card::Transition.password = self.class.password
           end
         end
       end

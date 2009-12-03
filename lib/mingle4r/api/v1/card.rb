@@ -107,12 +107,12 @@ EOS
           # TODO - Check if working with https
           # Executes the given transition on the card.
           # Example :
-          # defect_card.execute_transition(:transition_name => 'Close Defect', :Owner => nil, :Status => 'Closed', :transition_comment => comment)
+          # defect_card.execute_transition(:name => 'Close Defect', :Owner => nil, :Status => 'Closed', :transition_comment => comment)
           # transition_comment is mandatory if the transition is set that way.
           # after transition 'Owner' would have value 'Not Set' and 'Status' would be 'Closed' for defect card
           def execute_transition(args_hash)
             project_id = File.basename(self.class.site.to_s)
-            transition_name = args_hash.delete(:transition_name)
+            transition_name = args_hash.delete(:name)
             raise 'Transition name for given' unless transition_name
             transition_uri = URI.parse(File.join(self.class.site.to_s, 'transition_executions.xml'))
         
