@@ -95,7 +95,7 @@ EOS
             comment.save
           end
           
-          def execute(args)
+          def execute_transition(args)
             trans_name = args.symbolize_keys[:name]
             transition = transitions.detect { |t| t.name ==  trans_name}
             transition.execute(args)

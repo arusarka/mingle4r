@@ -24,6 +24,7 @@ module Mingle4r
             def create_transition_exec_hash(args)
               transition_hash = {}
               transition_hash['card'] = (args.delete(:card) || associated_card_number).to_i
+              args.delete(:name) || args.delete(:transition)
               
               comment = args.delete(:comment)
               transition_hash['comment'] = comment if comment

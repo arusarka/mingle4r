@@ -6,7 +6,7 @@ module Mingle4r
           module InstanceMethods
             # downloads the attachment. It an additional file path is given it saves it at the 
             # given path. The given path should be writable
-            def download(file_name = nil)
+            def download(file_name = tmp)
               collection_uri = self.class.site
               rel_down_url = self.url
               base_url = "#{collection_uri.scheme}://#{collection_uri.host}:#{collection_uri.port}/"

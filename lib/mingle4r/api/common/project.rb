@@ -52,8 +52,8 @@ module Mingle4r
             return @prop_definitions if(!refresh && @prop_definitions_cached)
             properties_site = File.join(@site.to_s, "projects/#{self.identifier}")
             PropertyDefinition.site = properties_site
-            PropertyDefinition.user = @user
-            PropertyDefinition.password = @password
+            PropertyDefinition.user = self.class.user
+            PropertyDefinition.password = self.class.password
             prop_defn_class = PropertyDefinition.send(:create_resource_class)
             @prop_definitions = prop_defn_class.find(:all)
             @prop_definitions_cached = true

@@ -29,8 +29,15 @@ attachments for a particular card.
 
 == SYNOPSIS:
 
+The api now supports both mingle 2 and mingle 3. The gem tries as much as possible to hide
+away the internal details. But some api features are only supported in mingle 3 only (like
+murmurs). For that check the api for the mingle instance(<mingle instance host>/help/index)
+
+In all the documentation below you can replace Mingle4r::MingleClient. Its an alias for
+the lazy ones! 
+
 A) Getting all the projects for a particular instance
---------------------------------------------------
+-----------------------------------------------------
 
 Suppose you want to connect to the mingle instance hosted at http://localhost:8080 where the
 username is 'testuser' and password is 'password'.
@@ -41,7 +48,7 @@ projs = m_c.projects
 projs is an array of active resource objects
 
 B) Getting a particular project
-----------------------------
+-------------------------------
 
 Before you access a particular project you need to set the project id for the mingle client 
 object. You can do that in two ways. Supposing you are trying to access a project with an
@@ -71,7 +78,7 @@ Get a mingle client object initialized as in SECTION B. Then call the cards meth
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
-m_c.cards
+m_c.project.cards
 
 cards will be an array of activeresoure objects.
 
@@ -80,49 +87,114 @@ D) Getting custom properties for a card
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
-card = m_c.cards[0]
-card.custom_properties => returns an array of hashes, {property name => property method name}
+card = m_c.project.cards[0]
+card.custom_properties => returns an array of hashes, {property name => property value}
 
-property name is the name as you see in mingle, whereas property method name is the name
-of the method that you need to call on the active resource object (card in this case). The 
-default is for a property name 'Added in Iteration Number' the method to call is 'added_in_iteration_number'
 However this gives only custom properties, not all the properties.
 
 E) Getting a particular property
 --------------------------------
 
-gets the value of a property. The property name can be given in several ways.
-suppose we are trying to get the property 'Iteration Number' as in mingle
-
-  1) give the name as seen in Mingle. E.g. - card.property_value('Iteration Number')
-
-  2) give the property method name i.e. in the active resource object it would
-become by default 'cp_iteration_number' attribute unless set differently in
-Mingle. E.g. - card.property_value('cp_iteration_number')
-
-  3) give the method a 'space separated' / 'camelcased' method name. e.g. - 'Iteration Number'
-'IterationNumber' E.g. card.property_value('IterationNumber')
+gets the value of a property. The property name given should be the same as seen in Mingle.
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
-card = m_c.cards[0]
+card = m_c.project.cards[0]
 card.property_value('Status')
 
-F) Adding comment to a particular card
+F) Setting a particular property
+--------------------------------
+
+sets the value of the property. The property name given should be the same as in Mingle and
+the value given should be one of the values that Mingle accepts in case of a managed list
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+defect_card.property_value('Status', 'Closed')
+
+G) Adding comment to a particular card
 --------------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
-defect_card = m_c.cards[0]
+defect_card = m_c.project.cards[0]
 defect_card.add_comment('Not able to reproduce')
 
+H) Getting all comments for a card(only in mingle 3.0)
+------------------------------------------------------
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+defect_cards.comments
+
+I) Attachments
+--------------
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+defect_card.attachments
+
+  1) Downloading a particular attachment
+  --------------------------------------
+  
+  attachment = defect_card.attachments.first
+  attachment.save('page.css')
+  
+  2) Uploading an attachment
+  --------------------------
+  
+  defect_card.upload_attachment('page-screenshot.jpg')
+  
+J) Murmurs(only in Mingle 3.0)
+------------------------------
+
+  1) Get the murmurs for a project
+  --------------------------------
+  
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  project = m_c.project
+  project.murmurs
+  
+  2) Get the murmurs associated with a card
+  -----------------------------------------
+  
+  card = project.cards.first
+  card.murmurs
+  
+  3) post a murmur(hooray!)
+  -------------------------
+  project.post_murmur('my first murmur, I am excited!')
+  
+K) Get all transitions for a card(only in Mingle 3.0)
+-----------------------------------------------------
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+
+defect_card.transitions
+
+L) Execute a transition on a card
+---------------------------------
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+
+defect_card.execute_transition(
+ 'name'/'transition' => name of the transition to execute exactly s in Mingle(required in 2,3 but
+not required in 3.0)
+ 'comment' => comment for the transition, required only if the transition requires a comment
+ 'Property Name as in Mingle exactly' => 'Property value to set for the property', required only
+if the transition requires to be set manually.
+)
 
 == REQUIREMENTS:
 
 1) active_resource gem, it would be automatically taken care of
 during gem install.
-
-2) Mingle > 2.3
 
 == INSTALL:
 
