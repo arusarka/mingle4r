@@ -199,7 +199,10 @@ during gem install.
 
 == INSTALL:
 
-sudo (not on windows) gem install mingle4r
+since github no longer archives gems, I am hosting the gem at gemcutter. So you would need to
+add http://gemcutter.org to your gem sources : gem sources -a 'http://gemcutter.org'. Then do
+
+gem install mingle4r
 
 == LICENSE:
 
