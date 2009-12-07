@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'mingle4r'
-  s.version = '0.2.7'
+  s.version = '0.3.0'
   s.author = 'asur'
   s.email = 'arusarka@gmail.com'
   s.homepage = 'http://github.com/arusarka/mingle4r/'
@@ -35,13 +35,14 @@ Gem::Specification.new do |s|
              'lib/mingle4r/api/v2/card/attachment.rb',
              'lib/mingle4r/api/v2/card/comment.rb',
              'lib/mingle4r/api/v2/card/transition.rb',
+             'lib/mingle4r/api/v2/murmur.rb',
              'lib/mingle4r/api/v2/project.rb',
              'lib/mingle4r/api/v2/property_definition.rb',
              'lib/mingle4r/api/v2/user.rb',
              'lib/mingle4r/api/v2/wiki.rb',
                                                          
              'MIT-LICENSE',
-             'Rakefile',
+             'History.txt',
              'README',
              'TODO.txt']
   s.require_path = 'lib'

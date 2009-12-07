@@ -2,7 +2,7 @@
 -----
 
 * Major refactoring. The internal structure is completely changed
-* supports both Mingle 2 and Mingle 3.
+* supports both Mingle 2 and Mingle 3. Mingle 2 support is deprecated and will be removed in the next release.
 * new Mingle 3 api features added - murmurs, comment
 
 0.2.2
