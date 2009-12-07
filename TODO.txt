@@ -1,8 +1,5 @@
 update documentation
-extend v2 for murmurs
-write tests for mingle4r/api/v1/card
 write tests for mingle4r/mingle_client
-restructure v2 of api with TDD
 
 refactorings
 ------------

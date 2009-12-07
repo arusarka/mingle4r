@@ -107,6 +107,6 @@ describe Mingle4r::API::V2::Card do
     args = {:name => 'Accepted', :comment => 'Test comment'}
     transition2.should_receive(:execute).with(args)
     
-    card.execute(args)
+    card.execute_transition(args)
   end
 end

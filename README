@@ -31,10 +31,11 @@ attachments for a particular card.
 
 The api now supports both mingle 2 and mingle 3. The gem tries as much as possible to hide
 away the internal details. But some api features are only supported in mingle 3 only (like
-murmurs). For that check the api for the mingle instance(<mingle instance host>/help/index)
+murmurs). For that check the api documentation for the mingle instance(located at 
+<mingle instance host>/help/index)
 
-In all the documentation below you can replace Mingle4r::MingleClient. Its an alias for
-the lazy ones! 
+In all the documentation below you can replace Mingle4r::MingleClient with MingleClient.
+Its an alias for easy use.
 
 A) Getting all the projects for a particular instance
 -----------------------------------------------------
