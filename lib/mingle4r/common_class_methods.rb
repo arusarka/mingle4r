@@ -189,7 +189,6 @@ module Mingle4r
       # if it is defined inside the wrapper class
       inst_meth_mod_name = instance_methods_module_name()
       created_class.send(:include, self.const_get(inst_meth_mod_name.to_sym)) if inst_meth_mod_name
-      created_class.send(:include, Mingle4r::CommonDynClassInstanceMethods)
 
       # extends the class created dynamically with a module called ClassMethods if
       # it is defined inside the wrapper class

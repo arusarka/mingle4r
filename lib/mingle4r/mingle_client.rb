@@ -3,7 +3,7 @@ module Mingle4r
     attr_reader :site, :user, :password, :proj_id
     
     def initialize(site, user, password, proj_id = nil)
-      @site = site
+      @site = site.to_s
       @user = user
       @password = password
       @proj_id = proj_id
@@ -46,43 +46,45 @@ module Mingle4r
     end
     
     def valid_credentials?
-      project_class = @api.project_class
-      project_class.site = @api.base_url
-      project_class.user = user
-      project_class.password = password
+      API::Project.site = base_url
+      API::Project.user = user
+      API::Project.password = password
       begin
-        project_class.find(:all)
+        API::Project.find(:all)
         true
       rescue Exception => e
-        e.message
+        false
       end
     end
 
     def project
       raise 'proj_id attribute not set' unless @proj_id
-      @project = @api.project_class.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
+      @project = API::Project.find(@proj_id) unless(@project && (@proj_id == @project.identifier))
       @project
     end
     
     def projects
-      @api.project_class.find(:all)
+      API::Project.find(:all)
     end
 
     def users
-      @api.user_class.find(:all)
+      API::User.find(:all)
     end
     
     private
     def set_resource_attributes
-      @api = API.create(@site)
-      set_attributes(@api.project_class)
-      set_attributes(@api.user_class)
+      set_attributes(API::Project)
+      set_attributes(API::User)
     end
     
     def set_attributes(klass)
-      klass.site = @api.base_url
+      klass.site = base_url
       klass.user = @user
       klass.password = @password
+    end
+    
+    def base_url
+      File.join(@site.to_s, '/api/v2/')
     end
   end
 end
