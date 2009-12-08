@@ -86,7 +86,7 @@ EOS
         
         def add_comment(str)
           set_attributes_for(Comment)
-          comment = Card::Comment.new(:content => str.to_s)
+          comment = Comment.new(:content => str.to_s)
           comment.save
         end
         
@@ -98,10 +98,10 @@ EOS
         
         # returns back the version of the card given. If an invalid version is given, the latest
         # version is returned, takes a number or :next or :before
-        def at_version(version_no)
+        def version(version_no)
           version_2_find = 0
           case version_no
-          when :before
+          when :previous
             version_2_find = self.version.to_i - 1
           when :next
             version_2_find = self.version.to_i + 1

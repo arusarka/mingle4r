@@ -8,6 +8,8 @@ This gem is a wrapper around active resource to access the rest api exposed by m
 (http://studios.thoughtworks.com/mingle-agile-project-management).It provides a easy 
 way to communicate with mingle. For the library to work you need to enable basic authentication
 (not enabled by default) in Mingle. See below to enable basic authentication in Mingle.
+The typical use-case for this gem is to help someone getting started with writing code
+to integrate with Mingle.
 
 However if you are planning to connect and work with mingle from the terminal, then there
 is another gem mingle-mingle which you should look at. This library provides a very easy
@@ -124,7 +126,34 @@ m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards[0]
 defect_card.add_comment('Not able to reproduce')
 
-H) Getting all comments for a card
+H) Getting a particular version of a card
+-----------------------------------------
+
+Mingle maintains the different versions of a card. It always shows the latest version
+by default. However if you want to access a different version you can do so in the
+following ways.
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+defect_card = m_c.project.cards.first
+supposing the latest version of the card is 42
+
+  1) Get the previous version
+  ---------------------------
+  
+  defect_card.version(:previous) # return version 41
+  
+  2) Get the next version
+  -----------------------
+  
+  defect_card.version(:next) # returns version 42 since it is the latest version
+  
+  3) Get an arbitrary version
+  ---------------------------
+  
+  defect_card.version(21) # returns version 21
+
+I) Getting all comments for a card
 ----------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
@@ -132,7 +161,7 @@ m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards.first
 defect_cards.comments
 
-I) Attachments
+J) Attachments
 --------------
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -150,8 +179,8 @@ defect_card.attachments
   
   defect_card.upload_attachment('page-screenshot.jpg')
   
-J) Murmurs(only in Mingle 3.0)
-------------------------------
+K) Murmurs
+----------
 
   1) Get the murmurs for a project
   --------------------------------
@@ -171,16 +200,16 @@ J) Murmurs(only in Mingle 3.0)
   -------------------------
   project.post_murmur('my first murmur, I am excited!')
   
-K) Get all transitions for a card
+L) Get all transitions for a card
 ---------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards.first
 
-defect_card.transitions
+defect_card.transitions # array of active resource objects
 
-L) Execute a transition on a card
+M) Execute a transition on a card
 ---------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')

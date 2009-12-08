@@ -1,7 +1,7 @@
 module Mingle4r
   module Version
     Major = '0'
-    Minor = '3'
+    Minor = '4'
     Tiny  = '0'
     
     def self.to_s
