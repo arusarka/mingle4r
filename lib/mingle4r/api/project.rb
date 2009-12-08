@@ -52,7 +52,7 @@ module Mingle4r
         private
         def set_attributes_for(klass)
           resource_site = File.join(self.class.site.to_s, "projects/#{self.identifier}")
-          klass.site = murmurs_site
+          klass.site = resource_site
           klass.user = self.class.user
           klass.password = self.class.password
         end
