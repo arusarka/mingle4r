@@ -35,29 +35,25 @@ module Mingle4r
 
         def attachments(refresh = false)
           return @attachments if(!refresh && @attachments)
-          attachment_site           = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
-          Attachment.site     = attachment_site
-          Attachment.user     = self.class.user
-          Attachment.password = self.class.password
-          attachment_class          = Card::Attachment.send(:create_resource_class)
-          @attachments              = attachment_class.find(:all)
+          set_attributes_for(Attachment)
+          @attachments = Attachment.find(:all)
         end
         
         def comments(refresh = false)
           return @comments if(!refresh && @comments)
-          set_comment_class_attributes
+          set_attributes_for(Comment)
           @comments = Card::Comment.find(:all)
         end
         
         def transitions(refresh = false)
           return @transitions if(!refresh && @transitions)
-          set_transition_class_attributes
+          set_attributes_for(Transition)
           @transitions = Card::Transition.find(:all)
         end
         
         def murmurs(refresh = false)
           return @murmurs if(!refresh && @murmurs)
-          set_murmur_class_attributes
+          set_attributes_for(Murmur)
           @murmurs = Murmur.find(:all)
         end
         
@@ -89,7 +85,7 @@ EOS
         end
         
         def add_comment(str)
-          set_comment_class_attributes
+          set_attributes_for(Comment)
           comment = Card::Comment.new(:content => str.to_s)
           comment.save
         end
@@ -129,25 +125,11 @@ EOS
         end
         
         private
-        def set_comment_class_attributes
-          comment_site     = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
-          Comment.site     = comment_site
-          Comment.user     = self.class.user
-          Comment.password = self.class.password
-        end
-        
-        def set_transition_class_attributes
-          transition_site     = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
-          Transition.site     = transition_site
-          Transition.user     = self.class.user
-          Transition.password = self.class.password
-        end
-        
-        def set_murmur_class_attributes
-          murmur_site     = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
-          Murmur.site     = murmur_site
-          Murmur.user     = self.class.user
-          Murmur.password = self.class.password
+        def set_attributes_for(klass)
+          resource_site  = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
+          klass.site     = resource_site
+          klass.user     = self.class.user
+          klass.password = self.class.password
         end
       end
     end

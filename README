@@ -143,7 +143,7 @@ defect_card.attachments
   --------------------------------------
   
   attachment = defect_card.attachments.first
-  attachment.save('page.css')
+  attachment.download('page.css')
   
   2) Uploading an attachment
   --------------------------
