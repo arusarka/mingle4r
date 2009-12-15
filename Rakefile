@@ -4,7 +4,6 @@ require 'rubygems'
 require 'rake'
 require 'spec/rake/spectask'
 require 'rake/gempackagetask'
-require 'optparse'
 
 namespace :gem do
   desc "Builds the gem"

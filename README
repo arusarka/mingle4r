@@ -217,11 +217,9 @@ m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards.first
 
 defect_card.execute_transition(
- 'name'/'transition' => name of the transition to execute exactly s in Mingle(required in 2,3 but
-not required in 3.0)
  'comment' => comment for the transition, required only if the transition requires a comment
  'Property Name as in Mingle exactly' => 'Property value to set for the property', required only
-if the transition requires to be set manually.
+if the transition requires to be set manually, multiple properties might need to be set.
 )
 
 == REQUIREMENTS:

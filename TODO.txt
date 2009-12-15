@@ -1,7 +1,11 @@
-update documentation
-write tests for mingle4r/mingle_client
+update documentation - write about executing transitions directly on the transition
+write tests for project class
+
 
 refactorings
 ------------
-remove calling create_resource_class through send
-remove checking for cache through a variable. check the results container directly
+
+maybe nice to  nave
+-------------------
+
+should transtions give the list of properties to be changed directly

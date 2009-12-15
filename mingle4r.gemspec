@@ -14,9 +14,7 @@ Gem::Specification.new do |s|
   s.files = ['lib/mingle4r.rb',
              'lib/mingle_resource.rb',
              
-             'lib/mingle4r/api.rb',
              'lib/mingle4r/common_class_methods.rb',
-             'lib/mingle4r/common_dyn_class_instance_methods.rb',
              'lib/mingle4r/helpers.rb',
              'lib/mingle4r/mingle_client.rb',
              'lib/mingle4r/version.rb',
