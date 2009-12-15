@@ -28,7 +28,7 @@ Spec::Rake::SpecTask.new do |t|
 end
 
 desc 'run tests'
-rake :default => :spec
+task :default => :spec
 
 directory 'pkg'
 CLEAN.include 'pkg'
