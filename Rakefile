@@ -4,10 +4,11 @@ require 'rubygems'
 require 'rake'
 require 'spec/rake/spectask'
 require 'rake/gempackagetask'
+require 'rake/clean'
 
 namespace :gem do
   desc "Builds the gem"
-  task :build do
+  task :build => 'pkg' do
     file_name = "#{File.dirname(__FILE__)}/mingle4r.gemspec"
     spec = Gem::Specification.load(file_name)
     Gem::Builder.new(spec).build
@@ -26,3 +27,8 @@ Spec::Rake::SpecTask.new do |t|
   t.verbose = true
 end
 
+desc 'run tests'
+rake :default => :spec
+
+directory 'pkg'
+CLEAN.include 'pkg'
