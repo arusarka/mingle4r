@@ -233,7 +233,7 @@ since github no longer archives gems, I am hosting the gem at gemcutter. So you 
 add http://gemcutter.org to your gem sources : gem sources -a 'http://gemcutter.org'. Then do
 
 gem install mingle4r
-c
+
 == LICENSE:
 
 (The MIT License)
