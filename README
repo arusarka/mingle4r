@@ -222,6 +222,17 @@ defect_card.execute_transition(
 if the transition requires to be set manually, multiple properties might need to be set.
 )
 
+N) MQL execution
+----------------
+
+mingle allows you to write an arbitrary MQL query and returns the results. This gem 
+allows you to do that in a simpler way. If you want to know more about MQL go to http://www.thoughtworks-studios.com/mingle/3.0/help/mql_reference.html. 
+
+m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+m_c.proj_id = 'great_mingle_project'
+m_c.project.execute_mql('SELECT name, "Added in Iteration" WHERE Type = Story') 
+  => returns an array of hash
+
 == REQUIREMENTS:
 
 1) active_resource gem, it would be automatically taken care of
