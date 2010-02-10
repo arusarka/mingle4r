@@ -49,9 +49,16 @@ module Mingle4r
           murmur.save
         end
         
+        # executes an mql
+        def execute_mql(query)
+          set_attributes_for(ExecuteMql)
+          ExecuteMql.query(query)
+        end
+        
         private
         def set_attributes_for(klass)
           resource_site = File.join(self.class.site.to_s, "projects/#{self.identifier}")
+          resource_site = File.join(resource_site, 'cards') if klass == ExecuteMql
           klass.site = resource_site
           klass.user = self.class.user
           klass.password = self.class.password
