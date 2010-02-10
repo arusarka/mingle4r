@@ -4,7 +4,8 @@ module Mingle4r
       extend Mingle4r::CommonClassMethods
       
       def self.query(query_string)
-        @resource_class.find(:all, :params => {:mql => query_string})
+        @resource_class.find(:all, :params => {:mql => query_string}).
+          collect { |res| res.attributes }
       end
     end
   end

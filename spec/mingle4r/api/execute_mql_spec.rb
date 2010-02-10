@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
+require 'ostruct'
 
 include Mingle4r::API
 
@@ -10,8 +11,21 @@ describe ExecuteMql do
     
     query = 'SELECT "Accepted in Iteration" WHERE type = Story'
     mql_class = ExecuteMql.instance_variable_get('@resource_class')
-    mql_class.should_receive(:find).with(:all, :params => {:mql => query})
+    mql_class.should_receive(:find).with(:all, :params => {:mql => query}).and_return([])
     ExecuteMql.query(query)
+  end
+  
+  it "should be able to convert the results to an list of hashes" do
+    ExecuteMql.site = 'http://localhost/projects/dummy/cards'
+    ExecuteMql.user = 'test'
+    ExecuteMql.password = 'test'
+    
+    query = 'SELECT name, "Iteration" WHERE type = Story'
+    mql_class = ExecuteMql.instance_variable_get('@resource_class')
+    mql_class.should_receive(:find).with(:all, :params => {:mql => query}).
+      and_return([OpenStruct.new('attributes' => {"name"=>"some story", "iteration"=>"#36 Iteration 3"})])
+    results = ExecuteMql.query(query)
+    results.should == [{"name"=>"some story", "iteration"=>"#36 Iteration 3"}]
   end
   
   it "should set the collection name to execute_mql" do
