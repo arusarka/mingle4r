@@ -23,7 +23,6 @@ module Mingle4r
         # applies an mql filter on card types. Look at https://mingle05.thoughtworks.com/help/mql_reference.html
         # for reference
         def apply_filter(filter_string)
-          filter_string = 'WHERE ' + filter_string unless(filter_string =~ /^WHERE|where|Where/)
           find_without_pagination(:all, :params => {'filters[mql]'.to_sym => filter_string})
         end
       end
