@@ -1,5 +1,6 @@
 update documentation - write about executing transitions directly on the transition
 write tests for project class
+tree configuration information
 
 refactorings
 ------------
