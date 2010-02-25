@@ -101,7 +101,7 @@ Getting a particular property
 
 gets the value of a property. The property name given should be the same as seen in Mingle.
 Type, name, description and number of a card can be accessed directly. For any other custom
-property use the method below
+property use the method below.
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -112,7 +112,7 @@ Setting a particular property
 -----------------------------
 
 sets the value of the property. The property name given should be the same as in Mingle.
-Type, name, description and number can be set directly when creating or updating a card.
+Type, name, description and number should be set directly when creating or updating a card.
 In case of a custom property use the following method. The value given should be one of 
 the values that Mingle accepts in case of a managed list
 
