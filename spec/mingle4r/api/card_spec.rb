@@ -54,6 +54,12 @@ describe Card do
     card.type.should == 'Story'
   end
   
+  it "should be able to set the card type directly" do
+    card = Card.new
+    card.type = 'Story'
+    card.card_type_name.should == 'Story'
+  end
+  
   context "for comments" do
     it "should be able to set the appropriate attributes in Comment class while fetching comments" do
       Card.site = 'http://localhost:9090/'

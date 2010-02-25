@@ -36,7 +36,11 @@ module Mingle4r
         def type
           card_type.name
         end
-
+        
+        def type=(type)
+          attributes['card_type_name'] = type
+        end
+        
         def attachments(refresh = false)
           return @attachments if(!refresh && @attachments)
           set_attributes_for(Attachment)
