@@ -111,8 +111,10 @@ card.property_value('Status')
 Setting a particular property
 -----------------------------
 
-sets the value of the property. The property name given should be the same as in Mingle and
-the value given should be one of the values that Mingle accepts in case of a managed list
+sets the value of the property. The property name given should be the same as in Mingle.
+Type, name, description and number can be set directly when creating or updating a card.
+In case of a custom property use the following method. The value given should be one of 
+the values that Mingle accepts in case of a managed list
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
