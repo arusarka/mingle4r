@@ -32,6 +32,10 @@ module Mingle4r
         def id
           number()
         end
+        
+        def type
+          card_type.name
+        end
 
         def attachments(refresh = false)
           return @attachments if(!refresh && @attachments)

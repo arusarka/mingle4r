@@ -38,8 +38,8 @@ the api documentation for the mingle instance(located at <mingle instance host>/
 In all the documentation below you can replace Mingle4r::MingleClient with MingleClient.
 Its an alias for easy use.
 
-A) Getting all the projects for a particular instance
------------------------------------------------------
+Getting all the projects for a particular instance
+--------------------------------------------------
 
 Suppose you want to connect to the mingle instance hosted at http://localhost:8080 where the
 username is 'testuser' and password is 'password'.
@@ -49,8 +49,8 @@ projs = m_c.projects
 
 projs is an array of active resource objects
 
-B) Getting a particular project
--------------------------------
+Getting a particular project
+----------------------------
 
 Before you access a particular project you need to set the project id for the mingle client 
 object. You can do that in two ways. Supposing you are trying to access a project with an
@@ -75,8 +75,8 @@ you are trying to access. It should be something like 'http://localhost:8080/pro
 		
 		project is a single activeresource object
 
-C) Getting cards for a particular project
------------------------------------------
+Getting cards for a particular project
+--------------------------------------
 
 Get a mingle client object initialized as in SECTION B. Then call the cards method.
 
@@ -86,8 +86,8 @@ m_c.project.cards
 
 cards will be an array of activeresoure objects.
 
-D) Getting custom properties for a card
----------------------------------------
+Getting custom properties for a card
+------------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -96,18 +96,20 @@ card.custom_properties => returns an array of hashes, {property name => property
 
 However this gives only custom properties, not all the properties.
 
-E) Getting a particular property
---------------------------------
+Getting a particular property
+-----------------------------
 
 gets the value of a property. The property name given should be the same as seen in Mingle.
+Type, name, description and number of a card can be accessed directly. For any other custom
+property use the method below
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
 card = m_c.project.cards[0]
 card.property_value('Status')
 
-F) Setting a particular property
---------------------------------
+Setting a particular property
+-----------------------------
 
 sets the value of the property. The property name given should be the same as in Mingle and
 the value given should be one of the values that Mingle accepts in case of a managed list
@@ -118,16 +120,16 @@ defect_card = m_c.project.cards.first
 defect_card.property_value('Status', 'Closed')
 defect_card.save
 
-G) Adding comment to a particular card
---------------------------------------
+Adding comment to a particular card
+-----------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards[0]
 defect_card.add_comment('Not able to reproduce')
 
-H) Getting a particular version of a card
------------------------------------------
+Getting a particular version of a card
+--------------------------------------
 
 Mingle maintains the different versions of a card. It always shows the latest version
 by default. However if you want to access a different version you can do so in the
@@ -153,16 +155,16 @@ supposing the latest version of the card is 42
   
   defect_card.version(21) # returns version 21
 
-I) Getting all comments for a card
-----------------------------------
+Getting all comments for a card
+-------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards.first
 defect_cards.comments
 
-J) Attachments
---------------
+Attachments
+-----------
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
 defect_card = m_c.project.cards.first
@@ -178,9 +180,9 @@ defect_card.attachments
   --------------------------
   
   defect_card.upload_attachment('page-screenshot.jpg')
-  
-K) Murmurs
-----------
+
+Murmurs
+-------
 
   1) Get the murmurs for a project
   --------------------------------
@@ -200,8 +202,8 @@ K) Murmurs
   -------------------------
   project.post_murmur('my first murmur, I am excited!')
   
-L) Get all transitions for a card
----------------------------------
+Get all transitions for a card
+------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -209,8 +211,8 @@ defect_card = m_c.project.cards.first
 
 defect_card.transitions # array of active resource objects
 
-M) Execute a transition on a card
----------------------------------
+Execute a transition on a card
+------------------------------
 
 m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
 m_c.proj_id = 'great_mingle_project'
@@ -222,8 +224,8 @@ defect_card.execute_transition(
 if the transition requires to be set manually, multiple properties might need to be set.
 )
 
-N) MQL execution
-----------------
+MQL execution
+-------------
 
 mingle allows you to write an arbitrary MQL query and returns the results. This gem 
 allows you to do that in a simpler way. If you want to know more about MQL go to http://www.thoughtworks-studios.com/mingle/3.0/help/mql_reference.html. 

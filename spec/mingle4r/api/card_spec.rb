@@ -49,7 +49,12 @@ describe Card do
     card.property_value('Story Status').should == 'In Development'
   end
   
-  describe "for comments" do
+  it "should be able to return the card type directly" do
+    card = Card.new({:card_type => OpenStruct.new(:name => 'Story')})
+    card.type.should == 'Story'
+  end
+  
+  context "for comments" do
     it "should be able to set the appropriate attributes in Comment class while fetching comments" do
       Card.site = 'http://localhost:9090/'
       Card.user = 'test'

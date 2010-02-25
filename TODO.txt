@@ -1,11 +1,13 @@
 update documentation - write about executing transitions directly on the transition
+clarify in docs difference between custom properties and native properties
 write tests for project class
-tree configuration information
 
 refactorings
 ------------
 
 maybe nice to  nave
 -------------------
+
+provide a easy mechanism to link to other cards
 
 should transtions give the list of properties to be changed directly
