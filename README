@@ -112,7 +112,7 @@ Setting a particular property
 -----------------------------
 
 sets the value of the property. The property name given should be the same as in Mingle.
-Type, name, description and number should be set directly when creating or updating a card.
+Type, name and description should be set directly when creating or updating a card.
 In case of a custom property use the following method. The value given should be one of 
 the values that Mingle accepts in case of a managed list
 
