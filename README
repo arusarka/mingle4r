@@ -108,6 +108,22 @@ m_c.proj_id = 'great_mingle_project'
 card = m_c.project.cards[0]
 card.property_value('Status')
 
+Creating a card
+---------------
+
+Mingle4r::API::Card is the ActiveResource class which handles interaction with cards.
+task = Mingle4r::API::new
+task.name = 'set up Cruise build'
+task.type = 'task'
+task.description = 'a basic cruise build needs to be set up so that we can start working'
+task.save
+
+Do not do it like this:
+
+task = Mingle4r::API::new :name => 'set up Cruise build', :type => 'task',
+        :description => 'a basic cruise build needs to be set up so that we can start working'
+task.save => It simply won't work, there is a workaround but rather use as described above.
+
 Setting a particular property
 -----------------------------
 
