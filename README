@@ -112,7 +112,7 @@ Creating a card
 ---------------
 
 Mingle4r::API::Card is the ActiveResource class which handles interaction with cards.
-task = Mingle4r::API::new
+task = Mingle4r::API::Card.new
 task.name = 'set up Cruise build'
 task.type = 'task'
 task.description = 'a basic cruise build needs to be set up so that we can start working'
