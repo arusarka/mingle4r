@@ -1,13 +1,17 @@
-update documentation - write about executing transitions directly on the transition
-clarify in docs difference between custom properties and native properties
-write tests for project class
+will be fixed/implemented very soon
+-----------------------------------
 
-refactorings
-------------
+* fix updation of card properties
 
-maybe nice to  nave
--------------------
+will be implemented, but not very important for now
+----------------------------------------------------
 
-provide a easy mechanism to link to other cards
+* update documentation - write about executing transitions directly on the transition
+* provide a helper method to link to a card
+* write tests for project class
 
-should transtions give the list of properties to be changed directly
+will be done when I've no other work
+------------------------------------
+
+* clarify in docs difference between custom properties and native properties
+* should transtions give the list of properties to be changed directly

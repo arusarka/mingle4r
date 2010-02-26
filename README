@@ -258,6 +258,11 @@ m_c.project.execute_mql('SELECT name, "Added in Iteration" WHERE Type = Story')
 1) active_resource gem, it would be automatically taken care of
 during gem install.
 
+== LIMITATIONS:
+
+updating a property on the card which is a link to another card does not work. So for now
+only use it for other properties
+
 == INSTALL:
 
 since github no longer archives gems, I am hosting the gem at gemcutter. So you would need to
