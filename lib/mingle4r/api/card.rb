@@ -50,13 +50,13 @@ module Mingle4r
         def comments(refresh = false)
           return @comments if(!refresh && @comments)
           set_attributes_for(Comment)
-          @comments = Card::Comment.find(:all)
+          @comments = Comment.find(:all)
         end
         
         def transitions(refresh = false)
           return @transitions if(!refresh && @transitions)
           set_attributes_for(Transition)
-          @transitions = Card::Transition.find(:all)
+          @transitions = Transition.find(:all)
         end
         
         def murmurs(refresh = false)

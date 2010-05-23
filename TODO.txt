@@ -10,7 +10,9 @@ will be implemented, but not very important for now
 * provide a helper method to link to a card
 * write tests for project class
 * don't cache the different results in the project class
+* don't cache the different results in the card class
 * implement card_types for a project
+* mingle client should have cards method
 
 will be done when I've no other work
 ------------------------------------
