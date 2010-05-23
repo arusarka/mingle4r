@@ -45,48 +45,52 @@ describe DummyClass do
     dummy_obj.class.superclass.should == ActiveResource::Base
   end
   
-  it "should create same class when site is not changed" do
-    class DummyClass
-      class << self
-        attr_reader :resource_class
+  context "resoure class" do
+    it "is same when site is not changed" do
+      class DummyClass
+        class << self
+          attr_reader :resource_class
+        end
       end
+      site = 'http://localhost/foo'
+      DummyClass.site = site
+      DummyClass.user = 'test'
+      DummyClass.password = 'password'
+      class1 = DummyClass.resource_class
+      DummyClass.site = site
+      class2 = DummyClass.resource_class
+      class1.should == class2
     end
-    site = 'http://localhost/foo'
-    DummyClass.site = site
-    DummyClass.user = 'test'
-    DummyClass.password = 'password'
-    class1 = DummyClass.resource_class
-    DummyClass.site = site
-    class2 = DummyClass.resource_class
-    class1.should == class2
-  end
-  
-  it "should create different classes when site is changed" do
-    class DummyClass
-      class << self
-        attr_reader :resource_class
+
+    it "is different when site is changed" do
+      class DummyClass
+        class << self
+          attr_reader :resource_class
+        end
       end
+      site1 = 'http://localhost/foo'
+      site2 = 'http://localhost/bar'
+      DummyClass.site = site1
+      DummyClass.user = 'test'
+      DummyClass.password = 'password'
+      class1 = DummyClass.resource_class
+      DummyClass.site = site2
+      class2 = DummyClass.resource_class
+      class1.should_not == class2
     end
-    site1 = 'http://localhost/foo'
-    site2 = 'http://localhost/bar'
-    DummyClass.site = site1
-    DummyClass.user = 'test'
-    DummyClass.password = 'password'
-    class1 = DummyClass.resource_class
-    DummyClass.site = site2
-    class2 = DummyClass.resource_class
-    class1.should_not == class2
   end
-  
-  it "should call find with proper params" do
-    # open access to @resource var
-    class << DummyClass
-      attr_writer :resource_class
+    
+  context "method_missing" do
+    before do
+      class FooBar
+        extend Mingle4r::CommonClassMethods
+      end
     end
     
-    mock_class = mock(Class)
-    DummyClass.resource_class = mock_class
-    mock_class.should_receive(:find).with(:all, :from => 'http://localhost/test', :params => {:foo => 'bar'})
-    DummyClass.find(:all, :from => 'http://localhost/test', :params => {:foo => 'bar'})
+    it "should check if resource class has been set before calling the resource class's method" do
+      lambda{FooBar.foo_bar}.should(raise_error(Mingle4r::ResourceNotSetup) do |err|
+        err.message.should == 'Site is not set for FooBar. Please set it.'
+      end)
+    end
   end
 end

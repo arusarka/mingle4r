@@ -1,4 +1,6 @@
 module Mingle4r
+  class ResourceNotSetup < Exception; end
+  
   module CommonClassMethods
     attr_reader :site, :user, :password
 
@@ -128,6 +130,7 @@ module Mingle4r
     end
     
     def method_missing(meth_id, *args, &block)
+      raise ResourceNotSetup.new("Site is not set for #{name}. Please set it.") unless @resource_class
       @resource_class.send(meth_id.to_sym, *args, &block)
     end
   end
