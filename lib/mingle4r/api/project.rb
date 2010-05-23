@@ -2,44 +2,34 @@ module Mingle4r
   module API
     class Project
       module InstanceMethods
-        # returns the cards for the project. To hit the resource server without returning
-        # cached results pass true as an argument.
-        def cards(refresh = false)
-          return @cards if(!refresh && @cards)
+        # returns the cards for the project.
+        def cards
           set_attributes_for(Card)
-          @cards = Card.find_without_pagination(:all)
+          Card.find_without_pagination(:all)
         end
 
-        # returns the users for the project. To hit the resource server without returning
-        # cached results pass true as an argument.
-        def users(refresh = false)
-          return @users if(!refresh && @users)
-          set_attributes_for(User)
-          @users = User.find(:all)
+        # returns the users for the project.
+        def users
+          set_attributes_for(User) unless user_class_set
+          User.find(:all)
         end
 
-        # returns the wikis for the project. To hit the resource server without returning
-        # cached results pass true as an argument.
-        def wikis(refresh = false)
-          return @wikis if(!refresh && @wikis)
+        # returns the wikis for the project.
+        def wikis
           set_attributes_for(Wiki)
-          @wikis = Wiki.find(:all)
+          Wiki.find(:all)
         end
 
-        # returns the property definitions for the project. To hit the resource server
-        # pass true as an argument
-        def property_definitions(refresh = false)
-          return @prop_definitions if(!refresh && @prop_definitions)
+        # returns the property definitions for the project.
+        def property_definitions
           set_attributes_for(PropertyDefinition)
-          @prop_definitions = PropertyDefinition.find(:all)
+          PropertyDefinition.find(:all)
         end
 
-        # returns the murmurs for the project. To hit the resource server without returning
-        # cached results pass true as an argument.
-        def murmurs(refresh = false)
-          return @murmurs if(!refresh && @murmurs)
+        # returns the murmurs for the project.
+        def murmurs
           set_attributes_for(Murmur)
-          @murmurs = Murmur.find(:all)
+          Murmur.find(:all)
         end
 
         # posts a murmur
@@ -62,6 +52,13 @@ module Mingle4r
           klass.site = resource_site
           klass.user = self.class.user
           klass.password = self.class.password
+          setter_method = klass.name.demodulize.downcase + '_class_set'
+          send(setter_method, true)
+        end
+        
+        def user_class_set(val = nil)
+          return @user_class_set unless val
+          @user_class_set = val
         end
       end # module InstanceMethods
 
