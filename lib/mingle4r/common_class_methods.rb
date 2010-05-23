@@ -173,17 +173,9 @@ module Mingle4r
       
       created_class = Class.new(MingleResource)
       
-      # set the resource options
-      created_class.site = self.site
-      created_class.user = self.user
-      created_class.password = self.password
-      created_class.collection_name = self.collection_name
-      created_class.element_name = self.element_name
-
-      # created_class_name = "#{self}::#{class_name}#{Mingle4r::Helpers.fast_token()}"
+      set_resource_options(created_class)
       created_class_name = class_name + Mingle4r::Helpers.fast_token()
       created_class = self.const_set(created_class_name, created_class)
-      # eval "#{created_class_name} = created_class"
 
       # includes a module called InstanceMethods in the class created dynamically
       # if it is defined inside the wrapper class
@@ -196,6 +188,15 @@ module Mingle4r
       created_class.extend(self.const_get(class_meth_mod_name)) if class_meth_mod_name
       
       created_class
+    end
+    
+    def set_resource_options(klass)
+      klass.site = self.site
+      klass.user = self.user
+      klass.password = self.password
+      klass.collection_name = self.collection_name
+      klass.element_name = self.element_name
+      klass
     end
     
     def class_name
