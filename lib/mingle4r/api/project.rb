@@ -4,7 +4,7 @@ module Mingle4r
       module InstanceMethods
         # returns the cards for the project.
         def cards
-          set_attributes_for(Card)
+          set_attributes_for(Card) unless card_class_set
           Card.find_without_pagination(:all)
         end
 
@@ -54,11 +54,17 @@ module Mingle4r
           klass.password = self.class.password
           setter_method = klass.name.demodulize.downcase + '_class_set'
           send(setter_method, true)
+          klass
         end
         
         def user_class_set(val = nil)
           return @user_class_set unless val
           @user_class_set = val
+        end
+        
+        def card_class_set(val = nil)
+          return @card_class_set unless val
+          @card_class_set = val
         end
       end # module InstanceMethods
 

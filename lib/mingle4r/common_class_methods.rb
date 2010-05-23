@@ -92,8 +92,8 @@ module Mingle4r
       include_singleton_methods(klass)
     end
     
-    def include_singleton_methods(created_class)
-      created_class.extend(self.const_get(class_meths_mod_name)) if class_meths_mod_name
+    def include_singleton_methods(klass)
+      klass.extend(self.const_get(class_meths_mod_name)) if class_meths_mod_name
     end
     
     def include_instance_methods(klass)
@@ -116,17 +116,17 @@ module Mingle4r
     end
     
     def class_name
-      self.name.split('::')[-1]
+      self.name.demodulize
     end
     
     def inst_meths_mod_name
       inst_meth_mod_name = 'InstanceMethods'
-      self.constants.detect { |const| const.split('::')[-1] =~ /#{inst_meth_mod_name}/ }
+      self.constants.detect { |const| const.demodulize =~ /#{inst_meth_mod_name}/ }
     end
     
     def class_meths_mod_name
       class_meth_mod_name = 'ClassMethods'
-      self.constants.detect { |const| const.split('::')[-1] =~ /#{class_meth_mod_name}/ }
+      self.constants.detect { |const| const.demodulize =~ /#{class_meth_mod_name}/ }
     end
     
     def method_missing(meth_id, *args, &block)

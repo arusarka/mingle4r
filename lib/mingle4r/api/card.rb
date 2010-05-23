@@ -3,13 +3,6 @@ module Mingle4r
     class Card  
       extend Mingle4r::CommonClassMethods
       
-      # overwrite the default find in CommonClassMethods
-      def self.find(*args)
-        scope = args.slice!(0)
-        options = args.slice!(0) || {}
-        @resource_class.find_without_pagination(scope, options)
-      end
-      
       module ClassMethods
         def find_without_pagination(*args)
           scope   = args.slice!(0)

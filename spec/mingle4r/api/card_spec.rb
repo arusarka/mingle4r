@@ -17,10 +17,14 @@ describe Card do
     Card.element_name.should == 'card'
   end
   
-  it "should be able to call active resource find method with proper params" do
-    card_class = Card.send(:create_resource_class)
-    card_class.should_receive(:find).with(:all, :params => {:page => 'all'})
-    card_class.find_without_pagination(:all)
+  context "find_without_pagination" do
+    it "should be able to call active resource find method with proper params" do
+      card_class = Card.send(:create_resource_class)
+      card_class.should_receive(:find).with(:all, :params => {:page => 'all'})
+      card_class.find_without_pagination(:all)
+    end
+    
+    it "should raise error if resource class is not net"
   end
   
   it "should be able to give the number as the id of the card" do
