@@ -15,7 +15,7 @@ require 'mingle4r/version'
 require 'mingle4r/common_class_methods'
 require 'mingle4r/helpers'
 require 'mingle4r/mingle_client'
-require 'mingle4r/mingle_format'
+require 'mingle4r/card_format'
 
 require 'mingle4r/api/card'
 require 'mingle4r/api/card/attachment'
