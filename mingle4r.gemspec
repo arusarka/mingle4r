@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
              'lib/mingle4r/helpers.rb',
              'lib/mingle4r/mingle_client.rb',
              'lib/mingle4r/version.rb',
+             'lib/mingle4r/mingle_format.rb',
              
              'lib/mingle4r/api/card.rb',
              'lib/mingle4r/api/card/attachment.rb',
