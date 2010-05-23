@@ -41,26 +41,22 @@ module Mingle4r
           attributes['card_type_name'] = type
         end
         
-        def attachments(refresh = false)
-          return @attachments if(!refresh && @attachments)
-          set_attributes_for(Attachment)
+        def attachments
+          set_attributes_for(Attachment) unless attachment_class_set
           @attachments = Attachment.find(:all)
         end
         
-        def comments(refresh = false)
-          return @comments if(!refresh && @comments)
-          set_attributes_for(Comment)
-          @comments = Comment.find(:all)
+        def comments
+          set_attributes_for(Comment) unless comment_class_set
+          Comment.find(:all)
         end
         
-        def transitions(refresh = false)
-          return @transitions if(!refresh && @transitions)
-          set_attributes_for(Transition)
+        def transitions
+          set_attributes_for(Transition) unless transition_class_set
           @transitions = Transition.find(:all)
         end
         
-        def murmurs(refresh = false)
-          return @murmurs if(!refresh && @murmurs)
+        def murmurs
           set_attributes_for(Murmur)
           @murmurs = Murmur.find(:all)
         end
@@ -138,6 +134,24 @@ EOS
           klass.site     = resource_site
           klass.user     = self.class.user
           klass.password = self.class.password
+          setter_method = klass.name.demodulize.downcase + '_class_set'
+          send(setter_method, true)
+          klass
+        end
+        
+        def comment_class_set(val = nil)
+          return @comment_class_set unless val
+          @comment_class_set = val
+        end
+        
+        def attachment_class_set(val = nil)
+          return @attachment_class_set unless val
+          @attachment_class_set = val
+        end
+        
+        def transition_class_set(val = nil)
+          return @transition_class_set unless val
+          @transition_class_set = val
         end
       end
     end

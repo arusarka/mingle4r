@@ -61,11 +61,13 @@ describe Card do
   end
   
   context "for comments" do
-    it "should be able to set the appropriate attributes in Comment class while fetching comments" do
+    before(:each) do
       Card.site = 'http://localhost:9090/'
       Card.user = 'test'
       Card.password = 'test'
-
+    end
+    
+    it "should be able to set the appropriate attributes in Comment class while fetching comments" do
       card =  Card.new({:number => 1})
       Comment.stub!(:find)
       card.comments    
@@ -76,10 +78,6 @@ describe Card do
     end
 
     it "should be able to add comments to a card" do
-      Card.site = 'http://localhost:9090/'
-      Card.user = 'test'
-      Card.password = 'test'
-
       comment = Comment.new(:content => 'test comment')
       Comment.stub!(:new).and_return(comment)
       comment.should_receive(:save)
@@ -87,39 +85,83 @@ describe Card do
       card =  Card.new({:number => 1})
       card.add_comment('test comment')
     end
-  end
-
-  it "should be able to set the attributes in Transition class while fetching transitions" do
-    Card.site = 'http://localhost:9090/'
-    Card.user = 'test'
-    Card.password = 'test'
     
-    card =  Card.new({:number => 1})
-    Transition.stub!(:find)
-                                       
-    card.transitions                   
-    Transition.site.should == 'http://localhost:9090/cards/1'
-    Transition.user.should == 'test'
-    Transition.password.should == 'test'
+    it "should set attributes for Comment class only once" do
+      card =  Card.new({:number => 1})
+      
+      Comment.stub!(:find)
+      Comment.should_receive(:site=).once
+      Comment.should_receive(:user=).once
+      Comment.should_receive(:password=).once
+      
+      card.comments
+      card.comments
+    end
   end
   
-  it "should be able to execute a transition" do    
-    Card.site = 'http://localhost:9090/'
-    Card.user = 'test'
-    Card.password = 'test'
+  context "exceuting transitions" do
+    before(:each) do
+      Card.site = 'http://localhost:9090/'
+      Card.user = 'test'
+      Card.password = 'test'
+    end
     
-    Transition.site = 'http://localhost:9090/cards/1'
-    Transition.user = 'testuser'
-    Transition.password = 'testuser'
+    it "should be able to set the attributes in Transition class while fetching transitions" do
+      card =  Card.new({:number => 1})
+      Transition.stub!(:find)
+
+      card.transitions                   
+      Transition.site.should == 'http://localhost:9090/cards/1'
+      Transition.user.should == 'test'
+      Transition.password.should == 'test'
+    end
     
-    card = Card.new(:number => 1)
-    transition1 = Transition.new(:name => 'Dummy transition')
-    transition2 = Transition.new(:name => 'Accepted')
-    transitions = [transition1, transition2]
-    Transition.stub!(:find).and_return(transitions)
-    args = {:name => 'Accepted', :comment => 'Test comment'}
-    transition2.should_receive(:execute).with(args)
+    it "should set attributes for Transition class only once" do
+      card =  Card.new({:number => 1})
+      
+      Transition.stub!(:find)
+      Transition.should_receive(:site=).once
+      Transition.should_receive(:user=).once
+      Transition.should_receive(:password=).once
+      
+      card.transitions
+      card.transitions
+    end
+
+    it "should be able to execute a transition" do    
+      Transition.site = 'http://localhost:9090/cards/1'
+      Transition.user = 'testuser'
+      Transition.password = 'testuser'
+
+      card = Card.new(:number => 1)
+      transition1 = Transition.new(:name => 'Dummy transition')
+      transition2 = Transition.new(:name => 'Accepted')
+      transitions = [transition1, transition2]
+      Transition.stub!(:find).and_return(transitions)
+      args = {:name => 'Accepted', :comment => 'Test comment'}
+      transition2.should_receive(:execute).with(args)
+
+      card.execute_transition(args)
+    end
+  end
+  
+  context "for attachments" do
+    before(:each) do
+      Card.site = 'http://localhost:9090/'
+      Card.user = 'test'
+      Card.password = 'test'
+    end
     
-    card.execute_transition(args)
+    it "should set attributes for Attachment class only once" do
+      card =  Card.new({:number => 1})
+      
+      Attachment.stub!(:find)
+      Attachment.should_receive(:site=).once
+      Attachment.should_receive(:user=).once
+      Attachment.should_receive(:password=).once
+      
+      card.attachments
+      card.attachments
+    end
   end
 end
