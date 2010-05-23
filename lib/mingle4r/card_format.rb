@@ -1,5 +1,5 @@
 module Mingle4r
-  class MingleFormat
+  class CardFormat
     def extension
       'xml'
     end

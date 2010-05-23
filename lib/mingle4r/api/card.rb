@@ -127,7 +127,7 @@ EOS
           klass.site     = resource_site
           klass.user     = self.class.user
           klass.password = self.class.password
-          setter_method = klass.name.demodulize.downcase + '_class_set'
+          setter_method = klass.name.demodulize.underscore + '_class_set'
           send(setter_method, true)
           klass
         end

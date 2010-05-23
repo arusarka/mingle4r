@@ -5,9 +5,9 @@ include Mingle4r
 class DummyCard < ActiveResource::Base ; end
 class CardType < ActiveResource::Base ; end
 
-describe MingleFormat do
+describe CardFormat do
   before(:each) do
-    @card_format = MingleFormat.new
+    @card_format = CardFormat.new
   end
 
   it "should be have the extension as 'xml'" do
