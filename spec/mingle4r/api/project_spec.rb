@@ -50,4 +50,62 @@ describe Project do
       project.wikis
     end
   end
+  
+  context "fetching property definitions" do
+    it "should set the attributes for PropertyDefinition class only once" do
+      project = Project.new(:identifier => 'some-id')
+      
+      PropertyDefinition.stub!(:find)
+      PropertyDefinition.should_receive(:site=).once
+      PropertyDefinition.should_receive(:user=).once
+      PropertyDefinition.should_receive(:password=).once
+      
+      project.property_definitions
+      project.property_definitions
+    end
+  end
+  
+  context "murmurs" do
+    def any_murmur
+      OpenStruct.new(:save => 'do nothing')
+    end
+    
+    it "should set the attributes for Murmur class only once when fetching" do
+      project = Project.new(:identifier => 'some-id')
+      
+      Murmur.stub!(:find)
+      Murmur.should_receive(:site=).once
+      Murmur.should_receive(:user=).once
+      Murmur.should_receive(:password=).once
+      
+      project.murmurs
+      project.murmurs
+    end
+    
+    it "should set the attributes for Murmur class only once when posting" do
+      project = Project.new(:identifier => 'some-id')
+      
+      Murmur.stub!(:new).and_return(any_murmur)
+      Murmur.should_receive(:site=).once
+      Murmur.should_receive(:user=).once
+      Murmur.should_receive(:password=).once
+      
+      project.post_murmur('hello')
+      project.post_murmur('world')
+    end
+  end
+  
+  context "executing an mql" do
+    it "should set the attributes of the ExecuteMql class only once" do
+      project = Project.new(:identifier => 'some-id')
+      
+      ExecuteMql.stub!(:query)
+      ExecuteMql.should_receive(:site=).once
+      ExecuteMql.should_receive(:user=).once
+      ExecuteMql.should_receive(:password=).once
+      
+      project.execute_mql('Select name WHERE type is Story')
+      project.execute_mql('Select name WHERE type is Defect')
+    end
+  end
 end
