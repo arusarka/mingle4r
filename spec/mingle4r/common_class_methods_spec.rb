@@ -78,18 +78,6 @@ describe DummyClass do
     class1.should_not == class2
   end
   
-  it "should be able to find the instance methods module in the class" do
-    DummyClass.send(:instance_methods_module_name).should == 'InstanceMethods'
-  end
-  
-  it "should not be able to find class methods module in the class" do
-    DummyClass.send(:class_methods_module_name).should be_nil
-  end
-  
-  it "should return the class name only without nesting of namespaces" do
-    DummyClass.send(:class_name).should == 'DummyClass'
-  end
-  
   it "should call find with proper params" do
     # open access to @resource var
     class << DummyClass

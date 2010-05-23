@@ -168,26 +168,31 @@ module Mingle4r
     # creates an active resource class dynamically. All the attributes are set automatically. Avoid calling
     # this method directly                                                  
     def create_resource_class
-      # raise exceptions if site is not set
       raise "Please set the site for #{self} class." unless(self.site)
-      
       created_class = Class.new(MingleResource)
-      
-      set_resource_options(created_class)
-      created_class_name = class_name + Mingle4r::Helpers.fast_token()
-      created_class = self.const_set(created_class_name, created_class)
-
-      # includes a module called InstanceMethods in the class created dynamically
-      # if it is defined inside the wrapper class
-      inst_meth_mod_name = instance_methods_module_name()
-      created_class.send(:include, self.const_get(inst_meth_mod_name.to_sym)) if inst_meth_mod_name
-
-      # extends the class created dynamically with a module called ClassMethods if
-      # it is defined inside the wrapper class
-      class_meth_mod_name = class_methods_module_name()
-      created_class.extend(self.const_get(class_meth_mod_name)) if class_meth_mod_name
-      
+      setup_class(created_class)
       created_class
+    end
+    
+    def setup_class(klass)
+      set_resource_options(klass)
+      set_class_name(klass)
+      include_instance_methods(klass)
+      include_singleton_methods(klass)
+    end
+    
+    def include_singleton_methods(created_class)
+      created_class.extend(self.const_get(class_meths_mod_name)) if class_meths_mod_name
+    end
+    
+    def include_instance_methods(klass)
+      klass.send(:include, self.const_get(inst_meths_mod_name.to_sym)) if inst_meths_mod_name
+    end
+    
+    def set_class_name(klass)
+      created_class_name = class_name + Mingle4r::Helpers.fast_token()
+      klass = self.const_set(created_class_name, klass)
+      klass
     end
     
     def set_resource_options(klass)
@@ -203,12 +208,12 @@ module Mingle4r
       self.name.split('::')[-1]
     end
     
-    def instance_methods_module_name
+    def inst_meths_mod_name
       inst_meth_mod_name = 'InstanceMethods'
       self.constants.detect { |const| const.split('::')[-1] =~ /#{inst_meth_mod_name}/ }
     end
     
-    def class_methods_module_name
+    def class_meths_mod_name
       class_meth_mod_name = 'ClassMethods'
       self.constants.detect { |const| const.split('::')[-1] =~ /#{class_meth_mod_name}/ }
     end
