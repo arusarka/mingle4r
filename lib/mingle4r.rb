@@ -6,9 +6,7 @@ require 'active_resource'
 require 'net/http'
 
 # This module should be used to interact with mingle. Look in the readme for examples.
-module Mingle4r
-  AUTHOR = 'Asur'
-end
+module Mingle4r; end
 
 require 'mingle_resource'
 require 'mingle4r/version'

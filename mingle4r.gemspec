@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
              'lib/mingle4r/api/card/attachment.rb',
              'lib/mingle4r/api/card/comment.rb',
              'lib/mingle4r/api/card/transition.rb',
-             'lib/mingle4r/api/execute_mql',
+             'lib/mingle4r/api/execute_mql.rb',
              'lib/mingle4r/api/murmur.rb',
              'lib/mingle4r/api/project.rb',
              'lib/mingle4r/api/property_definition.rb',
