@@ -16,7 +16,7 @@ module Mingle4r
 
         # returns the wikis for the project.
         def wikis
-          set_attributes_for(Wiki)
+          set_attributes_for(Wiki) unless wiki_class_set
           Wiki.find(:all)
         end
 
@@ -65,6 +65,11 @@ module Mingle4r
         def card_class_set(val = nil)
           return @card_class_set unless val
           @card_class_set = val
+        end
+        
+        def wiki_class_set(val = nil)
+          return @wiki_class_set unless val
+          @wiki_class_set = val
         end
       end # module InstanceMethods
 

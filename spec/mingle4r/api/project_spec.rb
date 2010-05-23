@@ -36,4 +36,18 @@ describe Project do
       project.cards
     end
   end
+  
+  context "fetching wikis" do
+    it "should set the attributes for Wiki class only once" do
+      project = Project.new(:identifier => 'some-id')
+      
+      Wiki.stub!(:find)
+      Wiki.should_receive(:site=).once
+      Wiki.should_receive(:user=).once
+      Wiki.should_receive(:password=).once
+      
+      project.wikis
+      project.wikis
+    end
+  end
 end
