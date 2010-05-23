@@ -9,6 +9,8 @@ will be implemented, but not very important for now
 * update documentation - write about executing transitions directly on the transition
 * provide a helper method to link to a card
 * write tests for project class
+* don't cache the different results in the project class
+* implement card_types for a project
 
 will be done when I've no other work
 ------------------------------------
