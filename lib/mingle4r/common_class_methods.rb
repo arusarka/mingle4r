@@ -88,7 +88,7 @@ module Mingle4r
     end
     
     def setup_class(klass)
-      set_resource_options(klass)
+      set_resource_attributes(klass)
       set_class_name(klass)
       include_instance_methods(klass)
       include_singleton_methods(klass)
@@ -108,7 +108,7 @@ module Mingle4r
       klass
     end
     
-    def set_resource_options(klass)
+    def set_resource_attributes(klass)
       klass.site = self.site
       klass.user = self.user
       klass.password = self.password
