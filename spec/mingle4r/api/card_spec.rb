@@ -51,9 +51,17 @@ describe Card do
     card.property_value('Story Status').should == 'In Development'
   end
   
-  it "should be able to return the card type directly" do
-    card = Card.new({:card_type => OpenStruct.new(:name => 'Story')})
-    card.type.should == 'Story'
+  context "card_type" do
+    it "should be able to return the card type directly" do
+      card = Card.new({:card_type => OpenStruct.new(:name => 'Story')})
+      card.type.should == 'Story'
+    end
+    
+    it "should return the card type set" do
+      card = Card.new
+      card.type = 'Defect'
+      card.type.should == 'Defect'
+    end
   end
   
   it "should be able to set the card type directly" do

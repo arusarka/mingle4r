@@ -27,7 +27,7 @@ module Mingle4r
         end
         
         def type
-          card_type.name
+          attributes['card_type_name'] || attributes['card_type'].name
         end
         
         def type=(type)
