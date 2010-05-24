@@ -82,4 +82,28 @@ describe DummyClass do
       end)
     end
   end
+  
+  context "post setup hook" do
+    it "should be called after setup" do
+      class NeedsPostSetup
+        extend Mingle4r::CommonClassMethods
+        def self.on_setup(klass); end
+      end
+      
+      NeedsPostSetup.should_receive(:on_setup)
+      NeedsPostSetup.site = 'http://localhost'
+    end
+    
+    # not able to make this test pass as the assertion should_not_recieve
+    # creates the method 'on_setup' in the class DoesNotNeedPostSetup which
+    # is hidering with the code
+    xit "should not be called after setup if not implemented by extendee" do
+      class DoesNotNeedPostSetup
+        extend Mingle4r::CommonClassMethods
+      end
+      
+      DoesNotNeedPostSetup.should_not_receive(:on_setup)
+      DoesNotNeedPostSetup.site = 'http://localhost'
+    end
+  end
 end

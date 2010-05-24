@@ -92,6 +92,7 @@ module Mingle4r
       set_class_name(klass)
       include_instance_methods(klass)
       include_singleton_methods(klass)
+      on_setup(klass) if(respond_to?('on_setup'))
     end
     
     def include_singleton_methods(klass)
