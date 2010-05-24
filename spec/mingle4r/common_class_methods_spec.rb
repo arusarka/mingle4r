@@ -46,36 +46,25 @@ describe DummyClass do
   end
   
   context "resoure class" do
-    it "is same when site is not changed" do
-      class DummyClass
-        class << self
-          attr_reader :resource_class
-        end
-      end
+    before(:each) do
       site = 'http://localhost/foo'
       DummyClass.site = site
       DummyClass.user = 'test'
       DummyClass.password = 'password'
-      class1 = DummyClass.resource_class
-      DummyClass.site = site
-      class2 = DummyClass.resource_class
+    end
+    
+    it "is same when site is not changed" do
+      class1 = DummyClass.new.class
+      DummyClass.site = 'http://localhost/foo'
+      class2 = DummyClass.new.class
       class1.should == class2
     end
 
     it "is different when site is changed" do
-      class DummyClass
-        class << self
-          attr_reader :resource_class
-        end
-      end
-      site1 = 'http://localhost/foo'
       site2 = 'http://localhost/bar'
-      DummyClass.site = site1
-      DummyClass.user = 'test'
-      DummyClass.password = 'password'
-      class1 = DummyClass.resource_class
+      class1 = DummyClass.new.class
       DummyClass.site = site2
-      class2 = DummyClass.resource_class
+      class2 = DummyClass.new.class
       class1.should_not == class2
     end
   end
@@ -89,7 +78,7 @@ describe DummyClass do
     
     it "should check if resource class has been set before calling the resource class's method" do
       lambda{FooBar.foo_bar}.should(raise_error(Mingle4r::ResourceNotSetup) do |err|
-        err.message.should == 'Site is not set for FooBar. Please set it.'
+        err.message.should == 'Site not set for FooBar.'
       end)
     end
   end
