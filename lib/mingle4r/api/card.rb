@@ -147,6 +147,13 @@ EOS
           @transition_class_set = val
         end
       end
+      
+      private
+      # post setup hook
+      def self.on_setup(klass)
+        klass.format = Mingle4r::CardFormat.new
+        klass
+      end
     end
   end
 end

@@ -174,4 +174,15 @@ describe Card do
       card.attachments
     end
   end
+  
+  context "post setup hook" do
+    it "should set the format of the class as card format" do
+      Card.site = 'http://localhost:9090/'
+      Card.user = 'test'
+      Card.password = 'test'
+      
+      format = Card.new.class.format
+      format.should be_instance_of(Mingle4r::CardFormat)
+    end
+  end
 end
