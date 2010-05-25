@@ -16,4 +16,12 @@ describe Wiki do
     wiki = Wiki.new :identifier => 'some_wiki'
     wiki.id.should == 'some_wiki'
   end
+  
+  context "post setup hook" do
+    it "should set the primary key as identifier" do
+      Wiki.site = 'http://localhost'
+      primary_key = Wiki.new.class.primary_key
+      primary_key.should == 'identifier'
+    end
+  end
 end

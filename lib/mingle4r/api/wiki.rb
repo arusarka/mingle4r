@@ -8,6 +8,11 @@ module Mingle4r
           identifier
         end
       end
+      
+      private
+      def self.on_setup(klass)
+        klass.primary_key = 'identifier'
+      end
     end
   end
 end

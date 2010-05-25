@@ -191,7 +191,7 @@ describe Card do
       Card.password = 'test'
       
       primary_key = Card.new.class.primary_key
-      primary_key.should == :number
+      primary_key.should == 'number'
     end
   end
 end
