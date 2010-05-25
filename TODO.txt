@@ -1,7 +1,6 @@
 will be fixed/implemented very soon
 -----------------------------------
 
-* fix bugs for id returning identifiers or numbers instead of object id (try setting primary_key)
 * fix updation of card properties
 
 will be implemented, but not very important for now

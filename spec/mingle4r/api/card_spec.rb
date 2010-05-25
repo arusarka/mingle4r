@@ -177,19 +177,11 @@ describe Card do
   
   context "post setup hook" do
     it "should set the format of the class as card format" do
-      Card.site = 'http://localhost:9090/'
-      Card.user = 'test'
-      Card.password = 'test'
-      
       format = Card.new.class.format
       format.should be_instance_of(Mingle4r::CardFormat)
     end
     
     it "should set the primary key as the id" do
-      Card.site = 'http://localhost:9090/'
-      Card.user = 'test'
-      Card.password = 'test'
-      
       primary_key = Card.new.class.primary_key
       primary_key.should == 'number'
     end
