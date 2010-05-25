@@ -108,4 +108,11 @@ describe Project do
       project.execute_mql('Select name WHERE type is Defect')
     end
   end
+  
+  context "post setup" do
+    it "should set identifier ias the primary key" do
+      primary_key = Project.new.class.primary_key
+      primary_key.should == 'identifier'
+    end
+  end
 end

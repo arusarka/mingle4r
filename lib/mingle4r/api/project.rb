@@ -89,6 +89,11 @@ module Mingle4r
       end # module InstanceMethods
 
       extend Mingle4r::CommonClassMethods
+      
+      private
+      def self.on_setup(klass)
+        klass.primary_key = 'identifier'
+      end
     end # class Project
   end # class API
 end
