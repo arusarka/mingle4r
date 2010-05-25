@@ -2,13 +2,7 @@ module Mingle4r
   module API
     class Wiki
       extend Mingle4r::CommonClassMethods
-      
-      module InstanceMethods
-        def id
-          identifier
-        end
-      end
-      
+            
       private
       def self.on_setup(klass)
         klass.primary_key = 'identifier'

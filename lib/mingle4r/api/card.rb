@@ -21,11 +21,6 @@ module Mingle4r
       end
 
       module InstanceMethods
-        # so that active resource tries to find by number
-        def id
-          number()
-        end
-        
         def type
           attributes['card_type_name'] || attributes['card_type'].name
         end
