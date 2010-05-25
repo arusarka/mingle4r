@@ -40,15 +40,31 @@ XML
   context "encode" do
     it "should be able to encode properly" do
       xml = '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
-      "<dummy-card>\n" +
-      "  <card-type>\n" +
-      "  </card-type>\n" +
-      "</dummy-card>\n"
+      "<dummy_card>\n" +
+      "  <card_type>\n" +
+      "  </card_type>\n" +
+      "</dummy_card>\n"
       DummyCard.site = 'http://dummyhost'
       DummyCard.format = @card_format
       dummy_resource = DummyCard.new(:card_type => CardType.new)
-      encoded = dummy_resource.encode(:root => 'dummy-card')
+      encoded = dummy_resource.encode(:root => 'dummy_card')
       encoded.should == xml
+    end
+    
+    it "should convert tree relationship property appropriately" do
+      raw_xml = load_fixture('card_with_tree_relationship_property_raw.xml')
+      final_xml = load_fixture('card_with_tree_relationship_property_final.xml')
+      hash_to_encode = @card_format.decode(raw_xml)
+      encoded_xml = @card_format.encode(hash_to_encode, :root => 'card')
+      encoded_xml.should == final_xml
+    end
+    
+    it "should convert card relationship property appropriately" do
+      raw_xml = load_fixture('card_with_card_relationship_property_raw.xml')
+      final_xml = load_fixture('card_with_card_relationship_property_final.xml')
+      hash_to_encode = @card_format.decode(raw_xml)
+      encoded_xml = @card_format.encode(hash_to_encode, :root => 'card')
+      encoded_xml.should == final_xml
     end
   end
 end

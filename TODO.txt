@@ -1,7 +1,7 @@
 will be fixed/implemented very soon
 -----------------------------------
 
-* fix updation of card properties
+* fix updation of card properties - fix card type, any card used in tree, user types
 
 will be implemented, but not very important for now
 ----------------------------------------------------
