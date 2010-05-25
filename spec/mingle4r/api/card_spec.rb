@@ -184,5 +184,14 @@ describe Card do
       format = Card.new.class.format
       format.should be_instance_of(Mingle4r::CardFormat)
     end
+    
+    it "should set the primary key as the id" do
+      Card.site = 'http://localhost:9090/'
+      Card.user = 'test'
+      Card.password = 'test'
+      
+      primary_key = Card.new.class.primary_key
+      primary_key.should == :number
+    end
   end
 end

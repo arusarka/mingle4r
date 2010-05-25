@@ -152,6 +152,7 @@ EOS
       # post setup hook
       def self.on_setup(klass)
         klass.format = Mingle4r::CardFormat.new
+        klass.primary_key = :number
         klass
       end
     end
