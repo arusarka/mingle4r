@@ -2,6 +2,12 @@ module Mingle4r
   module API
     class Wiki
       extend Mingle4r::CommonClassMethods
+      
+      module InstanceMethods
+        def id
+          identifier
+        end
+      end
     end
   end
 end
