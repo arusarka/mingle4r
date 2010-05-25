@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 require 'rubygems/specification'
 
-describe Mingle4r::Version do
+describe "Mingle4r::Version" do
   it "should return proper version" do
-    Mingle4r::Version::to_s.should == '0.4.3'
+    Mingle4r::Version::to_s.should == '0.4.4'
   end
   
   it "should have the same version as in the gemspec" do
