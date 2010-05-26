@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<card>
+  <number type="integer">116</number>
+  <name>Login/logout</name>
+  <created_on type="datetime">2009-12-03T06:47:02Z</created_on>
+  <card_type>
+    <name>Test Case</name>
+  </card_type>
+  <project_card_rank type="integer">113</project_card_rank>
+  <created_by>
+    <name>testuser</name>
+    <url>http://localhost:8080/api/v2/users/1.xml</url>
+    <login>testuser</login>
+  </created_by>
+  <modified_on type="datetime">2010-05-24T08:52:42Z</modified_on>
+  <project>
+    <name>Agile hybrid project</name>
+    <url>http://localhost:8080/api/v2/projects/agile_hybrid_project.xml</url>
+    <identifier>agile_hybrid_project</identifier>
+  </project>
+  <id type="integer">1428</id>
+  <version type="integer">3</version>
+  <modified_by>
+    <name>testuser</name>
+    <url>http://localhost:8080/api/v2/users/1.xml</url>
+    <login>testuser</login>
+  </modified_by>
+  <description>
+  </description>
+  <properties type="array">
+    <property>
+      <name>hjira</name>
+      <type_description>Any text</type_description>
+      <value>MITP-7</value>
+      <hidden>false</hidden>
+    </property>
+    <property>
+      <name>Feature</name>
+      <type_description>Any card used in tree</type_description>
+      <value type="integer">117</value>
+      <hidden>false</hidden>
+    </property>
+    <property>
+      <name>Story related to</name>
+      <type_description>Any card used in tree</type_description>
+      <value nil="true"></value>
+      <hidden>false</hidden>
+    </property>
+  </properties>
+</card>

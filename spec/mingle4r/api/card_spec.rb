@@ -186,4 +186,17 @@ describe Card do
       primary_key.should == 'number'
     end
   end
+  
+  context "encode" do
+    it "should work properly" do
+      expected_xml = ''
+      card = Card.new(:name => 'some card',
+                      :card_type => {:name => 'Story'},
+                      :properties => [{:type_description => 'Card', :name => 'Feature',
+                        :value => {:url => 'http://localhost', :number => 87}}])
+      encoded_xml = card.encode
+      puts encoded_xml
+      encoded_xml.should == expected_xml
+    end
+  end
 end

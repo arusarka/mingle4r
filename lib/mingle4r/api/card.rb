@@ -116,6 +116,11 @@ EOS
           properties.map { |p| {p.name => p.value} }
         end
         
+        # def encode(options = {})
+        #   options.merge! :root => 'card'
+        #   self.class.format.encode(options)
+        # end
+        
         private
         def set_attributes_for(klass)
           resource_site  = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
