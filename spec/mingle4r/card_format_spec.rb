@@ -38,7 +38,17 @@ describe CardFormat do
       </card>
 XML
       @card_format.decode(xml).should == {"name"=>"Yet another bug", "card_type_name"=>"Bug",
-        "properties"=>[{"name"=>"Defect Fix Completed in Iteration", "type_description"=>"Card", "value"=>34, "hidden"=>"false"}]}
+        "properties"=>[{"name"=>"Defect Fix Completed in Iteration", "type_description"=>"Card", "value"=>34, 
+          "hidden"=>"false"}]}
+    end
+    
+    it "should be able to decode tree relatioship property appropriately" do
+      xml = load_fixture('card_with_tree_relationship_property_raw.xml')
+      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type"=>{"name"=>"Story"},
+      "properties"=>[{"name"=>"Feature", "type_description"=>"Any card used in tree",
+        "value"=> 87, "hidden"=>"false"}]}
+      actual_hash = @card_format.decode(xml)
+      actual_hash.should == expected_hash
     end
   end
 

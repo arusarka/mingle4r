@@ -9,7 +9,9 @@ module Mingle4r
     end
     
     def decode(xml)
-      from_xml_data(Hash.from_xml(xml))
+      hash = from_xml_data(Hash.from_xml(xml))
+      simplify_props_of_type('Any card used in tree', hash)
+      hash
     end
     
     def encode(hash, options={})
@@ -44,6 +46,24 @@ module Mingle4r
     
     def prop_of_type?(prop, type)
       prop.type_description == type
+    end
+    
+    def simplify_props_of_type(type, hash)
+      return unless hash['properties']
+      hash['properties'].collect! do |prop|
+        simplify_prop(prop) if (prop_is_of_type?(prop, type))
+        prop
+      end
+      hash
+    end
+    
+    def simplify_prop(prop)
+      prop['value'] = prop['value']['number'] if prop['value']
+      prop
+    end
+    
+    def prop_is_of_type?(prop, type)
+      prop['type_description'] == type
     end
   end
 end

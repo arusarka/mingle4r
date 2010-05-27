@@ -2,6 +2,7 @@ will be fixed/implemented very soon
 -----------------------------------
 
 * move conversion of the attributes hash to simpler form for properties of type user, card and tree relationship property while 'getting' a card instead of while 'saving' it
+* test whether the project tag in the card GET xml is the same for PUT
 * fix updation of card properties - fix user types
 
 will be implemented, but not very important for now
