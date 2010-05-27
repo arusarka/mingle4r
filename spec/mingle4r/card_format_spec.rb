@@ -28,7 +28,7 @@ describe CardFormat do
       xml = <<-XML
       <?xml version="1.0" encoding="UTF-8"?>
       <card><name>Yet another bug</name>
-        <card_type_name>Bug</card_type_name>
+        <card_type><name>Bug</name></card_type>
         <properties type="array">
           <property type_description="Card" hidden="false">
             <name>Defect Fix Completed in Iteration</name>
@@ -46,7 +46,7 @@ XML
     
     it "should be able to decode tree relatioship property appropriately" do
       xml = load_fixture('card_with_tree_relationship_property_raw.xml')
-      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type"=>{"name"=>"Story"},
+      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
       "properties"=>[{"name"=>"Feature", "type_description"=>"Any card used in tree",
         "value"=> 87, "hidden"=>"false"}]}
       actual_hash = @card_format.decode(xml)
@@ -55,7 +55,17 @@ XML
     
     it "should be able to decode link to other card property appropriately" do
       xml = load_fixture('card_with_card_relationship_property_raw.xml')
-      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type"=>{"name"=>"Story"},
+      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
+      "properties" =>[{"name"=>"Accepted in Iteration", "type_description"=>"Card",
+        "value" => nil, "hidden"=>"false"}, {"name"=>"Added to Scope in Iteration",
+          "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}
+      actual_hash = @card_format.decode(xml)
+      actual_hash.should == expected_hash
+    end
+
+    it "should be able to decode card_type appropriately" do
+      xml = load_fixture('card_with_card_relationship_property_raw.xml')
+      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
       "properties" =>[{"name"=>"Accepted in Iteration", "type_description"=>"Card",
         "value" => nil, "hidden"=>"false"}, {"name"=>"Added to Scope in Iteration",
           "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}
