@@ -11,6 +11,7 @@ module Mingle4r
     def decode(xml)
       hash = from_xml_data(Hash.from_xml(xml))
       simplify_props_of_type('Any card used in tree', hash)
+      simplify_props_of_type('Card', hash)
       hash
     end
     
