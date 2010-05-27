@@ -116,10 +116,10 @@ EOS
           properties.map { |p| {p.name => p.value} }
         end
         
-        # def encode(options = {})
-        #   options.merge! :root => 'card'
-        #   self.class.format.encode(options)
-        # end
+        def encode(options = {})
+          options.merge! :root => 'card'
+          self.class.format.encode(attributes, options)
+        end
         
         private
         def set_attributes_for(klass)

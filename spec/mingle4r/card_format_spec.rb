@@ -6,6 +6,11 @@ class DummyCard < ActiveResource::Base ; end
 class CardType < ActiveResource::Base ; end
 
 describe CardFormat do
+  before(:all) do
+    DummyCard.site = 'http://localhost'
+    CardType.site = 'http://localhost'
+  end
+  
   before(:each) do
     @card_format = CardFormat.new
   end
@@ -44,7 +49,6 @@ XML
       "  <card_type>\n" +
       "  </card_type>\n" +
       "</dummy_card>\n"
-      DummyCard.site = 'http://dummyhost'
       DummyCard.format = @card_format
       dummy_resource = DummyCard.new(:card_type => CardType.new)
       encoded = dummy_resource.encode(:root => 'dummy_card')
@@ -52,19 +56,25 @@ XML
     end
     
     it "should convert tree relationship property appropriately" do
-      raw_xml = load_fixture('card_with_tree_relationship_property_raw.xml')
-      final_xml = load_fixture('card_with_tree_relationship_property_final.xml')
-      hash_to_encode = @card_format.decode(raw_xml)
-      encoded_xml = @card_format.encode(hash_to_encode, :root => 'card')
-      encoded_xml.should == final_xml
+      card = DummyCard.new(:number => 116,
+      :properties => [{ :type_description => 'Any card used in tree',
+        :hidden   => 'false', :name => 'Feature',
+        :value    => {:url => "http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/117.xml",
+        :number   => 117}}])
+      expected_xml = load_fixture('card_with_tree_relationship_property_final.xml')
+      actual_xml = @card_format.encode(card.attributes, :root => 'card')
+      actual_xml.should == expected_xml
     end
     
     it "should convert card relationship property appropriately" do
-      raw_xml = load_fixture('card_with_card_relationship_property_raw.xml')
-      final_xml = load_fixture('card_with_card_relationship_property_final.xml')
-      hash_to_encode = @card_format.decode(raw_xml)
-      encoded_xml = @card_format.encode(hash_to_encode, :root => 'card')
-      encoded_xml.should == final_xml
+      card = DummyCard.new(:name => 'Contact API',
+      :properties => [{ :type_description => 'Card',
+        :hidden   => 'false', :name => 'Feature',
+        :value    => {:url => "http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/37.xml",
+        :number   => 37}}])
+      expected_xml = load_fixture('card_with_card_relationship_property_final.xml')
+      actual_xml = @card_format.encode(card.attributes, :root => 'card')
+      actual_xml.should == expected_xml
     end
   end
 end

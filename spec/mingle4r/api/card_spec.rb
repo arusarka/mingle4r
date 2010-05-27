@@ -188,15 +188,13 @@ describe Card do
   end
   
   context "encode" do
-    it "should work properly" do
-      expected_xml = ''
-      card = Card.new(:name => 'some card',
-                      :card_type => {:name => 'Story'},
-                      :properties => [{:type_description => 'Card', :name => 'Feature',
-                        :value => {:url => 'http://localhost', :number => 87}}])
-      encoded_xml = card.encode
-      puts encoded_xml
-      encoded_xml.should == expected_xml
+    it "should delegate to CardFormat properly" do
+      card = Card.new(:name => 'some name', :number => 12)
+      encoding_format = mock()
+      encoding_format.should_receive(:encode).with(card.attributes, :root => 'card')
+      
+      card.class.format = encoding_format
+      card.encode
     end
   end
 end

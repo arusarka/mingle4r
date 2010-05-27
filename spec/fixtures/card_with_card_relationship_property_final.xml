@@ -1,108 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <card>
-  <number type="integer">119</number>
   <name>Contact API</name>
-  <created_on type="datetime">2009-12-03T06:47:02Z</created_on>
-  <card_type>
-    <name>Story</name>
-  </card_type>
-  <project_card_rank type="integer">116</project_card_rank>
-  <created_by>
-    <name>testuser</name>
-    <url>http://localhost:8080/api/v2/users/1.xml</url>
-    <login>testuser</login>
-  </created_by>
-  <modified_on type="datetime">2010-05-25T17:18:53Z</modified_on>
-  <project>
-    <name>Agile hybrid project</name>
-    <url>http://localhost:8080/api/v2/projects/agile_hybrid_project.xml</url>
-    <identifier>agile_hybrid_project</identifier>
-  </project>
-  <id type="integer">1431</id>
-  <version type="integer">2</version>
-  <modified_by>
-    <name>testuser</name>
-    <url>http://localhost:8080/api/v2/users/1.xml</url>
-    <login>testuser</login>
-  </modified_by>
-  <description>some description</description>
   <properties type="array">
     <property>
-      <name>Priority</name>
-      <type_description>Managed text list</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Story Status</name>
-      <type_description>Managed text list</type_description>
-      <value>New</value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Planning Estimate</name>
-      <type_description>Managed number list</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Actual Effort</name>
-      <type_description>Formula</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Type of test</name>
-      <type_description>Managed text list</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Testing Status</name>
-      <type_description>Managed text list</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Build completed</name>
-      <type_description>Any number</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Story Time-To-Life</name>
-      <type_description>Formula</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Added to Scope On</name>
-      <type_description>Date</type_description>
-      <value nil="true"></value>
-      <hidden>true</hidden>
-    </property>
-    <property>
-      <name>Development Started On</name>
-      <type_description>Date</type_description>
-      <value nil="true"></value>
-      <hidden>true</hidden>
-    </property>
-    <property>
-      <name>Accepted in Iteration</name>
-      <type_description>Card</type_description>
-      <value nil="true"></value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Added to Scope in Iteration</name>
+      <name>Feature</name>
       <type_description>Card</type_description>
       <value type="integer">37</value>
-      <hidden>false</hidden>
-    </property>
-    <property>
-      <name>Development Completed in Iteration</name>
-      <type_description>Card</type_description>
-      <value nil="true"></value>
       <hidden>false</hidden>
     </property>
   </properties>
