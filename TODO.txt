@@ -1,7 +1,7 @@
 will be fixed/implemented very soon
 -----------------------------------
 
-* fix bug for a hash passed with objects along with primitives
+* move conversion of the attributes hash to simpler form for properties of type user, card and tree relationship property while 'getting' a card instead of while 'saving' it
 * fix updation of card properties - fix user types
 
 will be implemented, but not very important for now
