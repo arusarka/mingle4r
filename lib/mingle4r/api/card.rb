@@ -22,7 +22,7 @@ module Mingle4r
 
       module InstanceMethods
         def type
-          attributes['card_type_name'] || attributes['card_type'].name
+          attributes['card_type_name']
         end
         
         def type=(type)

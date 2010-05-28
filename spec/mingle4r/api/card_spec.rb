@@ -53,7 +53,7 @@ describe Card do
   
   context "card_type" do
     it "should be able to return the card type directly" do
-      card = Card.new({:card_type => OpenStruct.new(:name => 'Story')})
+      card = Card.new({:card_type_name => 'Story'})
       card.type.should == 'Story'
     end
     
