@@ -94,7 +94,7 @@ XML
       :properties => [{ :type_description => 'Any card used in tree',
         :hidden   => 'false', :name => 'Feature',
         :value    => 117}])
-      expected_xml = load_fixture('card_with_tree_relationship_property_final.xml')
+      expected_xml = load_fixture('single_card.xml')
       actual_xml = @card_format.encode(card.attributes, :root => 'card')
       actual_xml.should == expected_xml
     end

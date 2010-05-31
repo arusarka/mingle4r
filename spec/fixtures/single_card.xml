@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <card>
-  <name>Contact API</name>
+  <number type="integer">116</number>
   <properties type="array">
     <property>
       <name>Feature</name>
-      <type_description>Card</type_description>
-      <value type="integer">37</value>
+      <type_description>Any card used in tree</type_description>
+      <value type="integer">117</value>
       <hidden>false</hidden>
     </property>
   </properties>
