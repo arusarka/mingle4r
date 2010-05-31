@@ -27,55 +27,57 @@ describe CardFormat do
     it "should decode to right xml" do
       xml = <<-XML
       <?xml version="1.0" encoding="UTF-8"?>
-      <card><name>Yet another bug</name>
-        <card_type><name>Bug</name></card_type>
-        <properties type="array">
-          <property type_description="Card" hidden="false">
-            <name>Defect Fix Completed in Iteration</name>
-            <value url="http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/34.xml">
-              <number type="integer">34</number>
-            </value>
-          </property>
-        </properties>
-      </card>
+      <cards type="array">
+        <card><name>Yet another bug</name>
+          <card_type><name>Bug</name></card_type>
+          <properties type="array">
+            <property type_description="Card" hidden="false">
+              <name>Defect Fix Completed in Iteration</name>
+              <value url="http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/34.xml">
+                <number type="integer">34</number>
+              </value>
+            </property>
+          </properties>
+        </card>
+      </cards>
 XML
-      @card_format.decode(xml).should == {"name"=>"Yet another bug", "card_type_name"=>"Bug",
+      @card_format.decode(xml).should == [{"name"=>"Yet another bug", "card_type_name"=>"Bug",
         "properties"=>[{"name"=>"Defect Fix Completed in Iteration", "type_description"=>"Card", "value"=>34, 
-          "hidden"=>"false"}]}
+          "hidden"=>"false"}]}]
     end
     
     it "should be able to decode tree relatioship property appropriately" do
       xml = load_fixture('card_with_tree_relationship_property_raw.xml')
-      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
+      expected = [{"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
       "properties"=>[{"name"=>"Feature", "type_description"=>"Any card used in tree",
-        "value"=> 87, "hidden"=>"false"}]}
-      actual_hash = @card_format.decode(xml)
-      actual_hash.should == expected_hash
+        "value"=> 87, "hidden"=>"false"}]}]
+      actual = @card_format.decode(xml)
+      actual.should == expected
     end
     
     it "should be able to decode link to other card property appropriately" do
       xml = load_fixture('card_with_card_relationship_property_raw.xml')
-      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
+      expected = [{"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
       "properties" =>[{"name"=>"Accepted in Iteration", "type_description"=>"Card",
         "value" => nil, "hidden"=>"false"}, {"name"=>"Added to Scope in Iteration",
-          "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}
-      actual_hash = @card_format.decode(xml)
-      actual_hash.should == expected_hash
+          "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}]
+      actual = @card_format.decode(xml)
+      actual.should == expected
     end
 
     it "should be able to decode card_type appropriately" do
       xml = load_fixture('card_with_card_relationship_property_raw.xml')
-      expected_hash = {"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
+      expected = [{"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
       "properties" =>[{"name"=>"Accepted in Iteration", "type_description"=>"Card",
         "value" => nil, "hidden"=>"false"}, {"name"=>"Added to Scope in Iteration",
-          "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}
-      actual_hash = @card_format.decode(xml)
-      actual_hash.should == expected_hash
+          "type_description"=>"Card", "value" => 37, "hidden"=>"false"}]}]
+      actual = @card_format.decode(xml)
+      actual.should == expected
     end
   end
 
   context "encode" do
-    it "should be able to encode properly" do
+    it "should be able to dasherize the tags properly" do
       xml = '<?xml version="1.0" encoding="UTF-8"?>' + "\n" +
       "<dummy_card>\n" +
       "  <card_type>\n" +
@@ -87,24 +89,12 @@ XML
       encoded.should == xml
     end
     
-    it "should convert tree relationship property appropriately" do
+    it "should encode properly" do
       card = DummyCard.new(:number => 116,
       :properties => [{ :type_description => 'Any card used in tree',
         :hidden   => 'false', :name => 'Feature',
-        :value    => {:url => "http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/117.xml",
-        :number   => 117}}])
+        :value    => 117}])
       expected_xml = load_fixture('card_with_tree_relationship_property_final.xml')
-      actual_xml = @card_format.encode(card.attributes, :root => 'card')
-      actual_xml.should == expected_xml
-    end
-    
-    it "should convert card relationship property appropriately" do
-      card = DummyCard.new(:name => 'Contact API',
-      :properties => [{ :type_description => 'Card',
-        :hidden   => 'false', :name => 'Feature',
-        :value    => {:url => "http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/37.xml",
-        :number   => 37}}])
-      expected_xml = load_fixture('card_with_card_relationship_property_final.xml')
       actual_xml = @card_format.encode(card.attributes, :root => 'card')
       actual_xml.should == expected_xml
     end

@@ -9,17 +9,17 @@ module Mingle4r
     end
     
     def decode(xml)
-      hash = from_xml_data(Hash.from_xml(xml))
-      simplify_prop_tags_of_type('Any card used in tree', hash)
-      simplify_prop_tags_of_type('Card', hash)
-      convert_card_type_tag(hash)
-      hash
+      cards = from_xml_data(Hash.from_xml(xml))
+      simplify_prop_tags_of_type('Any card used in tree', cards)
+      simplify_prop_tags_of_type('Card', cards)
+      convert_card_type_tag(cards)
+      cards
     end
     
     def encode(hash, options={})
       options.merge! :dasherize => false
-      convert_link_props_of_type('Any card used in tree', hash)
-      convert_link_props_of_type('Card', hash)
+      # convert_link_props_of_type('Any card used in tree', hash)
+      # convert_link_props_of_type('Card', hash)
       hash.to_xml(options)
     end
 
@@ -50,13 +50,17 @@ module Mingle4r
       prop.type_description == type
     end
     
-    def simplify_prop_tags_of_type(type, hash)
-      return unless hash['properties']
-      hash['properties'].collect! do |prop|
+    def simplify_prop_tags_of_type(type, cards)
+      cards.collect! { |card| simplify_card_for_prop_tags_of_type(card, type) }
+    end
+    
+    def simplify_card_for_prop_tags_of_type(card, type)
+      return card unless card['properties']
+      card['properties'].collect! do |prop|
         simplify_prop(prop) if (prop_is_of_type?(prop, type))
         prop
       end
-      hash
+      card
     end
     
     def simplify_prop(prop)
@@ -68,10 +72,12 @@ module Mingle4r
       prop['type_description'] == type
     end
     
-    def convert_card_type_tag(hash)
-      card_type = hash.delete('card_type')
-      hash['card_type_name'] = card_type['name']
-      hash
+    def convert_card_type_tag(cards)
+      cards.collect! do |card|
+        card_type = card.delete('card_type')
+        card['card_type_name'] = card_type['name']
+        card
+      end
     end
   end
 end

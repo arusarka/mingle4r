@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<card>
-  <name>Contact API</name>
-  <card_type>
-    <name>Story</name>
-  </card_type>
-  <number type="integer">119</number>
-  <properties type="array">
-    <property type_description="Any card used in tree" hidden="false">
-      <name>Feature</name>
-      <value url="http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/87.xml">
-        <number type="integer">87</number>
-      </value>
-    </property>
-  </properties>
-</card>
+<cards type="array">
+  <card>
+    <name>Contact API</name>
+    <card_type>
+      <name>Story</name>
+    </card_type>
+    <number type="integer">119</number>
+    <properties type="array">
+      <property type_description="Any card used in tree" hidden="false">
+        <name>Feature</name>
+        <value url="http://localhost:8080/api/v2/projects/agile_hybrid_project/cards/87.xml">
+          <number type="integer">87</number>
+        </value>
+      </property>
+    </properties>
+  </card>
+</cards>
