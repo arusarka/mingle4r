@@ -10,7 +10,7 @@ module Mingle4r
     
     def decode(xml)
       data = from_xml_data(Hash.from_xml(xml))
-      simplify_properties(data)
+      convert_properties(data)
       data
     end
     
@@ -28,7 +28,7 @@ module Mingle4r
       end
     end
     
-    def simplify_properties(data)
+    def convert_properties(data)
       types_to_convert = ['Any card used in tree', 'Card',
         'Automatically generated from the team list']
       types_to_convert.each { |type| convert_prop_tags_of_type(type, data)}
@@ -36,8 +36,8 @@ module Mingle4r
     end
     
     def for_every_card_in(data, &block)
-      if data.is_a?(Hash) && data.keys.size == 1
-        block.call(data['card'])
+      if data.is_a?(Hash)
+        block.call(data)
       else
         data.collect! { |card| block.call(card) }
       end      
