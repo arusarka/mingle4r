@@ -1,6 +1,8 @@
 will be fixed/implemented very soon
 -----------------------------------
 
+* write documentation about updating card properties of type 'Card', 'Tree Relationship property'
+  and 'Team member'
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
 
