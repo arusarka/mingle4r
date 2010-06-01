@@ -18,8 +18,6 @@ module Mingle4r
     
     def encode(hash, options={})
       options.merge! :dasherize => false
-      # convert_link_props_of_type('Any card used in tree', hash)
-      # convert_link_props_of_type('Card', hash)
       hash.to_xml(options)
     end
 
@@ -30,24 +28,6 @@ module Mingle4r
       else
         data
       end
-    end
-    
-    def convert_link_props_of_type(type, hash)
-      return unless hash['properties']
-      hash['properties'].collect! do |prop|
-        convert_link_prop(prop) if (prop_of_type?(prop, type))
-        prop
-      end
-      hash
-    end
-
-    def convert_link_prop(prop)
-      prop.value = prop.value.number if prop.value
-      prop
-    end
-    
-    def prop_of_type?(prop, type)
-      prop.type_description == type
     end
     
     def simplify_prop_tags_of_type(type, cards)
