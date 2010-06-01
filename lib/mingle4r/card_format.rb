@@ -12,6 +12,7 @@ module Mingle4r
       cards = from_xml_data(Hash.from_xml(xml))
       simplify_prop_tags_of_type('Any card used in tree', cards)
       simplify_prop_tags_of_type('Card', cards)
+      simplify_prop_tags_of_type('Automatically generated from the team list', cards)
       convert_card_type_tag(cards)
       cards
     end
@@ -44,7 +45,17 @@ module Mingle4r
     end
     
     def simplify_prop(prop)
-      prop['value'] = prop['value']['number'] if prop['value']
+      if prop_is_of_type?(prop, 'Automatically generated from the team list')
+        simplify_team_member_prop(prop)
+      else
+        prop['value'] = prop['value']['number'] if prop['value']
+      end
+      prop
+    end
+    
+    def simplify_team_member_prop(prop)
+      url = prop['value']['url']
+      prop['value'] = File.basename(url).gsub('.xml', '').to_i
       prop
     end
     

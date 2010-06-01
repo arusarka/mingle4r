@@ -74,6 +74,15 @@ XML
       actual = @card_format.decode(xml)
       actual.should == expected
     end
+
+    it "should be able to decode user properties appropriately" do
+      xml = load_fixture('card_with_team_member_property_raw.xml')
+      expected = [{"number"=>119, "name"=>"Contact API", "card_type_name"=>"Story",
+      "properties" =>[{"name"=>"Owner", "type_description"=>"Automatically generated from the team list",
+        "value" => 910, "hidden"=>"false"}]}]
+      actual = @card_format.decode(xml)
+      actual.should == expected
+    end
   end
 
   context "encode" do
