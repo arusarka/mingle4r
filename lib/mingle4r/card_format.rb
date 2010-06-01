@@ -9,12 +9,9 @@ module Mingle4r
     end
     
     def decode(xml)
-      cards = from_xml_data(Hash.from_xml(xml))
-      simplify_prop_tags_of_type('Any card used in tree', cards)
-      simplify_prop_tags_of_type('Card', cards)
-      simplify_prop_tags_of_type('Automatically generated from the team list', cards)
-      convert_card_type_tag(cards)
-      cards
+      data = from_xml_data(Hash.from_xml(xml))
+      simplify_properties(data)
+      data
     end
     
     def encode(hash, options={})
@@ -31,29 +28,45 @@ module Mingle4r
       end
     end
     
-    def simplify_prop_tags_of_type(type, cards)
-      cards.collect! { |card| simplify_card_for_prop_tags_of_type(card, type) }
+    def simplify_properties(data)
+      types_to_convert = ['Any card used in tree', 'Card',
+        'Automatically generated from the team list']
+      types_to_convert.each { |type| convert_prop_tags_of_type(type, data)}
+      convert_card_type_tag(data)
     end
     
-    def simplify_card_for_prop_tags_of_type(card, type)
+    def for_every_card_in(data, &block)
+      if data.is_a?(Hash) && data.keys.size == 1
+        block.call(data['card'])
+      else
+        data.collect! { |card| block.call(card) }
+      end      
+    end
+    
+    def convert_prop_tags_of_type(type, data)
+      for_every_card_in(data) { |card| convert_card_for_prop_tags_of_type(card, type) }
+    end
+    
+    def convert_card_for_prop_tags_of_type(card, type)
       return card unless card['properties']
       card['properties'].collect! do |prop|
-        simplify_prop(prop) if (prop_is_of_type?(prop, type))
+        convert_prop(prop) if (prop_is_of_type?(prop, type))
         prop
       end
       card
     end
     
-    def simplify_prop(prop)
+    def convert_prop(prop)
       if prop_is_of_type?(prop, 'Automatically generated from the team list')
-        simplify_team_member_prop(prop)
+        prop = convert_team_member_prop(prop)
       else
         prop['value'] = prop['value']['number'] if prop['value']
       end
       prop
     end
     
-    def simplify_team_member_prop(prop)
+    def convert_team_member_prop(prop)
+      return prop unless prop['value']
       url = prop['value']['url']
       prop['value'] = File.basename(url).gsub('.xml', '').to_i
       prop
@@ -63,8 +76,8 @@ module Mingle4r
       prop['type_description'] == type
     end
     
-    def convert_card_type_tag(cards)
-      cards.collect! do |card|
+    def convert_card_type_tag(data)
+      for_every_card_in(data) do |card|
         card_type = card.delete('card_type')
         card['card_type_name'] = card_type['name']
         card
