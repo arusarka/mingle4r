@@ -1,17 +1,12 @@
 will be fixed/implemented very soon
 -----------------------------------
 
-* card format still does not encode to a valid xml
 * complete manual QA to ensure/prioritize what needs to be done for card object
-* move conversion of the attributes hash to simpler form for properties of type user, card and tree relationship property while 'getting' a card instead of while 'saving' it
-* test whether the project tag in the card GET xml is the same for PUT
-* fix updation of card properties - fix user types
-* remove references of 'card_type' attribute in card
+* performance fixes
 
 will be implemented, but not very important for now
 ----------------------------------------------------
 
-* provide a helper method to update a user property on a card
 * update documentation - write about executing transitions directly on the transition
 * write tests for project class
 * implement card_types for a project

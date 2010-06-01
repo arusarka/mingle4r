@@ -107,7 +107,8 @@ EOS
         # as the mingle property name. the value is optional
         def property_value(name, val = nil)
           property = properties.detect { |p| p.name == name }
-          val ? property.value = val : property.value
+          val ? set_prop_val(property, val) : property.value
+          # val ? property.value = val : property.value
         end
     
         # Gets the custom properties in the form of an array of hashes with the property names as keys and
@@ -122,8 +123,24 @@ EOS
         end
         
         private
+        def set_prop_val(prop, val)
+          val = find_user_id_with_name(val) if(prop.type_description == 'Automatically generated from the team list' && is_not_a_num?(val))
+          prop.value = val
+        end
+        
+        def is_not_a_num?(val)
+          !(val.is_a?(Fixnum))
+        end
+        
+        def find_user_id_with_name(name)
+          set_attributes_for(User)
+          user = User.find(:all).detect { |mingle_user| mingle_user.user.name == name }
+          user.user.id
+        end
+        
         def set_attributes_for(klass)
-          resource_site  = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
+          nested_resource_site = File.join(self.class.site.to_s, "cards/#{self.number()}").to_s
+          resource_site  = (klass == User) ? self.class.site.to_s : nested_resource_site
           klass.site     = resource_site
           klass.user     = self.class.user
           klass.password = self.class.password
@@ -145,6 +162,11 @@ EOS
         def transition_class_set(val = nil)
           return @transition_class_set unless val
           @transition_class_set = val
+        end
+        
+        def user_class_set(val = nil)
+          return @user_class_set unless val
+          @user_class_set = val
         end
       end
       

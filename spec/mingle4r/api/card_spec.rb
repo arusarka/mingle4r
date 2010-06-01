@@ -46,7 +46,8 @@ describe Card do
   
   it "should be able to set the value of a particular custom property for a card" do
     card =  Card.new({:name => 'card1', :number => 1,
-      :id => 1237, :properties => [{:name => 'Story Status', :value => 'Completed'}]})
+      :id => 1237, :properties => [{:name => 'Story Status', :value => 'Completed',
+        :type_description => 'Managed text list'}]})
     card.property_value('Story Status', 'In Development')
     card.property_value('Story Status').should == 'In Development'
   end

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cards type="array">
+  <card>
+    <name>Contact API</name>
+    <card_type>
+      <name>Story</name>
+    </card_type>
+    <number type="integer">119</number>
+    <properties type="array">
+      <property type_description="Automatically generated from the team list" hidden="false">
+        <name>Owner</name>
+        <value url="http://localhost:8080/api/v2/users/910.xml">
+          <name>testuser</name>
+          <login>testuser</login>
+        </value>
+      </property>
+    </properties>
+  </card>
+</cards>

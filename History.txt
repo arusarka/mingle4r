@@ -1,3 +1,9 @@
+0.4.5
+-----
+* fixed card updation
+* user type properties of a card can be set directly either by using the user name or the user id
+* properties of type 'tree relationship' and 'Card' can be updated by giving a number
+
 0.4.4
 -----
 * more bug fixes
