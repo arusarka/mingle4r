@@ -3,7 +3,7 @@ require 'rubygems/specification'
 
 describe "Mingle4r::Version" do
   it "should return proper version" do
-    Mingle4r::Version::to_s.should == '0.4.4'
+    Mingle4r::Version::to_s.should == '0.4.5'
   end
   
   it "should have the same version as in the gemspec" do
