@@ -127,12 +127,14 @@ to another card) you can should set the property by giving the number of the car
 
 story_card = m_c.projects.cards.find {|c| c.type == 'Story'}.first
 story_card.property_value('Feature', 12)
+story_card.save
 
 In case of properties of type 'Team member' you can either use the user id (not the name or
 the login id, you would have to look at the xml to get the id) or more simply the user name.
 For e.g.
 
 story_card.property_value('Assignee', 'James Bond')
+story_card.save
 
 Creating a card
 ---------------
