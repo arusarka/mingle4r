@@ -134,7 +134,8 @@ EOS
         
         def find_user_id_with_name(name)
           set_attributes_for(User)
-          user = User.find(:all).detect { |mingle_user| mingle_user.user.name == name }
+          users = User.find(:all)
+          user = users.detect { |mingle_user| mingle_user.user.name == name }
           user.user.id
         end
         
