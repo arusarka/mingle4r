@@ -1,10 +1,10 @@
 will be fixed/implemented very soon
 -----------------------------------
 
-* write documentation about updating card properties of type 'Card', 'Tree Relationship property'
-  and 'Team member'
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
+* the xml sent for updating any resource should be stripped of all the 'creted_by', 'modified_by',
+  etc tags.
 
 will be implemented, but not very important for now
 ----------------------------------------------------
