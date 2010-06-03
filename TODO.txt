@@ -8,6 +8,7 @@ will be fixed/implemented very soon
 * Reformat README in ascii doc format
 * provide a way to find a particular card directly instead of searching through the list at the 
   mingle client level
+* update README about find_card, cards method available to mingle client object
 
 will be implemented, but not very important for now
 ----------------------------------------------------

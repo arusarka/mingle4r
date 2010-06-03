@@ -45,6 +45,12 @@ module Mingle4r
           ExecuteMql.query(query)
         end
         
+        #finds a single card
+        def find_card(number)
+          set_attributes_for(Card)
+          Card.find(number)
+        end
+        
         private
         def set_attributes_for(klass)
           resource_site = File.join(self.class.site.to_s, "projects/#{self.identifier}")

@@ -58,4 +58,11 @@ describe MingleClient do
     API::Project.stub!(:find).and_return(project)
     @client.cards
   end
+  
+  it "should be able to fetch a single card for a project" do
+    project = mock()
+    project.should_receive(:find_card).with(20)
+    API::Project.stub(:find).and_return(project)
+    @client.find_card(20)
+  end
 end
