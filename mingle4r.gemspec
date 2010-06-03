@@ -33,9 +33,9 @@ Gem::Specification.new do |s|
                                                          
              'MIT-LICENSE',
              'History.txt',
-             'README',
+             'README.rdoc',
              'TODO.txt']
   s.require_path = 'lib'
-  s.extra_rdoc_files = ['README']
+  s.extra_rdoc_files = ['README.rdoc']
   s.add_dependency('activeresource')
 end
