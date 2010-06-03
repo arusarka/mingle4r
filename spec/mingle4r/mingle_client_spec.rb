@@ -51,4 +51,11 @@ describe MingleClient do
     API::User.user.should == 'test'
     API::User.password.should == 'test'
   end
+  
+  it "should be able to fetch the cards of a project" do  
+    project = mock()
+    project.should_receive(:cards)
+    API::Project.stub!(:find).and_return(project)
+    @client.cards
+  end
 end

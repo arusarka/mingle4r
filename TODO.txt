@@ -3,16 +3,21 @@ will be fixed/implemented very soon
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
-* the xml sent for updating any resource should be stripped of all the 'creted_by', 'modified_by',
+* the xml sent for updating any resource should be stripped of all the 'created_by', 'modified_by',
   etc tags.
+* Reformat README in ascii doc format
+* provide a way to find a particular card directly instead of searching through the list at the 
+  mingle client level
 
 will be implemented, but not very important for now
 ----------------------------------------------------
 
+* get rid of active resource
 * update documentation - write about executing transitions directly on the transition
 * write tests for project class
 * implement card_types for a project
 * mingle client should have cards method
+* investigate setting custom properties at card creation time
 
 will be done when I've no other work
 ------------------------------------

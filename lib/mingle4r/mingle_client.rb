@@ -71,6 +71,10 @@ module Mingle4r
       API::User.find(:all)
     end
     
+    def cards
+      project.cards
+    end
+    
     private
     def set_resource_attributes
       set_attributes(API::Project)
