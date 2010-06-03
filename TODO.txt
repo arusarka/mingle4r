@@ -3,12 +3,11 @@ will be fixed/implemented very soon
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
-* the xml sent for updating any resource should be stripped of all the 'created_by', 'modified_by',
-  etc tags.
 * Reformat README in ascii doc format
 * provide a way to find a particular card directly instead of searching through the list at the 
   mingle client level
 * update README about find_card, cards method available to mingle client object
+* update README about mingle_client.valid_credentials?
 
 will be implemented, but not very important for now
 ----------------------------------------------------
