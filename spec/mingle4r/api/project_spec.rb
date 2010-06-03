@@ -55,7 +55,7 @@ describe Project do
     end
 
     it "should filter the cards matching the filter" do
-      ExecuteMql.stub!(:query).and_return([{'number' => 12}, {'number' => 13}])
+      ExecuteMql.stub!(:query).and_return([{'number' => '12'}, {'number' => '13'}])
         card_1 = card_with_number 12
         card_2 = card_with_number 13
         card_3 = card_with_number 21
