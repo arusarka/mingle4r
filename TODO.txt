@@ -8,6 +8,7 @@ will be fixed/implemented very soon
   mingle client level
 * update README about find_card, cards method available to mingle client object
 * update README about mingle_client.valid_credentials?
+* update README about mingle_client.filter_cards
 
 will be implemented, but not very important for now
 ----------------------------------------------------

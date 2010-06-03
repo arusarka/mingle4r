@@ -52,17 +52,26 @@ describe MingleClient do
     API::User.password.should == 'test'
   end
   
-  it "should be able to fetch the cards of a project" do  
-    project = mock()
-    project.should_receive(:cards)
-    API::Project.stub!(:find).and_return(project)
-    @client.cards
+  context "should delegate to project" do
+    before(:each) do
+      @project = mock()
+      API::Project.stub!(:find).and_return(@project)
+    end
+    
+    it "when fetching the cards of a project" do  
+      @project.should_receive(:cards)
+      @client.cards
+    end
+
+    it "when fetching a single card for a project" do
+      @project.should_receive(:find_card).with(20)
+      @client.find_card(20)
+    end
+
+    it "when filtering cards" do
+      @project.should_receive(:filter_cards)
+      @client.filter_cards('Type IS Story')
+    end
   end
   
-  it "should be able to fetch a single card for a project" do
-    project = mock()
-    project.should_receive(:find_card).with(20)
-    API::Project.stub(:find).and_return(project)
-    @client.find_card(20)
-  end
 end
