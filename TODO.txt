@@ -3,7 +3,6 @@ will be fixed/implemented very soon
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
-* update README about mingle_client.valid_credentials?
 * update README about mingle_client.filter_cards
 
 will be implemented, but not very important for now

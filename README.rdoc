@@ -95,6 +95,20 @@ Get a mingle client object. Then call the cards method.
   Alternatively you can also do
       m_c.project.find_card(42)
 
+=== Filtering cards
+
+Mingle allows a lighweight implementation of sql called mql through which you can filter
+cards. Look at http://www.thoughtworks-studios.com/mingle/3.0/help/mql_reference.html for
+reference. However when using this feature you should only give the condition not the
+properties you want out of mingle.
+
+      m_c.filter_cards('Type IS Story') => returns a list card objects
+      
+    Do not do this (it simply won't work) :
+      m_c.filter_cards('SELECT number, type WHERE Type IS Story')
+      
+    If you want to execute a generic mql look at the 'MQL Execution' section
+
 === Getting custom properties for a card
 
       m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
