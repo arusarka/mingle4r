@@ -3,13 +3,13 @@ will be fixed/implemented very soon
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
-* update README about find_card, cards method available to mingle client object
 * update README about mingle_client.valid_credentials?
 * update README about mingle_client.filter_cards
 
 will be implemented, but not very important for now
 ----------------------------------------------------
 
+* make the gemspec spec to autodiscover new files in some directories
 * get rid of active resource
 * update documentation - write about executing transitions directly on the transition
 * write tests for project class

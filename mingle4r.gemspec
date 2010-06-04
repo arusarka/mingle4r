@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
              'lib/mingle4r/common_class_methods.rb',
              'lib/mingle4r/helpers.rb',
              'lib/mingle4r/mingle_client.rb',
-             'lib/mingle4r/version.rb',
              'lib/mingle4r/card_format.rb',
              
              'lib/mingle4r/api/card.rb',
@@ -34,6 +33,7 @@ Gem::Specification.new do |s|
              'MIT-LICENSE',
              'History.txt',
              'README.rdoc',
+             'VERSION',
              'TODO.txt']
   s.require_path = 'lib'
   s.extra_rdoc_files = ['README.rdoc']
