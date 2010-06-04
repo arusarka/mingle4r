@@ -1,3 +1,8 @@
+0.4.6
+-----
+* new apis - find_card, filter_cards, cards for the mingle client
+* changed README to rdoc format
+
 0.4.5
 -----
 * fixed card updation
