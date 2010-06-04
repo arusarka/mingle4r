@@ -84,7 +84,14 @@ Get a mingle client object. Then call the cards method.
 
     cards will be an array of activeresoure objects.
 
-== Getting custom properties for a card
+=== Getting a singe card
+
+    m_c.find_card(42) => card activeresource object
+    
+  Alternatively you can also do
+    m_c.project.find_card(42)
+
+=== Getting custom properties for a card
 
     m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
     m_c.proj_id = 'great_mingle_project'
