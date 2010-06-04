@@ -59,13 +59,13 @@ WARNING : project identifier and project name are different. If you named your p
 the identifier of a project is you should look at the url in mingle in the particular project
 you are trying to access. It should be something like 'http://localhost:8080/projects/great_mingle_project'
 
-  1) Set at initialize time
+  * Set at initialize time
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password',
   		'great_mingle_project')
   		m_c.project
 
-  2) Set an attribute later
+  * Set an attribute later
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
@@ -165,18 +165,15 @@ following ways.
   
 supposing the latest version of the card is 42
 
-  1) Get the previous version
-  ---------------------------
+  * Get the previous version
   
   defect_card.version(:previous) # return version 41
   
-  2) Get the next version
-  -----------------------
+  * Get the next version
   
   defect_card.version(:next) # returns version 42 since it is the latest version
   
-  3) Get an arbitrary version
-  ---------------------------
+  * Get an arbitrary version
   
   defect_card.version(21) # returns version 21
 
@@ -194,35 +191,30 @@ supposing the latest version of the card is 42
   defect_card = m_c.project.cards.first
   defect_card.attachments
 
-  1) Downloading a particular attachment
-  --------------------------------------
+  * Downloading a particular attachment
   
   attachment = defect_card.attachments.first
   attachment.download('page.css')
   
-  2) Uploading an attachment
-  --------------------------
+  * Uploading an attachment
   
   defect_card.upload_attachment('page-screenshot.jpg')
 
 === Murmurs
 
-  1) Get the murmurs for a project
-  --------------------------------
+  * Get the murmurs for a project
   
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
   project = m_c.project
   project.murmurs
   
-  2) Get the murmurs associated with a card
-  -----------------------------------------
+  * Get the murmurs associated with a card
   
   card = project.cards.first
   card.murmurs
   
-  3) post a murmur(hooray!)
-  -------------------------
+  * post a murmur(hooray!)
   project.post_murmur('my first murmur, I am excited!')
   
 === Get all transitions for a card

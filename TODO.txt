@@ -4,8 +4,6 @@ will be fixed/implemented very soon
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
 * Reformat README in ascii doc format
-* provide a way to find a particular card directly instead of searching through the list at the 
-  mingle client level
 * update README about find_card, cards method available to mingle client object
 * update README about mingle_client.valid_credentials?
 * update README about mingle_client.filter_cards
