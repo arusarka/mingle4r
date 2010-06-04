@@ -3,7 +3,6 @@ will be fixed/implemented very soon
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
 * performance fixes
-* Reformat README in ascii doc format
 * update README about find_card, cards method available to mingle client object
 * update README about mingle_client.valid_credentials?
 * update README about mingle_client.filter_cards

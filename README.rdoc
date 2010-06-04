@@ -79,7 +79,10 @@ Get a mingle client object. Then call the cards method.
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  m_c.project.cards
+  m_c.cards
+  
+  Alternatively you can also do
+  +m_c.project.cards+
 
 cards will be an array of activeresoure objects.
 
@@ -166,15 +169,12 @@ following ways.
 supposing the latest version of the card is 42
 
   1. Get the previous version
-  
       defect_card.version(:previous) # return version 41
   
   2. Get the next version
-  
       defect_card.version(:next) # returns version 42 since it is the latest version
   
   3. Get an arbitrary version
-  
       defect_card.version(21) # returns version 21
 
 === Getting all comments for a card
@@ -192,30 +192,25 @@ supposing the latest version of the card is 42
   defect_card.attachments
 
   1. Downloading a particular attachment
-  
       attachment = defect_card.attachments.first
       attachment.download('page.css')
   
   2. Uploading an attachment
-  
       defect_card.upload_attachment('page-screenshot.jpg')
 
 === Murmurs
 
   1. Get the murmurs for a project
-  
       m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
       m_c.proj_id = 'great_mingle_project'
       project = m_c.project
       project.murmurs
   
   2. Get the murmurs associated with a card
-  
       card = project.cards.first
       card.murmurs
   
   3. post a murmur(hooray!)
-  
       project.post_murmur('my first murmur, I am excited!')
   
 === Get all transitions for a card
