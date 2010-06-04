@@ -73,27 +73,25 @@ you are trying to access. It should be something like 'http://localhost:8080/pro
 
 === Validate credentials
 
-      m_c.valid_credentials? => returns true and false
+  m_c.valid_credentials? => returns true and false
 
 === Getting cards for a particular project
 
 Get a mingle client object. Then call the cards method.
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      m_c.cards
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  m_c.cards
   
   Alternatively you can also do
-      m_c.project.cards
-
-    cards will be an array of activeresoure objects.
+    m_c.project.cards => array of activeresource objects
 
 === Getting a singe card
 
-      m_c.find_card(42) => card activeresource object
+  m_c.find_card(42) => card activeresource object
     
   Alternatively you can also do
-      m_c.project.find_card(42)
+    m_c.project.find_card(42)
 
 === Filtering cards
 
@@ -102,19 +100,19 @@ cards. Look at http://www.thoughtworks-studios.com/mingle/3.0/help/mql_reference
 reference. However when using this feature you should only give the condition not the
 properties you want out of mingle.
 
-      m_c.filter_cards('Type IS Story') => returns a list card objects
+  m_c.filter_cards('Type IS Story') => returns a list card objects
       
-    Do not do this (it simply won't work) :
-      m_c.filter_cards('SELECT number, type WHERE Type IS Story')
+  Do not do this (it simply won't work) :
+    m_c.filter_cards('SELECT number, type WHERE Type IS Story')
       
-    If you want to execute a generic mql look at the 'MQL Execution' section
+  If you want to execute a generic mql look at the 'MQL Execution' section
 
 === Getting custom properties for a card
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      card = m_c.project.cards[0]
-      card.custom_properties => returns an array of hashes, {property name => property value}
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  card = m_c.project.cards[0]
+  card.custom_properties => returns an array of hashes, {property name => property value}
 
 However this gives only custom properties, not all the properties.
 
@@ -124,10 +122,10 @@ gets the value of a property. The property name given should be the same as seen
 Type, name, description and number of a card can be accessed directly. For any other custom
 property use the method below.
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      card = m_c.project.cards[0]
-      card.property_value('Status')
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  card = m_c.project.cards[0]
+  card.property_value('Status')
 
 === Setting a particular property
 
@@ -136,48 +134,48 @@ Type, name and description should be set directly when creating or updating a ca
 In case of a custom property use the following method. The value given should be one of 
 the values that Mingle accepts in case of a managed list
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
-      defect_card.property_value('Status', 'Closed')
-      defect_card.save
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
+  defect_card.property_value('Status', 'Closed')
+  defect_card.save
 
 In case of properties of type 'Tree Relatioship property' or 'Card'(properties which link
 to another card) you can should set the property by giving the number of the card. For e.g.
 
-      story_card = m_c.projects.cards.find {|c| c.type == 'Story'}.first
-      story_card.property_value('Feature', 12)
-      story_card.save
+  story_card = m_c.projects.cards.find {|c| c.type == 'Story'}.first
+  story_card.property_value('Feature', 12)
+  story_card.save
 
 In case of properties of type 'Team member' you can either use the user id (not the name or
 the login id, you would have to look at the xml to get the id) or more simply the user name.
 For e.g.
 
-      story_card.property_value('Assignee', 'James Bond')
-      story_card.save
+  story_card.property_value('Assignee', 'James Bond')
+  story_card.save
 
 === Creating a card
 
 Mingle4r::API::Card is the ActiveResource class which handles interaction with cards.
 
-      task = Mingle4r::API::Card.new
-      task.name = 'set up Cruise build'
-      task.type = 'task'
-      task.description = 'a basic cruise build needs to be set up so that we can start working'
-      task.save
+  task = Mingle4r::API::Card.new
+  task.name = 'set up Cruise build'
+  task.type = 'task'
+  task.description = 'a basic cruise build needs to be set up so that we can start working'
+  task.save
 
 Do not do it like this:
 
-      task = Mingle4r::API::new :name => 'set up Cruise build', :type => 'task',
+  task = Mingle4r::API::new :name => 'set up Cruise build', :type => 'task',
               :description => 'a basic cruise build needs to be set up so that we can start working'
-      task.save => It simply won't work, there is a workaround but rather use as described above.
+  task.save => It simply won't work, there is a workaround but rather use as described above.
 
 === Adding comment to a particular card
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards[0]
-      defect_card.add_comment('Not able to reproduce')
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards[0]
+  defect_card.add_comment('Not able to reproduce')
 
 === Getting a particular version of a card
 
@@ -185,9 +183,9 @@ Mingle maintains the different versions of a card. It always shows the latest ve
 by default. However if you want to access a different version you can do so in the
 following ways.
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
   
 supposing the latest version of the card is 42
 
@@ -202,17 +200,17 @@ supposing the latest version of the card is 42
 
 === Getting all comments for a card
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
-      defect_cards.comments
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
+  defect_cards.comments
 
 === Attachments
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
-      defect_card.attachments
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
+  defect_card.attachments
 
   1. Downloading a particular attachment
       attachment = defect_card.attachments.first
@@ -238,33 +236,33 @@ supposing the latest version of the card is 42
   
 === Get all transitions for a card
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
-
-      defect_card.transitions # array of active resource objects
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
+  
+  defect_card.transitions # array of active resource objects
 
 === Execute a transition on a card
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      defect_card = m_c.project.cards.first
-
-      defect_card.execute_transition(
-       'comment' => comment for the transition, required only if the transition requires a comment
-       'Property Name as in Mingle exactly' => 'Property value to set for the property', required only
-      if the transition requires to be set manually, multiple properties might need to be set.
-      )
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.project.cards.first
+  
+  defect_card.execute_transition(
+   'comment' => comment for the transition, required only if the transition requires a comment
+   'Property Name as in Mingle exactly' => 'Property value to set for the property', required only
+  if the transition requires to be set manually, multiple properties might need to be set.
+  )
 
 === MQL execution
 
 mingle allows you to write an arbitrary MQL query and returns the results. This gem 
 allows you to do that in a simpler way. If you want to know more about MQL go to http://www.thoughtworks-studios.com/mingle/3.0/help/mql_reference.html. 
 
-      m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-      m_c.proj_id = 'great_mingle_project'
-      m_c.project.execute_mql('SELECT name, "Added in Iteration" WHERE Type = Story') 
-        => returns an array of hash
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  m_c.project.execute_mql('SELECT name, "Added in Iteration" WHERE Type = Story') 
+    => returns an array of hash
 
 == REQUIREMENTS:
 
