@@ -164,12 +164,15 @@ following ways.
 supposing the latest version of the card is 42
 
   * Get the previous version
+  
   defect_card.version(:previous) # return version 41
   
   * Get the next version
+  
   defect_card.version(:next) # returns version 42 since it is the latest version
   
   * Get an arbitrary version
+  
   defect_card.version(21) # returns version 21
 
 === Getting all comments for a card
