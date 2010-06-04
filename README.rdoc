@@ -18,11 +18,11 @@ api to write code to work with mingle (see the examples below) but thats it.
 Enable basic authentication in Mingle
 -------------------------------------
 
-1) Go to Mingle DataDir
+* Go to Mingle DataDir
 
-2) Open YAML file <Mingle DataDir>/config/auth_config.yml
+* Open YAML file <Mingle DataDir>/config/auth_config.yml
 
-3) Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
+* Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
 
 == FEATURES/PROBLEMS:
 
@@ -60,13 +60,11 @@ the identifier of a project is you should look at the url in mingle in the parti
 you are trying to access. It should be something like 'http://localhost:8080/projects/great_mingle_project'
 
   * Set at initialize time
-
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password',
   		'great_mingle_project')
   		m_c.project
-
+  		
   * Set an attribute later
-
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
   project = m_c.project
@@ -166,15 +164,12 @@ following ways.
 supposing the latest version of the card is 42
 
   * Get the previous version
-  
   defect_card.version(:previous) # return version 41
   
   * Get the next version
-  
   defect_card.version(:next) # returns version 42 since it is the latest version
   
   * Get an arbitrary version
-  
   defect_card.version(21) # returns version 21
 
 === Getting all comments for a card
