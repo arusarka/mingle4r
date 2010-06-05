@@ -72,6 +72,11 @@ describe MingleClient do
       @project.should_receive(:filter_cards)
       @client.filter_cards('Type IS Story')
     end
+    
+    it "when creating a card" do
+      @project.should_receive(:new_card)
+      @client.new_card
+    end
   end
   
 end

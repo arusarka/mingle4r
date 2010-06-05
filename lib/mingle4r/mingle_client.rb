@@ -83,6 +83,10 @@ module Mingle4r
       project.filter_cards(filter_str)
     end
     
+    def new_card
+      project.new_card
+    end
+    
     private
     def set_resource_attributes
       set_attributes(API::Project)
