@@ -15,8 +15,7 @@ However if you are planning to connect and work with mingle from the terminal, t
 is another gem mingle-mingle which you should look at. This library provides a very easy
 api to write code to work with mingle (see the examples below) but thats it.
 
-Enable basic authentication in Mingle
--------------------------------------
+=== Enable basic authentication in Mingle
 
 1. Go to Mingle DataDir
 
@@ -73,7 +72,7 @@ you are trying to access. It should be something like 'http://localhost:8080/pro
 
 === Validate credentials
 
-  m_c.valid_credentials? => returns true and false
+  m_c.valid_credentials? => returns true or false
 
 === Getting cards for a particular project
 
@@ -81,7 +80,7 @@ Get a mingle client object. Then call the cards method.
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  m_c.cards
+  m_c.cards => array of activeresource objects
   
   Alternatively you can also do
     m_c.project.cards => array of activeresource objects
@@ -102,7 +101,7 @@ properties you want out of mingle.
 
   m_c.filter_cards('Type IS Story') => returns a list card objects
       
-  Do not do this (it simply won't work) :
+  Do not do this (it simply *won't work*) :
     m_c.filter_cards('SELECT number, type WHERE Type IS Story')
       
   If you want to execute a generic mql look at the 'MQL Execution' section
