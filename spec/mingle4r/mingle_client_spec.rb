@@ -34,24 +34,6 @@ describe MingleClient do
     API::Project.password.should == 'test'
   end
   
-  it "should set the appropriate attributes in the User class before fetching the project" do
-    API::User.stub!(:find)
-    @client.user
-    
-    API::User.site.should == 'http://localhost/api/v2/'
-    API::User.user.should == 'test'
-    API::User.password.should == 'test'
-  end
-  
-  it "should set the appropriate attributes in the User class before fetching projects" do    
-    API::User.stub!(:find)
-    @client.users
-    
-    API::User.site.should == 'http://localhost/api/v2/'
-    API::User.user.should == 'test'
-    API::User.password.should == 'test'
-  end
-  
   context "should delegate to project" do
     before(:each) do
       @project = mock()
@@ -76,6 +58,11 @@ describe MingleClient do
     it "when creating a card" do
       @project.should_receive(:new_card)
       @client.new_card
+    end
+    
+    it "when fetching users" do
+      @project.should_receive(:users)
+      @client.users
     end
   end
   

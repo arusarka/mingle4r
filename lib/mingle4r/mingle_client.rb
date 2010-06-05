@@ -7,48 +7,38 @@ module Mingle4r
       @user = user
       @password = password
       @proj_id = proj_id
-      set_resource_attributes()
+      setup_project_class
     end
     
     def site=(site)
-      if site != self.site
-        @site = site
-        uri = URI.parse(site)
-        @user = URI.decode(uri.user) if(uri.user)
-        @password = URI.decode(uri.password) if(uri.password)
-        set_resource_attributes()
-      end
+      @site = site
+      user, password = decode_uri(site)
+      @user = user if user
+      @password = password if password
+      setup_project_class
       @site
     end
 
     def user=(user)
-      if user != self.user
-        @user = user
-        set_resource_attributes()
-      end
+      @user = user
+      setup_project_class
       @user
     end
 
     def password=(password)
-      if password != self.password
-        @password = password
-        set_resource_attributes()
-      end
+      @password = password
+      setup_project_class
       @password
     end
     
     def proj_id=(proj_id)
-      if proj_id != @proj_id
-        @proj_id = proj_id
-        set_resource_attributes()
-      end
+      @proj_id = proj_id
+      setup_project_class
       @proj_id
     end
     
     def valid_credentials?
-      API::Project.site = base_url
-      API::Project.user = user
-      API::Project.password = password
+      setup_project_class
       begin
         API::Project.find(:all)
         true
@@ -67,33 +57,13 @@ module Mingle4r
       API::Project.find(:all)
     end
 
-    def users
-      API::User.find(:all)
-    end
-    
-    def cards
-      project.cards
-    end
-    
-    def find_card(number)
-      project.find_card(number)
-    end
-    
-    def filter_cards(filter_str)
-      project.filter_cards(filter_str)
-    end
-    
-    def new_card
-      project.new_card
+    def method_missing(meth_id, *args, &block)
+      project.send(meth_id, *args, &block)
     end
     
     private
-    def set_resource_attributes
-      set_attributes(API::Project)
-      set_attributes(API::User)
-    end
-    
-    def set_attributes(klass)
+    def setup_project_class
+      klass = API::Project
       klass.site = base_url
       klass.user = @user
       klass.password = @password
@@ -101,6 +71,11 @@ module Mingle4r
     
     def base_url
       File.join(@site.to_s, '/api/v2/')
+    end
+    
+    def decode_uri(site)
+      uri = URI.parse(site)
+      [uri.user, uri.password]
     end
   end
 end
