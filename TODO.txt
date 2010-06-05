@@ -2,12 +2,14 @@ will be fixed/implemented very soon
 -----------------------------------
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
-* performance fixes
+* fix filter_cards to use filter[mql] instead of an execute mql lookup
 
 will be implemented, but not very important for now
 ----------------------------------------------------
 
 * make the gemspec spec to autodiscover new files in some directories
+* use a http connection class
+* test if attachment download works with https
 * get rid of active resource
 * update documentation - write about executing transitions directly on the transition
 * write tests for project class
@@ -19,3 +21,8 @@ will be done when I've no other work
 
 * clarify in docs difference between custom properties and native properties
 * should transtions give the list of properties to be changed directly
+
+What should be done regarding
+-----------------------------
+
+* performance fixes - should MingleClient::cards return all cards?

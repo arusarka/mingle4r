@@ -30,6 +30,12 @@ attachments for a particular card.
 
 == Synopsis:
 
+This library is a wrapper around active resource to interact with Mingle easily. So before
+using this gem a good idea would be to get familiar with active resource and the mingle apis.
+If you have a mingle server running somewhere you can check the different apis at <server address>/help/mingle_api.html or goto https://mingle05.thoughtworks.com/help/mingle_api.html
+
+A lot of examples are given below with get you started.
+
 The api now supports only mingle 3. Mingle 2 is no longer supported. If you need to connect
 to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem. To see the api for mingle 3, check
 the api documentation for the mingle instance(located at <mingle instance host>/help/index)
@@ -43,9 +49,7 @@ Suppose you want to connect to the mingle instance hosted at http://localhost:80
 username is 'testuser' and password is 'password'.
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-  projs = m_c.projects
-
-projs is an array of active resource objects
+  projs = m_c.projects => array of active resource objects
 
 === Getting a particular project
 
@@ -61,14 +65,12 @@ you are trying to access. It should be something like 'http://localhost:8080/pro
   1. Set at initialize time
       m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password',
       		'great_mingle_project')
-      		m_c.project
+      m_c.project => active resource object
   		
   2. Set an attribute later
       m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
       m_c.proj_id = 'great_mingle_project'
       project = m_c.project
-		
-		  project is a single activeresource object
 
 === Validate credentials
 
