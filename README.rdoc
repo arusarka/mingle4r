@@ -2,7 +2,7 @@
 
 http://github.com/arusarka/mingle4r/tree/master
 
-== DESCRIPTION:
+== Description:
 
 This gem is a wrapper around active resource to access the rest api exposed by mingle
 (http://studios.thoughtworks.com/mingle-agile-project-management).It provides a easy 
@@ -23,12 +23,12 @@ api to write code to work with mingle (see the examples below) but thats it.
 
 3. Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
 
-== FEATURES/PROBLEMS:
+== Features/Problems:
 
 It gives you access to projects in the mingle instance, cards under the project and also
 attachments for a particular card. 
 
-== SYNOPSIS:
+== Synopsis:
 
 The api now supports only mingle 3. Mingle 2 is no longer supported. If you need to connect
 to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem. To see the api for mingle 3, check
@@ -263,24 +263,24 @@ allows you to do that in a simpler way. If you want to know more about MQL go to
   m_c.project.execute_mql('SELECT name, "Added in Iteration" WHERE Type = Story') 
     => returns an array of hash
 
-== REQUIREMENTS:
+== Requirements:
 
 1) active_resource gem, it would be automatically taken care of
 during gem install.
 
-== LIMITATIONS:
+== Limitations:
 
 updating a property on the card which is a link to another card does not work. So for now
 only use it for other properties
 
-== INSTALL:
+== Install:
 
 since github no longer archives gems, I am hosting the gem at gemcutter. So you would need to
 add http://gemcutter.org to your gem sources : gem sources -a 'http://gemcutter.org'. Then do
 
 gem install mingle4r
 
-== LICENSE:
+== License:
 
 (The MIT License)
 
