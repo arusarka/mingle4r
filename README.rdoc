@@ -18,9 +18,7 @@ api to write code to work with mingle (see the examples below) but thats it.
 === Enable basic authentication in Mingle
 
 1. Go to Mingle DataDir
-
 2. Open YAML file <Mingle DataDir>/config/auth_config.yml
-
 3. Set 'basic_authentication_enabled' to 'true' (without the quotes) if it is not so
 
 == Features/Problems:
