@@ -2,7 +2,7 @@ will be fixed/implemented very soon
 -----------------------------------
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
-* fix filter_cards to use filter[mql] instead of an execute mql lookup
+* remove set_class_name_set flag in project
 
 will be implemented, but not very important for now
 ----------------------------------------------------
