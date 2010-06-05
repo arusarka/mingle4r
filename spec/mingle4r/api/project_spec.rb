@@ -47,24 +47,11 @@ describe Project do
   end
 
   context "when filtering cards" do
-    it "should execute the right mql" do
-      ExecuteMql.should_receive(:query).with('SELECT Number WHERE Type IS Story').
-      and_return([{'number' => 12}])
-      Card.stub!(:find_without_pagination).and_return([])  
+    it "should delegate to Card" do
+      Card.should_receive(:apply_filter).with('Type IS Story')
       @project.filter_cards('Type IS Story')
     end
-
-    it "should filter the cards matching the filter" do
-      ExecuteMql.stub!(:query).and_return([{'number' => '12'}, {'number' => '13'}])
-        card_1 = card_with_number 12
-        card_2 = card_with_number 13
-        card_3 = card_with_number 21
-        Card.stub!(:find_without_pagination).and_return([card_1, card_2, card_3])
-        cards = @project.filter_cards('Type IS Defect')
-        cards.should include card_1, card_2
-        cards.should_not include card_3
-      end
-    end
+  end
   
   context "fetching wikis" do
     it "should set the attributes for Wiki class only once" do

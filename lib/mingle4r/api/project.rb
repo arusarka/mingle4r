@@ -53,9 +53,8 @@ module Mingle4r
         
         #returns a filtered list of cards
         def filter_cards(filter_str)
-          query_str = 'SELECT Number WHERE ' + filter_str
-          card_numbers = execute_mql(query_str).collect { |r| r['number'].to_i }
-          cards.find_all { |c| card_numbers.include? c.number }
+          set_attributes_for(Card)
+          Card.apply_filter(filter_str)
         end
         
         private
