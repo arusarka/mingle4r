@@ -32,13 +32,12 @@ attachments for a particular card.
 
 This library is a wrapper around active resource to interact with Mingle easily. So before
 using this gem a good idea would be to get familiar with active resource and the mingle apis.
-If you have a mingle server running somewhere you can check the different apis at <server address>/help/mingle_api.html or goto https://mingle05.thoughtworks.com/help/mingle_api.html
+If you have a mingle server running somewhere you can check the different apis at <server address>/help/mingle_api.html or goto http://www.thoughtworks-studios.com/mingle/3.0/help/mingle_api.html
 
 A lot of examples are given below with get you started.
 
 The api now supports only mingle 3. Mingle 2 is no longer supported. If you need to connect
-to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem. To see the api for mingle 3, check
-the api documentation for the mingle instance(located at <mingle instance host>/help/index)
+to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem.
 
 In all the documentation below you can replace Mingle4r::MingleClient with MingleClient.
 Its an alias for easy use.
@@ -137,7 +136,7 @@ the values that Mingle accepts in case of a managed list
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.find_cards('Type IS Defect').first
   defect_card.property_value('Status', 'Closed')
   defect_card.save
 
@@ -210,7 +209,7 @@ supposing the latest version of the card is 42
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.find_cards('Type IS Defect').first
   defect_card.attachments
 
   1. Downloading a particular attachment
@@ -229,7 +228,7 @@ supposing the latest version of the card is 42
       project.murmurs
   
   2. Get the murmurs associated with a card
-      card = project.cards.first
+      card = m_c.cards.first
       card.murmurs
   
   3. post a murmur(hooray!)
@@ -239,7 +238,7 @@ supposing the latest version of the card is 42
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.cards.first
   
   defect_card.transitions # array of active resource objects
 
@@ -247,7 +246,7 @@ supposing the latest version of the card is 42
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.find_cards('Type IS Defect').first
   
   defect_card.execute_transition(
    'comment' => comment for the transition, required only if the transition requires a comment
