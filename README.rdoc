@@ -175,13 +175,6 @@ Do not do it like this:
               :description => 'a basic cruise build needs to be set up so that we can start working'
   task.save => It simply won't work, there is a workaround but rather use as described above.
 
-=== Adding comment to a particular card
-
-  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
-  m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.find_card(420)
-  defect_card.add_comment('Not able to reproduce')
-
 === Getting a particular version of a card
 
 Mingle maintains the different versions of a card. It always shows the latest version
@@ -207,8 +200,15 @@ supposing the latest version of the card is 42
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.find_cards('Type IS Defect').first
   defect_cards.comments
+
+=== Adding comment to a particular card
+
+  m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
+  m_c.proj_id = 'great_mingle_project'
+  defect_card = m_c.find_card(420)
+  defect_card.add_comment('Not able to reproduce')
 
 === Attachments
 
