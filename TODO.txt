@@ -2,7 +2,6 @@ will be fixed/implemented very soon
 -----------------------------------
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
-* remove set_class_name_set flag in project
 
 will be implemented, but not very important for now
 ----------------------------------------------------
@@ -12,7 +11,6 @@ will be implemented, but not very important for now
 * test if attachment download works with https
 * get rid of active resource
 * update documentation - write about executing transitions directly on the transition
-* write tests for project class
 * implement card_types for a project
 * investigate setting custom properties at card creation time
 
@@ -26,3 +24,6 @@ What should be done regarding
 -----------------------------
 
 * performance fixes - should MingleClient::cards return all cards?
+* what is the difference between mingle client and project object? mingle client seems to be delegating a
+  lot of methods to project
+* should MingleClient::projects method reuse the class of @project?

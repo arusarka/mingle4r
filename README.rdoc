@@ -154,18 +154,24 @@ For e.g.
 
 === Creating a card
 
-Mingle4r::API::Card is the ActiveResource class which handles interaction with cards. You would
-have to set the resource attributes if you are using the card class directly.
+MingleClient provides a handy method to create a new card.
 
-  task = Mingle4r::API::Card.new
+  task = m_c.new_card
   task.name = 'set up Cruise build'
   task.type = 'task'
   task.description = 'a basic cruise build needs to be set up so that we can start working'
   task.save
+  
+  Alternatively you can also do:
+    Mingle4r::API::Card.site = 'http://localhost:8080/projects/agile/'
+    Mingle4r::API::Card.user = 'foo'
+    Mingle4r::API::Card.password = 'bar'
+    
+    task = Mingle4r::API::Card.new , rest of the steps are same as above
 
 Do not do it like this:
 
-  task = Mingle4r::API::new :name => 'set up Cruise build', :type => 'task',
+  task = m_c.new_card :name => 'set up Cruise build', :type => 'task',
               :description => 'a basic cruise build needs to be set up so that we can start working'
   task.save => It simply won't work, there is a workaround but rather use as described above.
 
