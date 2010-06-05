@@ -34,7 +34,7 @@ This library is a wrapper around active resource to interact with Mingle easily.
 using this gem a good idea would be to get familiar with active resource and the mingle apis.
 If you have a mingle server running somewhere you can check the different apis at <server address>/help/mingle_api.html or goto http://www.thoughtworks-studios.com/mingle/3.0/help/mingle_api.html
 
-A lot of examples are given below with get you started.
+A lot of examples are given below to get you started.
 
 The api now supports only mingle 3. Mingle 2 is no longer supported. If you need to connect
 to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem.
@@ -174,7 +174,7 @@ Do not do it like this:
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards[0]
+  defect_card = m_c.find_card(420)
   defect_card.add_comment('Not able to reproduce')
 
 === Getting a particular version of a card
@@ -185,7 +185,7 @@ following ways.
 
   m_c = Mingle4r::MingleClient.new('http://localhost:8080', 'testuser', 'password')
   m_c.proj_id = 'great_mingle_project'
-  defect_card = m_c.project.cards.first
+  defect_card = m_c.find_card(20)
   
 supposing the latest version of the card is 42
 
