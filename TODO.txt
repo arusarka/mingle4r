@@ -2,6 +2,7 @@ will be fixed/implemented very soon
 -----------------------------------
 
 * complete manual QA to ensure/prioritize what needs to be done for card object
+* fix global users and users associated with a project
 
 will be implemented, but not very important for now
 ----------------------------------------------------
@@ -13,6 +14,7 @@ will be implemented, but not very important for now
 * update documentation - write about executing transitions directly on the transition
 * implement card_types for a project
 * investigate setting custom properties at card creation time
+* provide a block to set up a new card in MingleClient::new_card
 
 will be done when I've no other work
 ------------------------------------

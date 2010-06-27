@@ -13,7 +13,7 @@ describe "Mingle4r::Version" do
   end
 
   it "should return proper version" do
-    version_in_VERSION_file.should == '0.4.5'
+    version_in_VERSION_file.should == '0.4.6'
   end
   
   it "should have the same version as in the gemspec" do
