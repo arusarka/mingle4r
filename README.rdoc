@@ -276,8 +276,7 @@ during gem install.
 
 == Limitations:
 
-updating a property on the card which is a link to another card does not work. So for now
-only use it for other properties
+creating a card with custom properties directly doesn't work.
 
 == Install:
 

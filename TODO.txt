@@ -15,6 +15,7 @@ will be implemented, but not very important for now
 * implement card_types for a project
 * investigate setting custom properties at card creation time
 * provide a block to set up a new card in MingleClient::new_card
+* execute mql should return only a single value if there is only one result
 
 will be done when I've no other work
 ------------------------------------
