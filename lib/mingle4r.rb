@@ -9,7 +9,6 @@ require 'net/http'
 module Mingle4r; end
 
 require 'mingle_resource'
-require 'mingle4r/version'
 require 'mingle4r/common_class_methods'
 require 'mingle4r/helpers'
 require 'mingle4r/mingle_client'
