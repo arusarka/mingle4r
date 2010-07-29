@@ -1,14 +1,14 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/spec_helper'
 require 'rubygems/specification'
 
 describe "Mingle4r::Version" do
   def version_in_VERSION_file
-    version_file_path = File.dirname(__FILE__) + '/../../VERSION'
+    version_file_path = File.dirname(__FILE__) + '/../VERSION'
     IO.read(version_file_path).chomp
   end
   
   def gemspec_version
-    gemspec_data = File.read(File.dirname(__FILE__) + '/../../mingle4r.gemspec')
+    gemspec_data = File.read(File.dirname(__FILE__) + '/../mingle4r.gemspec')
     eval(gemspec_data).version.to_s
   end
 
