@@ -6,6 +6,8 @@ require 'spec/rake/spectask'
 require 'rake/gempackagetask'
 require 'rake/clean'
 
+task :gem => ['gem:build']
+
 namespace :gem do
   desc "Builds the gem"
   task :build => 'pkg' do
