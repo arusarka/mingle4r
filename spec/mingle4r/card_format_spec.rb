@@ -2,7 +2,12 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 include Mingle4r
 
-class DummyCard < ActiveResource::Base ; end
+class DummyCard < ActiveResource::Base
+  def to_xml(options = {})
+    self.class.format.encode(attributes, options)
+  end
+end
+
 class CardType < ActiveResource::Base ; end
 
 describe CardFormat do

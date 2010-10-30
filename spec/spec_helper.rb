@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../lib/mingle4r'
 require 'test/unit'
-require 'spec/test/unit'
+require 'rspec/unit'
 require 'yaml'
 
 def load_fixture(file_name)
