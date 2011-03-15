@@ -1,3 +1,7 @@
+== NO LONGER UNDER DEVELOPMENT
+
+I have stopped development for this project. If you are interested to take this up send me message
+
 == mingle4r
 
 http://github.com/arusarka/mingle4r/tree/master

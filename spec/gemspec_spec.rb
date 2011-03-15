@@ -42,6 +42,6 @@ describe "gemspec" do
   end
   
   it "should have the right version" do
-    spec.version.to_s.should == '0.4.7'
+    spec.version.to_s.should == '0.4.8'
   end
 end

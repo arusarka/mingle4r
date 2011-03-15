@@ -1,3 +1,8 @@
+0.4.8
+-----
+* version bump
+* did a sanity test with mingle 3.3
+
 0.4.6
 -----
 * new apis - find_card, filter_cards, cards, new_card for Project and MingleClient 
