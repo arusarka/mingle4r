@@ -34,6 +34,8 @@ If you have a mingle server running somewhere you can check the different apis a
 
 A lot of examples are given below to get you started.
 
+Current version under development (0.5.0 ) will support Mingle 3.5.
+
 The api now supports only mingle 3. Mingle 2 is no longer supported. If you need to connect
 to both Mingle 2 and Mingle 3 then try 0.3.0 of the gem.
 
