@@ -5,7 +5,7 @@ http://github.com/arusarka/mingle4r/tree/master
 == Description:
 
 This gem is a wrapper around active resource to access the rest api exposed by mingle
-(http://studios.thoughtworks.com/mingle-agile-project-management).It provides a easy 
+(http://thoughtworks-studios.com/mingle-agile-project-management).It provides a easy
 way to communicate with mingle. For the library to work you need to enable basic authentication
 (not enabled by default) in Mingle. See below to enable basic authentication in Mingle.
 The typical use-case for this gem is to help someone getting started with writing code
