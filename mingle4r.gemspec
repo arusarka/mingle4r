@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary = 'Mingle connector using active resource'
   s.description = <<-EOS
-  A wrapper connector for connecting to Mingle(http://studios.thoughtworks.com/mingle-agile-project-management).
+  A wrapper connector for connecting to Mingle(http://thoughtworks-studios.com/mingle-agile-project-management).
   It uses active resource to handle the restful connections to Mingle. Makes the job of connecting to Mingle a 
   lot easier.
   EOS
