@@ -3,10 +3,10 @@
   <number type="integer">116</number>
   <properties type="array">
     <property>
-      <name>Feature</name>
       <type_description>Any card used in tree</type_description>
-      <value type="integer">117</value>
       <hidden>false</hidden>
+      <name>Feature</name>
+      <value type="integer">117</value>
     </property>
   </properties>
 </card>

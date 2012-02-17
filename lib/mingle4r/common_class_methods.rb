@@ -119,15 +119,15 @@ module Mingle4r
     end
     
     def class_name
-      self.name.demodulize
+      self.name.to_s.demodulize
     end
     
     def has_inst_meths_module?
-      self.constants.detect { |const| const.demodulize == 'InstanceMethods' }
+      self.constants.detect { |const| const.to_s.demodulize == 'InstanceMethods' }
     end
     
     def has_class_meths_module?
-      self.constants.detect { |const| const.demodulize == 'ClassMethods' }
+      self.constants.detect { |const| const.to_s.demodulize == 'ClassMethods' }
     end
     
     def method_missing(meth_id, *args, &block)
