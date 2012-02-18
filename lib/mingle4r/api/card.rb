@@ -45,7 +45,7 @@ module Mingle4r
         end
         
         def murmurs
-          set_attributes_for(Murmur)
+          set_attributes_for(Murmur) unless murmur_class_set
           @murmurs = Murmur.find(:all)
         end
         
@@ -168,6 +168,11 @@ EOS
         def user_class_set(val = nil)
           return @user_class_set unless val
           @user_class_set = val
+        end
+
+        def murmur_class_set(val = nil)
+          return @murmur_class_set unless val
+          @murmur_class_set = val
         end
       end
       

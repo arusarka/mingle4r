@@ -64,7 +64,7 @@ describe Card do
       card.type.should == 'Defect'
     end
   end
-  
+
   it "should be able to set the card type directly" do
     card = Card.new
     card.type = 'Story'
@@ -107,6 +107,36 @@ describe Card do
       
       card.comments
       card.comments
+    end
+  end
+
+  context "murmurs" do
+    before(:each) do
+      Card.site = 'http://localhost:9090/'
+      Card.user = 'test'
+      Card.password = 'test'
+    end
+
+    it "should be able to set appropriate attributes for murmurs" do
+      card =  Card.new({:number => 1})
+      Murmur.stub!(:find)
+      card.murmurs
+
+      Murmur.site.should == 'http://localhost:9090/cards/1'
+      Murmur.user.should == 'test'
+      Murmur.password.should == 'test'
+    end
+
+    it "should set attributes for Comment class only once" do
+      card =  Card.new({:number => 1})
+
+      Murmur.stub!(:find)
+      Murmur.should_receive(:site=).once
+      Murmur.should_receive(:user=).once
+      Murmur.should_receive(:password=).once
+
+      card.murmurs
+      card.murmurs
     end
   end
   
