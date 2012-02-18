@@ -83,6 +83,7 @@ module Mingle4r
     def create_resource_class
       raise "Please set the site for #{self} class." unless(self.site)
       created_class = Class.new(MingleResource)
+      created_class.format = :xml
       setup_class(created_class)
       created_class
     end

@@ -22,6 +22,12 @@ describe DummyClass do
     DummyClass.user.should == user
   end
   
+  it "should set :xml as the format" do
+    user = 'testuser'
+    DummyClass.user = user
+    DummyClass.format.should == ActiveResource::Formats::XmlFormat
+  end
+  
   it "should be able to set the password properly" do
     password = 'password'
     DummyClass.password = password
