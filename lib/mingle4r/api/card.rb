@@ -107,7 +107,7 @@ EOS
         # as the mingle property name. the value is optional
         def property_value(name, val = nil)
           property = properties.detect { |p| p.name == name }
-          val ? set_prop_val(property, val) : property.value
+          val ? set_prop_val(property, val) : ( property ? property.value : nil )
           # val ? property.value = val : property.value
         end
     
