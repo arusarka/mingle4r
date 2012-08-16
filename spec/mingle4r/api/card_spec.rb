@@ -44,6 +44,13 @@ describe Card do
       {'Planning Estimate' => 3}]
   end
   
+  it "should be return nil when a missing property is referenced" do
+    card = Card.new({:name => 'card1', :number => 1,
+    :id => 1237, :properties => [{:name => 'Story Status', :value => 'Completed',
+        :type_description => 'Managed text list'}]})
+    card.property_value('Missing Property').should == nil
+  end
+  
   it "should be able to set the value of a particular custom property for a card" do
     card =  Card.new({:name => 'card1', :number => 1,
       :id => 1237, :properties => [{:name => 'Story Status', :value => 'Completed',
