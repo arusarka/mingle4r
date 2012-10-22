@@ -38,5 +38,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.extra_rdoc_files = ['README.rdoc']
   s.add_dependency('activeresource')
-  s.add_development_dependency(['rspec', 'rspec-unit'])
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('rspec-unit')
 end
